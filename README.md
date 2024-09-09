@@ -6,8 +6,8 @@ Escreva um ou dois parágrafos resumindo o objetivo do seu projeto.
 ## Alunos integrantes da equipe
 
 * Cauê Afonso Moraes
-* Leandro Alencar Pereira Clemente
 * Islayder Jackson Ribeiro de Oliveira
+* Leandro Alencar Pereira Clemente
 * Rafael de Faria Neves Alves Franco
 * Vinícius Gomes Rodrigues
 * Vitor Veiga Silva
