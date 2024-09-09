@@ -5,7 +5,7 @@ Escreva um ou dois parágrafos resumindo o objetivo do seu projeto.
 ## Alunos integrantes da equipe
 
 * Rafael de Faria Neves Alves Franco
-* Nome completo do aluno 2
+* Islayder Jackson Ribeiro de Oliveira
 * Nome completo do aluno 3
 * Nome completo do aluno 4
 * Vinícius Gomes Rodrigues
