@@ -15,6 +15,7 @@ public class Xumlabs {
     private static List<Parque> parques;
     private static List<Cliente> clientes;
     private static List<Veiculo> veiculos;
+    private static List<Ocupacao> ocupacoes;
     
     static{
         clientes.add(new Cliente("", ""));
@@ -30,6 +31,10 @@ public class Xumlabs {
     
     public static List<Cliente> listaClientes(){
         return clientes;
+    }
+    
+    public static List<Veiculo> listaVeiculos(){
+        return veiculos;
     }
     
 }

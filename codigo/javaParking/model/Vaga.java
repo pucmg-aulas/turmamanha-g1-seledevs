@@ -10,4 +10,14 @@ package br.com.javaParking.model;
  */
 public class Vaga {
     
+    private String indentificador;
+    
+    public Vaga(String identificador){
+        this.indentificador = identificador;
+    }
+    
+    public String getIdentificador(){
+        return this.indentificador;
+    }
+            
 }

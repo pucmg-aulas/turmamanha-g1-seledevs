@@ -4,6 +4,8 @@
  */
 package br.com.javaParking.model;
 
+import java.util.List;
+
 /**
  *
  * @author Leandro Alencar
@@ -11,15 +13,28 @@ package br.com.javaParking.model;
 public class Veiculo {
     private String placa;
     
-    public Veiculo(String placa){
-        this.placa = placa;
+    public Veiculo(String placa){        
+        if(validarPlaca(placa)){
+            this.placa = placa;
+        }else{
+            throw new RuntimeException();
+        }
     }
     
     public String getPlaca(){
         return this.placa;
     }
     
-    public boolean validarPlaca(){
-        return false;
+    private boolean validarPlaca(String placa){
+        
+        List<Veiculo> veiculos = Xumlabs.listaVeiculos();        
+        
+        for(int i = 0; i < veiculos.size(); i++){
+            if(veiculos.get(i).getPlaca().equals(placa)){
+                return false;
+            }
+        }
+        
+        return true;
     }
 }

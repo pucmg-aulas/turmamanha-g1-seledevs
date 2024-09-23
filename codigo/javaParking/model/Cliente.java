@@ -40,8 +40,9 @@ public class Cliente {
     
     private boolean validarCliente(String nome, String identificador){  
         
-        List<Cliente> clientes = Xumlabs.listaClientes();
         Cliente cliente = new Cliente(nome, identificador);
+        
+        List<Cliente> clientes = Xumlabs.listaClientes();        
         
         for(int i = 0; i < clientes.size(); i++){
             if(clientes.get(i).equals(cliente)){
