@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package br.com.javaParking.model;
+package com.javaParking.model;
 
 /**
  *
@@ -35,11 +35,32 @@ public class Ocupacao {
                
     }
     
-    public void desocuparVaga(Ocupacao ocupacao){
+    public void desocuparVaga(byte horaSaida) {
+        if (!ocupada) {
+            throw new RuntimeException("A vaga já está desocupada.");
+        }
+
+        this.horaSaida = horaSaida;
+        ocupada = false;
+
+        // Calcular o tempo de permanência em minutos
+        double tempoEstacionado = calcularTempoEstacionado(horaEntrada, horaSaida);
+
+        // Obter a vaga correspondente e calcular o preço
+        Vaga vaga = parque.getVagaById(identificadorVaga); // Método para obter a vaga pela ID
+        double precoTotal = vaga.calcularPreco(tempoEstacionado);
         
-        
+        // Imprimir o preço total
+        System.out.println("Preço total: R$" + precoTotal);
+
+        // Desocupar a vaga
+        vaga.desocupar();
     }
     
-    
-    
+    private double calcularTempoEstacionado(byte horaEntrada, byte horaSaida) {
+        // Calcula o tempo total em minutos
+        int tempoEmMinutos = (horaSaida - horaEntrada);
+        return Math.max(0, tempoEmMinutos); // Garante que não seja negativo
+    }
+
 }
