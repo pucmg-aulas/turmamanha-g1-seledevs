@@ -1,6 +1,9 @@
 # Diagramas de classe
 Coloque aqui todas as versões do seu diagrama de classes. Cada versão deve começar com um número de dois dígitos, na ordem crescente.
 
+## - Versão 0.3
+![Verção 1](../img/diagramaDeClasses03.png "Verção 2.1")
+
 ## - Versão 0.2.1
 ![Verção 1](../img/XulambsParking.png "Verção 2.1")
 
