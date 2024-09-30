@@ -18,34 +18,10 @@ public class Parque {
     private static List<String> letras;
     private int vagasPorFileira;
 
-    static{
-        //REFATORAR PARA DIMINUIR
-        letras.add("A");
-        letras.add("B");
-        letras.add("C");
-        letras.add("D");
-        letras.add("E");
-        letras.add("F");
-        letras.add("G");
-        letras.add("H");
-        letras.add("I");
-        letras.add("J");
-        letras.add("K");
-        letras.add("L");
-        letras.add("M");
-        letras.add("N");
-        letras.add("O");
-        letras.add("P");
-        letras.add("Q");
-        letras.add("R");
-        letras.add("S");
-        letras.add("T");
-        letras.add("U");
-        letras.add("V");
-        letras.add("W");
-        letras.add("X");
-        letras.add("Y");
-        letras.add("Z");
+static {
+        for (char letra = 'A'; letra <= 'Z'; letra++) {
+            letras.add(String.valueOf(letra));
+        }
     }
             
     public Parque(int numeroVagas, int vagasPorFileira) {
