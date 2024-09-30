@@ -3,23 +3,30 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Other/File.java to edit this template
  */
 
-package br.com.javaParking.model;
+package br.com.javaParking.model.tiposVaga;
 
+import br.com.javaParking.model.Vaga;
 import br.com.javaParking.model.Vaga;
 
 /**
  *
  * @author viniciusgomesrodrigues
  */
-public class VagaIdoso extends Vaga {
+public class Idoso extends Vaga {
 
-    public VagaIdoso(String identificador) {
+    private static double modificadorPreco;
+    
+    static{
+        modificadorPreco = 0.85;
+    }
+    
+    public Idoso(String identificador) {
         super(identificador);
     }
     
-    public double calcularPreco(double tempoEstacionado) {
+    public double calcularPreco(int tempoEstacionado) {
         double precoTotal = super.calcularPreco(tempoEstacionado); // Chama o cálculo da classe base
-        return precoTotal * 0.85; // Aplica 15% de desconto
+        return precoTotal * modificadorPreco; // Aplica 15% de desconto
     }
     
 }

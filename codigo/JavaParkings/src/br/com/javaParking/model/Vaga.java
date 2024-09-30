@@ -46,7 +46,7 @@ public class Vaga {
     
     // MÉTODOS ESPECIAIS
     
-    public double calcularPreco(double tempoEstacionado) {
+    public double calcularPreco(int tempoEstacionado) {
         double precoTotal = (tempoEstacionado / 15) * precoBase; // Preço por 15 minutos
         return aplicarLimite(precoTotal);
     }

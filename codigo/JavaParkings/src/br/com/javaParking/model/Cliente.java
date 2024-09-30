@@ -19,7 +19,6 @@ public class Cliente {
         if(validarCliente(nome, identificador)){
             this.nome = nome;
             this.identificador = identificador;
-            this.veiculos = new ArrayList<>();
         }else{
             throw new RuntimeException();
         }
@@ -35,7 +34,6 @@ public class Cliente {
             if(this.veiculos.get(i).getPlaca().equals(veiculo.getPlaca())){
                 this.veiculos.remove(i);
                 Xumlabs.delVeiculo(veiculo);
-                return;
             }
         }
     }
