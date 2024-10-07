@@ -81,20 +81,20 @@ public class Parque {
                     return;
                 
                 if(nIdoso != 0){
-                    this.vagas.add(new Idoso(this.identificador,Util.alfabeto().get(i).toString() + j)); 
-                    DaoVaga.gravar(new Idoso(this.identificador,Util.alfabeto().get(i).toString() + j));
+                    this.vagas.add(new Idoso(this.identificador,Util.alfabeto().get(i).toString() + j,false)); 
+                    DaoVaga.gravar(new Idoso(this.identificador,Util.alfabeto().get(i).toString() + j,false));
                     nIdoso--;
                 }else if(nPCD != 0){
-                    this.vagas.add(new Pcd(this.identificador,Util.alfabeto().get(i).toString() + j)); 
-                    DaoVaga.gravar(new Pcd(this.identificador,Util.alfabeto().get(i).toString() + j));
+                    this.vagas.add(new Pcd(this.identificador,Util.alfabeto().get(i).toString() + j,false)); 
+                    DaoVaga.gravar(new Pcd(this.identificador,Util.alfabeto().get(i).toString() + j,false));
                     nPCD--;
                 }else if(nVIP != 0){
-                    this.vagas.add(new Vip(this.identificador,Util.alfabeto().get(i).toString() + j));
-                    DaoVaga.gravar(new Vip(this.identificador,Util.alfabeto().get(i).toString() + j));
+                    this.vagas.add(new Vip(this.identificador,Util.alfabeto().get(i).toString() + j,false));
+                    DaoVaga.gravar(new Vip(this.identificador,Util.alfabeto().get(i).toString() + j,false));
                     nVIP--;
                 }else{
-                    this.vagas.add(new Comum(this.identificador,Util.alfabeto().get(i).toString() + j)); 
-                    DaoVaga.gravar(new Comum(this.identificador,Util.alfabeto().get(i).toString() + j));
+                    this.vagas.add(new Comum(this.identificador,Util.alfabeto().get(i).toString() + j,false)); 
+                    DaoVaga.gravar(new Comum(this.identificador,Util.alfabeto().get(i).toString() + j,false));
                 }                
                 
                 n++;

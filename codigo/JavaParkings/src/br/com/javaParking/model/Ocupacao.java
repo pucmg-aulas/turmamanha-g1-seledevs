@@ -18,27 +18,38 @@ import java.util.Date;
  */
 public class Ocupacao {
 
-    private Cliente cliente;
-    private Veiculo veiculo;
-    private Vaga vaga;
+    private String cliente;
+    private String veiculo;
+    private String vaga;
     private LocalDateTime horaEntrada;
     private LocalDateTime horaSaida;
 
-    public void ocupar(Cliente cliente, Veiculo veiculo, Vaga vaga) {
+    public Ocupacao(String cliente, String veiculo, String vaga) {
         this.cliente = cliente;
         this.veiculo = veiculo;
-        vaga.setOcupada(true);
         this.vaga = vaga;
         this.horaEntrada = LocalDateTime.now();
     }
 
-    public void desocuparVaga(Vaga vaga) {
-           vaga.setOcupada(false);
+    public String getCliente(){
+        return this.cliente;
     }
-
-    public double custoOcupacao(Vaga vaga) {
+    
+    public String getVeiculo(){
+        return this.veiculo;
+    }
+    
+    public String getVaga(){
+        return this.vaga;
+    }
+    
+    public LocalDateTime getEntrada(){
+        return this.horaEntrada;
+    }
+    
+    public double custoOcupacao(Vaga vaga, LocalDateTime saida) {
        
-        this.horaSaida = LocalDateTime.now();
+        this.horaSaida = saida;
         
         int dias = diferencaDias(this.horaEntrada, this.horaSaida);
         int minutos = diferencaMinutos(this.horaEntrada, this.horaSaida);
@@ -58,7 +69,7 @@ public class Ocupacao {
         return preco;
     }
     
-    private int diferencaDias(LocalDateTime dIn, LocalDateTime dOut){
+    public int diferencaDias(LocalDateTime dIn, LocalDateTime dOut){
         int ano = dOut.getYear() - dIn.getYear();
         int mes = dOut.getMonthValue() - dIn.getMonthValue();
         int dia = dOut.getDayOfMonth() - dIn.getDayOfMonth();

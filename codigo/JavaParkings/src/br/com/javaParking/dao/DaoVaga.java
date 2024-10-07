@@ -49,13 +49,13 @@ public class DaoVaga {
 
             try (BufferedWriter w = new BufferedWriter(new FileWriter(registro, true))) {
                 if (vaga instanceof Idoso) {
-                    w.write(vaga.getParque() + "&" + vaga.getIdentificador() + "&" + vaga.getOcupada() + "&" + "Idoso" + "&" + "\n");
+                    w.write(vaga.getParque() + "&" + vaga.getIdentificador() + "&" + vaga.isOcupada() + "&" + "Idoso" + "&" + "\n");
                 } else if (vaga instanceof Pcd) {
-                    w.write(vaga.getParque() + "&" + vaga.getIdentificador() + "&" + vaga.getOcupada() + "&" + "Pcd" + "&" + "\n");
+                    w.write(vaga.getParque() + "&" + vaga.getIdentificador() + "&" + vaga.isOcupada() + "&" + "Pcd" + "&" + "\n");
                 } else if (vaga instanceof Vip) {
-                    w.write(vaga.getParque() + "&" + vaga.getIdentificador() + "&" + vaga.getOcupada() + "&" + "Vip" + "&" + "\n");
+                    w.write(vaga.getParque() + "&" + vaga.getIdentificador() + "&" + vaga.isOcupada() + "&" + "Vip" + "&" + "\n");
                 } else if (vaga instanceof Comum) {
-                    w.write(vaga.getParque() + "&" + vaga.getIdentificador() + "&" + vaga.getOcupada() + "&" + "Comum" + "&" + "\n");
+                    w.write(vaga.getParque() + "&" + vaga.getIdentificador() + "&" + vaga.isOcupada() + "&" + "Comum" + "&" + "\n");
                 }
 
                 w.write("§\n");
@@ -94,16 +94,17 @@ public class DaoVaga {
                     if (parque.getIdentificador().equals(vagaAtual.toString().split("&")[0].replace("\n", ""))) {
 
                         if (tipo.equals("Idoso")) {
-                            vaga = new Idoso(parque.getIdentificador(), identificador);
+                            vaga = new Idoso(parque.getIdentificador(), identificador,Boolean.parseBoolean(ocupada));
                         } else if (tipo.equals("Pcd")) {
-                            vaga = new Pcd(parque.getIdentificador(), identificador);
+                            vaga = new Pcd(parque.getIdentificador(), identificador,Boolean.parseBoolean(ocupada));
                         } else if (tipo.equals("Vip")) {
-                            vaga = new Vip(parque.getIdentificador(), identificador);
+                            vaga = new Vip(parque.getIdentificador(), identificador,Boolean.parseBoolean(ocupada));
                         } else if (tipo.equals("Comum")) {
-                            vaga = new Comum(parque.getIdentificador(), identificador);
+                            vaga = new Comum(parque.getIdentificador(), identificador,Boolean.parseBoolean(ocupada));
                         }
-
-                        vagas.add(vaga);
+                        
+                        vagas.add(vaga); 
+                        
                     }
 
                     vagaAtual.setLength(0);

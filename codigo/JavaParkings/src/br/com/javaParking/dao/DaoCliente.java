@@ -43,7 +43,7 @@ public class DaoCliente{
             }
 
             try (BufferedWriter w = new BufferedWriter(new FileWriter(registro, true))) {
-                w.write(cliente.getNome()+ "&"+ cliente.getIdentificador() + "\n");
+                w.write(cliente.getNome()+ "&"+ cliente.getIdentificador()+ "&" + "\n");
                 w.write("§\n");
             }
             return true;

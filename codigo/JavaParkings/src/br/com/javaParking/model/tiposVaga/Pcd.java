@@ -12,8 +12,8 @@ public class Pcd extends Vaga {
         MODIFICADORPRECO = 0.87;
     }
     
-    public Pcd(String parque,String identificador) {
-        super(parque,identificador);
+    public Pcd(String parque,String identificador, boolean ocupada) {
+        super(parque,identificador,ocupada);
     }
 
     @Override

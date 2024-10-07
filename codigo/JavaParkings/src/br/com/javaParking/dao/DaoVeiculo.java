@@ -44,7 +44,7 @@ public class DaoVeiculo{
             }
 
             try (BufferedWriter w = new BufferedWriter(new FileWriter(registro, true))) {
-                w.write(veiculo.getPlaca()+ "&"+ cliente.getId() + "\n");
+                w.write(veiculo.getPlaca()+ "&"+ cliente.getId() +"&"+ "\n");
                 w.write("§\n");
             }
             return true;

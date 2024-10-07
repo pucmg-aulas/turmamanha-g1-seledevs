@@ -21,8 +21,8 @@ public class Idoso extends Vaga {
         MODIFICADORPRECO = 0.85;
     }
     
-    public Idoso(String parque,String identificador) {
-        super(parque,identificador);
+    public Idoso(String parque,String identificador, boolean ocupada) {
+        super(parque,identificador,ocupada);
     }
     
    @Override

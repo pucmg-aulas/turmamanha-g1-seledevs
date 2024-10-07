@@ -15,38 +15,34 @@ public abstract class Vaga {
     private boolean ocupada;
     private double precoBase = 4.0; // preço de 4 reais a cada 15 minutos
 
-    public Vaga(String parque, String identificador) {
+    public Vaga(String parque, String identificador, boolean ocupada) {
         this.parque = parque;
         this.identificador = identificador;
-        this.ocupada = false;
+        this.ocupada = ocupada;
     }
     
     // MÉTODOS PÚBLICOS GET E SET
     public String getIdentificador() {
-        return identificador;
+        return this.identificador;
     }
     
     public String getParque() {
         return this.parque;
     }
 
-    public boolean getOcupada() {
+    public boolean isOcupada() {
         return ocupada;
-    }
-
-    public void setOcupada(boolean ocupada) {
-        this.ocupada = ocupada;
     }
 
     public void setIdentificador(String identificador) {
         this.identificador = identificador;
     }
     
-    public void ocuparVaga(boolean ocupada) {
+    public void ocuparVaga() {
         this.ocupada = true;
     }
     
-    public void desocuparVaga(boolean ocupada) {
+    public void desocuparVaga() {
         this.ocupada = false;
     }
     

@@ -11,8 +11,8 @@ public class Comum extends Vaga {
         MODIFICADORPRECO = 1;
     }
     
-    public Comum(String parque,String identificador) {
-        super(parque,identificador);
+    public Comum(String parque,String identificador, boolean ocupada) {
+        super(parque,identificador,ocupada);
     }
 
     @Override
