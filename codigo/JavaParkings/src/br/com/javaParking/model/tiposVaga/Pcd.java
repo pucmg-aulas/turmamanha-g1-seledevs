@@ -4,19 +4,19 @@ import br.com.javaParking.model.Parque;
 import br.com.javaParking.model.Vaga;
 import br.com.javaParking.model.Vaga;
 
-public class Vip extends Vaga {
+public class Pcd extends Vaga {
     
     private final static double MODIFICADORPRECO;
     
     static{
-        MODIFICADORPRECO = 1.20;
+        MODIFICADORPRECO = 0.87;
     }
     
-    public Vip(String parque,String identificador) {
+    public Pcd(String parque,String identificador) {
         super(parque,identificador);
     }
 
-   @Override
+    @Override
     public double calcularPreco(int dias,int minutos) {        
         double precoTotal = Math.floor(minutos / Parque.INTERVALODECOBRANCAEMMINUTOS) * Parque.VALORPORTEMPO;         
         return (super.aplicarLimite(precoTotal) + (Parque.VALORDEDIARIAMAXIMA * dias)) * MODIFICADORPRECO; 

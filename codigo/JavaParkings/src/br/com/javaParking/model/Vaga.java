@@ -8,13 +8,15 @@ package br.com.javaParking.model;
  *
  * @author Leandro Alencar
  */
-public class Vaga {
+public abstract class Vaga {
     
+    private String parque;
     private String identificador;
     private boolean ocupada;
     private double precoBase = 4.0; // preço de 4 reais a cada 15 minutos
 
-    public Vaga(String identificador) {
+    public Vaga(String parque, String identificador) {
+        this.parque = parque;
         this.identificador = identificador;
         this.ocupada = false;
     }
@@ -22,6 +24,10 @@ public class Vaga {
     // MÉTODOS PÚBLICOS GET E SET
     public String getIdentificador() {
         return identificador;
+    }
+    
+    public String getParque() {
+        return this.parque;
     }
 
     public boolean getOcupada() {
@@ -44,15 +50,11 @@ public class Vaga {
         this.ocupada = false;
     }
     
-    // MÉTODOS ESPECIAIS
+    // MÉTODOS ESPECIAIS    
+    public abstract double calcularPreco(int dias,int minutos);
     
-    public double calcularPreco(int tempoEstacionado) {
-        double precoTotal = (tempoEstacionado / 15) * precoBase; // Preço por 15 minutos
-        return aplicarLimite(precoTotal);
-    }
-    
-    private double aplicarLimite(double precoTotal) {
-        return Math.min(precoTotal, 50.0); // Limite de 50 reais 
+    protected double aplicarLimite(double precoTotal) {
+        return Math.min(precoTotal, Parque.VALORDEDIARIAMAXIMA);
     }
     
 }

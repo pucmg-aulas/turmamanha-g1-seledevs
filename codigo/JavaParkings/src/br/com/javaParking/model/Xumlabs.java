@@ -4,6 +4,15 @@
  */
 package br.com.javaParking.model;
 
+import br.com.javaParking.dao.DaoParque;
+import br.com.javaParking.util.Util;
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -11,30 +20,38 @@ import java.util.List;
  * @author Leandro Alencar
  */
 public class Xumlabs {
-    
+
     private static List<Parque> parques;
     private static List<Cliente> clientes;
-    private static List<Veiculo> veiculos;
-    private static List<Ocupacao> ocupacoes;
-    
-    static{
+
+    static {
         clientes.add(new Cliente("", ""));
     }
-    
-    public static void addVeiculo(Veiculo veiculo){
-        
+
+    public static void addCliente(Cliente cliente) {
+        clientes.add(cliente);
     }
-    
-    public static void delVeiculo(Veiculo veiculo){
-        
+
+    public static void delCliente(Cliente cliente) {
+        for (int i = 0; i > clientes.size(); i++) {
+            if (cliente.getId().equals(clientes.get(i).getId())) {
+                clientes.remove(i);
+                return;
+            }
+        }
     }
-    
-    public static List<Cliente> listaClientes(){
+
+    public static void addParque(Parque parque) {
+        parques.add(parque);
+    }
+
+    public static List<Cliente> listaClientes() {
         return clientes;
     }
-    
-    public static List<Veiculo> listaVeiculos(){
-        return veiculos;
+
+    public static List<Parque> listaParques() {
+       return DaoParque.listar();
     }
-    
+
+
 }

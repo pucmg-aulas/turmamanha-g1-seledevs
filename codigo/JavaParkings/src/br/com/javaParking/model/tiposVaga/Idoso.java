@@ -5,6 +5,7 @@
 
 package br.com.javaParking.model.tiposVaga;
 
+import br.com.javaParking.model.Parque;
 import br.com.javaParking.model.Vaga;
 import br.com.javaParking.model.Vaga;
 
@@ -14,19 +15,20 @@ import br.com.javaParking.model.Vaga;
  */
 public class Idoso extends Vaga {
 
-    private static double modificadorPreco;
+    private final static double MODIFICADORPRECO;
     
     static{
-        modificadorPreco = 0.85;
+        MODIFICADORPRECO = 0.85;
     }
     
-    public Idoso(String identificador) {
-        super(identificador);
+    public Idoso(String parque,String identificador) {
+        super(parque,identificador);
     }
     
-    public double calcularPreco(int tempoEstacionado) {
-        double precoTotal = super.calcularPreco(tempoEstacionado); // Chama o cálculo da classe base
-        return precoTotal * modificadorPreco; // Aplica 15% de desconto
+   @Override
+    public double calcularPreco(int dias,int minutos) {        
+        double precoTotal = Math.floor(minutos / Parque.INTERVALODECOBRANCAEMMINUTOS) * Parque.VALORPORTEMPO;         
+        return (super.aplicarLimite(precoTotal) + (Parque.VALORDEDIARIAMAXIMA * dias)) * MODIFICADORPRECO; 
     }
     
 }

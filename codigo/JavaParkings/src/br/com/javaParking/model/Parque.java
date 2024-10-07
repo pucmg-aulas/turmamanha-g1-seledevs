@@ -4,7 +4,13 @@
  */
 package br.com.javaParking.model;
 
-import br.com.javaParking.util.Validador;
+import br.com.javaParking.dao.DaoVaga;
+import br.com.javaParking.model.tiposVaga.Comum;
+import br.com.javaParking.model.tiposVaga.Idoso;
+import br.com.javaParking.model.tiposVaga.Pcd;
+import br.com.javaParking.model.tiposVaga.Vip;
+import br.com.javaParking.util.Util;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -13,51 +19,35 @@ import java.util.List;
  */
 public class Parque {
 
-    private int numeroVagas;
-    private List<Vaga> vagas;
-    private static List<String> letras;
+    public final static double VALORPORTEMPO; 
+    public final static int INTERVALODECOBRANCAEMMINUTOS; 
+    public final static double VALORDEDIARIAMAXIMA; 
+    
+    private final static double PORCENTAGEMMINIMAIDOSOS; 
+    private final static double PORCENTAGEMMINIMAPCD; 
+    private final static double PORCENTAGEMMINIMAVIP; 
+        
+    private String identificador;
+    private int numeroVagas; 
+    private List<Vaga> vagas;   
     private int vagasPorFileira;
 
     static{
-        //REFATORAR PARA DIMINUIR
-        letras.add("A");
-        letras.add("B");
-        letras.add("C");
-        letras.add("D");
-        letras.add("E");
-        letras.add("F");
-        letras.add("G");
-        letras.add("H");
-        letras.add("I");
-        letras.add("J");
-        letras.add("K");
-        letras.add("L");
-        letras.add("M");
-        letras.add("N");
-        letras.add("O");
-        letras.add("P");
-        letras.add("Q");
-        letras.add("R");
-        letras.add("S");
-        letras.add("T");
-        letras.add("U");
-        letras.add("V");
-        letras.add("W");
-        letras.add("X");
-        letras.add("Y");
-        letras.add("Z");
+        VALORPORTEMPO=4;
+        INTERVALODECOBRANCAEMMINUTOS=15;
+        VALORDEDIARIAMAXIMA=50;
+        
+        PORCENTAGEMMINIMAIDOSOS=0.10;
+        PORCENTAGEMMINIMAPCD=0.10;
+        PORCENTAGEMMINIMAVIP=0.20;
     }
             
-    public Parque(int numeroVagas, int vagasPorFileira) {
-        
-        if (Validador.ePositivo(numeroVagas)){ 
+    public Parque(String identificador, int numeroVagas, int vagasPorFileira) {
+        this.identificador = identificador;
+        this.vagas = new ArrayList<>();
+        if (Util.ePositivo(numeroVagas, vagasPorFileira)){             
             this.numeroVagas = numeroVagas;
-        }else{
-            throw new RuntimeException();
-        }
-        
-        if (Validador.ePositivo(vagasPorFileira)) {
-            this.vagasPorFileira = vagasPorFileira; 
+            this.vagasPorFileira = vagasPorFileira;             
         }else{
             throw new RuntimeException();
         }
@@ -65,38 +55,67 @@ public class Parque {
         if(!validarNumeroDeVagas()) 
             throw new RuntimeException();       
                 
-        montarVagas();     
-        
     }
     
     private boolean validarNumeroDeVagas(){
-        int maximo = Parque.letras.size() * this.vagasPorFileira;
+        int maximo = Util.alfabeto().size() * this.vagasPorFileira;
         
         if(maximo < this.numeroVagas )
             return false;
-        
+            
         return true;        
     }
 
-    private void montarVagas() {
+    public void montarVagas() {   
         
         int n = 0;
         
-        for(int i = 0; i < Parque.letras.size(); i++){
+        int nIdoso = (int) Math.floor(this.numeroVagas  * PORCENTAGEMMINIMAIDOSOS);
+        int nPCD = (int) Math.floor(this.numeroVagas  * PORCENTAGEMMINIMAPCD);
+        int nVIP = (int) Math.floor(this.numeroVagas  * PORCENTAGEMMINIMAVIP); 
+        
+        for(int i = 0; i < Util.alfabeto().size(); i++){
             for(int j = 0; j < this.vagasPorFileira; j++){
                 
-                if(!(n>this.numeroVagas))
+                if(n>this.numeroVagas)
                     return;
                 
-                this.vagas.add(new Vaga(Parque.letras.get(i) + j));
+                if(nIdoso != 0){
+                    this.vagas.add(new Idoso(this.identificador,Util.alfabeto().get(i).toString() + j)); 
+                    DaoVaga.gravar(new Idoso(this.identificador,Util.alfabeto().get(i).toString() + j));
+                    nIdoso--;
+                }else if(nPCD != 0){
+                    this.vagas.add(new Pcd(this.identificador,Util.alfabeto().get(i).toString() + j)); 
+                    DaoVaga.gravar(new Pcd(this.identificador,Util.alfabeto().get(i).toString() + j));
+                    nPCD--;
+                }else if(nVIP != 0){
+                    this.vagas.add(new Vip(this.identificador,Util.alfabeto().get(i).toString() + j));
+                    DaoVaga.gravar(new Vip(this.identificador,Util.alfabeto().get(i).toString() + j));
+                    nVIP--;
+                }else{
+                    this.vagas.add(new Comum(this.identificador,Util.alfabeto().get(i).toString() + j)); 
+                    DaoVaga.gravar(new Comum(this.identificador,Util.alfabeto().get(i).toString() + j));
+                }                
                 
                 n++;
             }
         }
     }
-
+    
+     public String getIdentificador(){
+        return this.identificador;
+    }
+    
+    public int getNumeroVagas(){
+        return this.numeroVagas;
+    }
+    
+    public int getVagasPorFileira(){
+        return this.vagasPorFileira;
+    }
+    
     private boolean atualizarNumeroVagas(int numeroVagas) {
-        if(Validador.ePositivo(numeroVagas)){
+        if(Util.ePositivo(numeroVagas)){
             
             if(!validarNumeroDeVagas()) 
                 throw new RuntimeException(); 
@@ -111,14 +130,5 @@ public class Parque {
     
     private List<Vaga> listarVagas() {
         return this.vagas;
-    }
-    
-    public boolean vagaExiste(String identificador){
-        for(int i = 0; i < this.vagas.size(); i++){
-            if(this.vagas.get(i).getIdentificador().equals(identificador)){
-                return true;
-            }
-        }
-        return false;
     }
 }

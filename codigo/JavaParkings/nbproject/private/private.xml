@@ -4,12 +4,17 @@
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
             <file>file:/C:/Users/Leandro%20Alencar/Documents/NetBeansProjects/JavaParkings/src/br/com/javaParking/model/Ocupacao.java</file>
-            <file>file:/C:/Users/Leandro%20Alencar/Documents/NetBeansProjects/JavaParkings/src/br/com/javaParking/model/tiposVaga/PessoaComDeficiencia.java</file>
+            <file>file:/C:/Users/Leandro%20Alencar/Documents/NetBeansProjects/JavaParkings/src/br/com/javaParking/dao/DaoCliente.java</file>
+            <file>file:/C:/Users/Leandro%20Alencar/Documents/NetBeansProjects/JavaParkings/src/br/com/javaParking/model/Cliente.java</file>
+            <file>file:/C:/Users/Leandro%20Alencar/Documents/NetBeansProjects/JavaParkings/src/br/com/javaParking/model/Xumlabs.java</file>
+            <file>file:/C:/Users/Leandro%20Alencar/Documents/NetBeansProjects/JavaParkings/src/br/com/javaParking/model/Veiculo.java</file>
             <file>file:/C:/Users/Leandro%20Alencar/Documents/NetBeansProjects/JavaParkings/src/br/com/javaParking/model/Vaga.java</file>
             <file>file:/C:/Users/Leandro%20Alencar/Documents/NetBeansProjects/JavaParkings/src/br/com/javaParking/model/tiposVaga/Vip.java</file>
+            <file>file:/C:/Users/Leandro%20Alencar/Documents/NetBeansProjects/JavaParkings/src/br/com/javaParking/util/Util.java</file>
             <file>file:/C:/Users/Leandro%20Alencar/Documents/NetBeansProjects/JavaParkings/src/br/com/javaParking/model/tiposVaga/Idoso.java</file>
             <file>file:/C:/Users/Leandro%20Alencar/Documents/NetBeansProjects/JavaParkings/src/br/com/javaParking/model/Parque.java</file>
             <file>file:/C:/Users/Leandro%20Alencar/Documents/NetBeansProjects/JavaParkings/src/br/com/javaParking/model/tiposVaga/Comum.java</file>
+            <file>file:/C:/Users/Leandro%20Alencar/Documents/NetBeansProjects/JavaParkings/src/br/com/javaParking/Main.java</file>
         </group>
     </open-files>
 </project-private>

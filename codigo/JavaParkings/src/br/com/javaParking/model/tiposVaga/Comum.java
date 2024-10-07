@@ -1,23 +1,23 @@
 package br.com.javaParking.model.tiposVaga;
 
-import br.com.javaParking.model.Vaga;
+import br.com.javaParking.model.Parque;
 import br.com.javaParking.model.Vaga;
 
 public class Comum extends Vaga {
     
-    private static double modificadorPreco;
+    private final static double MODIFICADORPRECO;
     
     static{
-        modificadorPreco = 1;
+        MODIFICADORPRECO = 1;
     }
     
-    public Comum(String identificador) {
-        super(identificador);
+    public Comum(String parque,String identificador) {
+        super(parque,identificador);
     }
 
     @Override
-    public double calcularPreco(int tempoEstacionado) {
-        double precoTotal = super.calcularPreco(tempoEstacionado); // Chama o cálculo da classe base
-        return precoTotal * modificadorPreco; // Aplica 0% de desconto
+    public double calcularPreco(int dias,int minutos) {        
+        double precoTotal = Math.floor(minutos / Parque.INTERVALODECOBRANCAEMMINUTOS) * Parque.VALORPORTEMPO;         
+        return (super.aplicarLimite(precoTotal) + (Parque.VALORDEDIARIAMAXIMA * dias)) * MODIFICADORPRECO; 
     }
 }
