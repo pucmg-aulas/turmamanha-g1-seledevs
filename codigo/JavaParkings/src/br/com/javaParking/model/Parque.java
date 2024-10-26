@@ -15,29 +15,19 @@ import java.util.List;
 
 public class Parque {
 
-    public final static double VALORPORTEMPO; 
-    public final static int INTERVALODECOBRANCAEMMINUTOS; 
-    public final static double VALORDEDIARIAMAXIMA; 
+    public final static double VALORPORTEMPO = 4; 
+    public final static int INTERVALODECOBRANCAEMMINUTOS = 15; 
+    public final static double VALORDEDIARIAMAXIMA = 50; 
     
-    private final static double PORCENTAGEMMINIMAIDOSOS; 
-    private final static double PORCENTAGEMMINIMAPCD; 
-    private final static double PORCENTAGEMMINIMAVIP; 
+    private final static double PORCENTAGEMMINIMAIDOSOS = 0.10; 
+    private final static double PORCENTAGEMMINIMAPCD = 0.10; 
+    private final static double PORCENTAGEMMINIMAVIP = 0.20; 
         
     private String identificador;
     private int numeroVagas; 
     private List<Vaga> vagas;   
     private int vagasPorFileira;
-
-    static{
-        VALORPORTEMPO=4;
-        INTERVALODECOBRANCAEMMINUTOS=15;
-        VALORDEDIARIAMAXIMA=50;
-        
-        PORCENTAGEMMINIMAIDOSOS=0.10;
-        PORCENTAGEMMINIMAPCD=0.10;
-        PORCENTAGEMMINIMAVIP=0.20;
-    }
-            
+       
     public Parque(String identificador, int numeroVagas, int vagasPorFileira) {
         this.identificador = identificador;
         this.vagas = new ArrayList<>();
