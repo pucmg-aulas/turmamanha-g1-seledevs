@@ -13,11 +13,7 @@ import java.util.List;
  */
 public class Util {
     
-    public final static String CAMINHOPADRAO;
-    
-    static{
-       CAMINHOPADRAO = "./src/br/com/javaParking/arquivos/";
-    }
+    public final static String CAMINHOPADRAO = "./src/br/com/javaParking/arquivos/";
     
     public static boolean ePositivo(int... x){
         for(int i = 0; i < x.length; i++){

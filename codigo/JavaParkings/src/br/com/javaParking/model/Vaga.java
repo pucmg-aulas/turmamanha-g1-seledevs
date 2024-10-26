@@ -4,10 +4,6 @@
  */
 package br.com.javaParking.model;
 
-/**
- *
- * @author Leandro Alencar
- */
 public abstract class Vaga {
     
     private String parque;
@@ -47,8 +43,8 @@ public abstract class Vaga {
     }
     
     // MÉTODOS ESPECIAIS    
-    public abstract double calcularPreco(int dias,int minutos);
-    
+    public abstract double calcularPreco(long minutosTotais);
+
     protected double aplicarLimite(double precoTotal) {
         return Math.min(precoTotal, Parque.VALORDEDIARIAMAXIMA);
     }

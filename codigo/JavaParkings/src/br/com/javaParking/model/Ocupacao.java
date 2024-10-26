@@ -9,6 +9,7 @@ import br.com.javaParking.model.tiposVaga.Idoso;
 import br.com.javaParking.model.tiposVaga.Pcd;
 import br.com.javaParking.model.tiposVaga.Vip;
 import br.com.javaParking.util.Util;
+import java.time.Duration;
 import java.time.LocalDateTime;
 import java.util.Date;
 
@@ -50,23 +51,12 @@ public class Ocupacao {
     public double custoOcupacao(Vaga vaga, LocalDateTime saida) {
        
         this.horaSaida = saida;
-        
-        int dias = diferencaDias(this.horaEntrada, this.horaSaida);
-        int minutos = diferencaMinutos(this.horaEntrada, this.horaSaida);
-        
-        double preco = 0;
-        
-        if (vaga instanceof Idoso) {
-            preco = vaga.calcularPreco(dias, minutos);
-        } else if (vaga instanceof Pcd) {
-            preco = vaga.calcularPreco(dias, minutos);
-        } else if (vaga instanceof Vip) {
-            preco = vaga.calcularPreco(dias, minutos);
-        } else if (vaga instanceof Comum) {
-            preco = vaga.calcularPreco(dias, minutos);
-        }
-        
-        return preco;
+
+        // Calcula a diferença total entre hora de entrada e saída em minutos
+        Duration duracao = Duration.between(this.horaEntrada, this.horaSaida);
+        long minutosTotais = duracao.toMinutes();
+
+        return vaga.calcularPreco(minutosTotais);
     }
     
     public int diferencaDias(LocalDateTime dIn, LocalDateTime dOut){

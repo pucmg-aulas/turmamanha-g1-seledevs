@@ -244,7 +244,9 @@ public class Main {
 
                     for (int i = 0; i < auxListaOcupacao.size(); i++) {
                         if (auxVaga.getIdentificador().equals(auxListaOcupacao.get(i).getVaga())) {
-                            System.out.println("Para o Cliente:" + auxListaOcupacao.get(i).getCliente() + " retirar o veiculo de placa: " + auxListaOcupacao.get(i).getVeiculo() + " da vaga:" + auxListaOcupacao.get(i).getVaga() + " precisara pagar uma taxa de:" + auxListaOcupacao.get(i).custoOcupacao(auxVaga, dataSaida));
+                            System.out.println("Para o Cliente:" + auxListaOcupacao.get(i).getCliente() + " retirar o veiculo de placa: " 
+                                    + auxListaOcupacao.get(i).getVeiculo() + " da vaga:" + auxListaOcupacao.get(i).getVaga() + " precisara pagar uma taxa de:" 
+                                    + auxListaOcupacao.get(i).custoOcupacao(auxVaga, dataSaida));
 
                             while (true) {
                                 System.out.println("Deseja pagar?\n(1) -> Sim\n(2) -> Nao");
@@ -286,3 +288,4 @@ public class Main {
     }
 
 }
+

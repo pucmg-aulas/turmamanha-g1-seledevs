@@ -6,10 +6,6 @@ package br.com.javaParking.model;
 
 import java.util.List;
 
-/**
- *
- * @author Leandro Alencar
- */
 public class Cliente {
     private String nome;
     private String identificador;

@@ -13,10 +13,6 @@ import br.com.javaParking.util.Util;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- *
- * @author Leandro Alencar
- */
 public class Parque {
 
     public final static double VALORPORTEMPO; 
