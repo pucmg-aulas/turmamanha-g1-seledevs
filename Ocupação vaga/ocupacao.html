@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sistema de Ocupação de Estacionamento</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="container">
+    <h1>Sistema de Ocupação de Vagas</h1>
+    
+    <!-- Seção de Seleção de Parque -->
+    <div class="form-group">
+      <label for="parqueSelect">Selecione o Parque:</label>
+      <select id="parqueSelect" onchange="loadVagas()">
+        <option value="parque1">Parque 1</option>
+        <option value="parque2">Parque 2</option>
+        <option value="parque3">Parque 3</option>
+      </select>
+    </div>
+    
+    <!-- Filtro de Tipo de Cliente -->
+    <div class="form-group">
+      <label for="clienteSelect">Tipo de Cliente:</label>
+      <select id="clienteSelect">
+        <option value="anonimo">Anônimo</option>
+        <option value="normal">Normal</option>
+      </select>
+    </div>
+    
+    <!-- Tabela de Vagas -->
+    <table>
+      <thead>
+        <tr>
+          <th>Identificador</th>
+          <th>Tipo de Vaga</th>
+          <th>Status</th>
+          <th>Ação</th>
+        </tr>
+      </thead>
+      <tbody id="vagasTableBody">
+        <!-- Conteúdo gerado dinamicamente -->
+      </tbody>
+    </table>
+  </div>
+  
+  <script src="scripts.js"></script>
+</body>
+</html>
