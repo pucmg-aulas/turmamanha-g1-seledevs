@@ -11,7 +11,8 @@ Escreva um ou dois parágrafos resumindo o objetivo do seu projeto.
 * Rafael de Faria Neves Alves Franco
 * Vinícius Gomes Rodrigues
 * Vitor Veiga Silva
-
+* Felipe Bragança Godinho
+  
 ## Professor responsável 
 
 * Danilo Boechat Seufitelli
