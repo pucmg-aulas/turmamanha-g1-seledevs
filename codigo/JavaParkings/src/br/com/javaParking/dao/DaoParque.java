@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package br.com.javaParking.dao;
 
 import br.com.javaParking.model.Parque;
@@ -14,11 +10,6 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.util.ArrayList;
 import java.util.List;
-
-/**
- *
- * @author Leandro Alencar
- */
 
 public class DaoParque{
     
@@ -44,7 +35,7 @@ public class DaoParque{
             }
                  
             try (BufferedWriter w = new BufferedWriter(new FileWriter(registro, true))) {
-                w.write(parque.getIdentificador()+"&"+parque.getNumeroVagas()+"&"+ parque.getVagasPorFileira()+"&"+"\n");
+                w.write(String.valueOf(parque.getId())+"&"+parque.getNumeroVagas()+"&"+ parque.getVagasPorFileira()+"&"+"\n");
                 w.write("§\n");
             }
             
@@ -77,7 +68,7 @@ public class DaoParque{
                     numeroVagas = Integer.parseInt(parqueAtual.toString().split("&")[1].replace("\n", ""));
                     vagasPorFileira = Integer.parseInt(parqueAtual.toString().split("&")[2].replace("\n", ""));
                     
-                    parques.add(new Parque(identificador, numeroVagas, vagasPorFileira));
+                    parques.add(new Parque(Integer.parseInt(identificador), numeroVagas, vagasPorFileira));
                     
                     parqueAtual.setLength(0);
                 }

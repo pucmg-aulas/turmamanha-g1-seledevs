@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package br.com.javaParking.model;
 
 import br.com.javaParking.dao.DaoParque;
@@ -15,19 +11,24 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- *
- * @author Leandro Alencar
- */
 public class Xumlabs {
 
-    private static List<Parque> parques;
-    private static List<Cliente> clientes;
+    /**
+     * Atributos
+     */
+    public static List<Parque> parques;
+    public static List<Cliente> clientes;
+    public static List<Ocupacao> ocupacoes;
+    public static List<Arrecadacao> arrecadacoes;
+    public static List<Veiculo> veiculos;
 
     static {
         clientes.add(new Cliente("", ""));
     }
 
+    /**
+     * Metodos de acesso
+     */
     public static void addCliente(Cliente cliente) {
         clientes.add(cliente);
     }
@@ -44,14 +45,44 @@ public class Xumlabs {
     public static void addParque(Parque parque) {
         parques.add(parque);
     }
-
-    public static List<Cliente> listaClientes() {
-        return clientes;
+    
+    public static void delParque(Parque parque) {
+        for (int i = 0; i > parques.size(); i++) {
+            if (parque.getId() == parques.get(i).getId()) {
+                parques.remove(i);
+                return;
+            }
+        }
+    }
+    
+    public static void addOcupacao(Ocupacao ocupacao) {
+        ocupacoes.add(ocupacao);
+    }
+    
+    public static void desocuparOcupacao(Ocupacao ocupacao) {
+        for (int i = 0; i > ocupacoes.size(); i++) {
+            if (ocupacao.getId() == ocupacoes.get(i).getId()) {
+                ocupacoes.get(i).desocupar(ocupacao.getVaga());
+                return;
+            }
+        }
+    }
+    
+    public static void addArrecadacao(Arrecadacao arrecadacao) {
+        arrecadacoes.add(arrecadacao);
+    }
+    
+    public static void addVeiculo(Veiculo veiculo) {
+        veiculos.add(veiculo);
     }
 
-    public static List<Parque> listaParques() {
-       return DaoParque.listar();
+    public static void delVeiculo(Veiculo veiculo) {
+        for (int i = 0; i > veiculos.size(); i++) {
+            if (veiculo.getPlaca().equals(veiculos.get(i).getPlaca())) {
+                veiculos.remove(i);
+                return;
+            }
+        }
     }
-
 
 }

@@ -1,24 +1,36 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package br.com.javaParking.model;
 
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- *
- * @author Leandro Alencar
- */
 public class Veiculo {
+
+    /**
+     * Atributos
+     */
     private String placa;
-    
-    public Veiculo(String placa){  
+
+    /**
+     * Construtores
+     */
+    public Veiculo(String placa) {
         this.placa = placa;
     }
-    
-    public String getPlaca(){
+
+    /**
+     * Metodos de acesso
+     */
+    public String getPlaca() {
         return this.placa;
+    }
+
+    /**
+     * Metodos de validação
+     */
+    public boolean validarPlaca() {
+        /* [IMPLEMENTAÇÃO PENDENTE] -> Validar se a placa ja foi registrada antes usando os dados persistidos nos arquivos,
+         * caso ja exista retorne falso, caso contrario retorne verdadeiro.
+         */
+        return false;
     }
 }

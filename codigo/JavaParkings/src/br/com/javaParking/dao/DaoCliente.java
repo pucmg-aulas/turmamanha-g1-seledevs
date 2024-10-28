@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package br.com.javaParking.dao;
 
 import br.com.javaParking.model.Cliente;
@@ -13,11 +9,6 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.util.ArrayList;
 import java.util.List;
-
-/**
- *
- * @author Leandro Alencar
- */
 
 public class DaoCliente{
     
@@ -43,7 +34,7 @@ public class DaoCliente{
             }
 
             try (BufferedWriter w = new BufferedWriter(new FileWriter(registro, true))) {
-                w.write(cliente.getNome()+ "&"+ cliente.getIdentificador()+ "&" + "\n");
+                w.write(cliente.getNome()+ "&"+ cliente.getId()+ "&" + "\n");
                 w.write("§\n");
             }
             return true;

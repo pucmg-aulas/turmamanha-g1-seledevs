@@ -4,6 +4,8 @@
  */
 package br.com.javaParking.view.cliente;
 
+import javax.swing.JTextField;
+
 /**
  *
  * @author Usuario
@@ -17,6 +19,14 @@ public class ClienteView extends javax.swing.JFrame {
         initComponents();
     }
 
+    public JTextField getTxtNome(){
+        return txtNome;
+    }
+    
+    public JTextField getTxtCPF(){
+        return txtNome;
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -193,7 +203,7 @@ public class ClienteView extends javax.swing.JFrame {
             }
         });
 
-        btnAtualizar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/javaParking/assets/img/iconeAtualizar-00.png"))); // NOI18N
+        btnAtualizar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/javaParking/assets/img/iconeVeiculo-00.png"))); // NOI18N
         btnAtualizar.setToolTipText("");
         btnAtualizar.setBorderPainted(false);
         btnAtualizar.setContentAreaFilled(false);
@@ -208,7 +218,6 @@ public class ClienteView extends javax.swing.JFrame {
         btnHistorico.setToolTipText("");
         btnHistorico.setBorderPainted(false);
         btnHistorico.setContentAreaFilled(false);
-        btnHistorico.setEnabled(false);
         btnHistorico.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnHistoricoActionPerformed(evt);

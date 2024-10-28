@@ -1,22 +1,14 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package br.com.javaParking.model;
 
 import java.time.Duration;
 import java.time.LocalTime;
 
-/**
- *
- * @author Leandro Alencar
- */
 public class Ocupacao {
     
     /**
      * Atributos
      */
-    
+    private int id;
     private Cliente cliente;
     private Veiculo veiculo;
     private Vaga vaga;
@@ -25,8 +17,7 @@ public class Ocupacao {
 
     /**
      * Construtores
-     */
-    
+     */    
     public Ocupacao(Cliente cliente, Veiculo veiculo, Vaga vaga, LocalTime horaEntrada) {
         this.cliente = cliente;
         this.veiculo = veiculo;
@@ -38,7 +29,10 @@ public class Ocupacao {
     /**
      * Metodos de acesso 
      */
-
+    public int getId(){
+        return this.id;
+    }
+    
     public Cliente getCliente(){
         return this.cliente;
     }
@@ -57,9 +51,7 @@ public class Ocupacao {
     
     /**
      * Metodos de ação 
-     */
-    
-        
+     */ 
     public void desocupar(Vaga vaga) {
         vaga.desocuparVaga();
     }    
