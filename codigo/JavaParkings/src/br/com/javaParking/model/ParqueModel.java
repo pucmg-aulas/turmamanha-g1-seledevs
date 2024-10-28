@@ -17,11 +17,7 @@ public class ParqueModel {
     private double valorPorTempo; 
     private int intervaloDeCobrancaMinutos; 
     private double valorDeDiariaMaxima; 
-    
-    private final static double PORCENTAGEMMINIMAIDOSOS = 0.10; 
-    private final static double PORCENTAGEMMINIMAPCD = 0.10; 
-    private final static double PORCENTAGEMMINIMAVIP = 0.20; 
-        
+            
     private int id;
     private int numeroVagas; 
     private List<VagaModel> vagas;   
@@ -91,9 +87,9 @@ public class ParqueModel {
         
         int n = 0;
         
-        int nIdoso = (int) Math.floor(this.numeroVagas  * PORCENTAGEMMINIMAIDOSOS);
-        int nPCD = (int) Math.floor(this.numeroVagas  * PORCENTAGEMMINIMAPCD);
-        int nVIP = (int) Math.floor(this.numeroVagas  * PORCENTAGEMMINIMAVIP); 
+        int nIdoso = (int) Math.floor(this.numeroVagas  * ConfiguracaoModel.PORCENTAGEMMINIMAIDOSOS);
+        int nPCD = (int) Math.floor(this.numeroVagas  * ConfiguracaoModel.PORCENTAGEMMINIMAPCD);
+        int nVIP = (int) Math.floor(this.numeroVagas  * ConfiguracaoModel.PORCENTAGEMMINIMAVIP); 
         
         for(int i = 0; i < Util.alfabeto().size(); i++){
             for(int j = 0; j < this.vagasPorFileira; j++){

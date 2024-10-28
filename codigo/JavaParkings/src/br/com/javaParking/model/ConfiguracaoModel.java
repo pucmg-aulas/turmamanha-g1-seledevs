@@ -10,4 +10,8 @@ package br.com.javaParking.model;
  */
 public class ConfiguracaoModel {
     
+    public final static double PORCENTAGEMMINIMAIDOSOS = 0.10; 
+    public final static double PORCENTAGEMMINIMAPCD = 0.10; 
+    public final static double PORCENTAGEMMINIMAVIP = 0.20; 
+    
 }
