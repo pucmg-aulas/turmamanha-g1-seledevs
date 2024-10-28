@@ -3,9 +3,8 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/Leandro%20Alencar/Desktop/P1/codigo/JavaParkings/src/br/com/javaParking/view/XumlabsView.java</file>
-            <file>file:/C:/Users/Leandro%20Alencar/Desktop/P1/codigo/JavaParkings/src/br/com/javaParking/model/Veiculo.java</file>
-            <file>file:/C:/Users/Leandro%20Alencar/Desktop/P1/codigo/JavaParkings/src/br/com/javaParking/model/Ocupacao.java</file>
+            <file>file:/C:/Users/Leandro%20Alencar/Desktop/turmamanha-g1-seledevs/codigo/JavaParkings/src/br/com/javaParking/view/xulambs/PdaView.java</file>
+            <file>file:/C:/Users/Leandro%20Alencar/Desktop/turmamanha-g1-seledevs/codigo/JavaParkings/src/br/com/javaParking/view/veiculo/VeiculosRegistradosView.java</file>
         </group>
     </open-files>
 </project-private>
