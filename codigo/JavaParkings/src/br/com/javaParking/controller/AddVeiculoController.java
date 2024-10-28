@@ -6,7 +6,7 @@ package br.com.javaParking.controller;
 
 import br.com.javaParking.dao.DaoVeiculo;
 import br.com.javaParking.model.Veiculo;
-import br.com.javaParking.view.veiculo.VeiculoCreateView;
+import br.com.javaParking.view.veiculo.VeiculoView;
 import javax.swing.JOptionPane;
 
 /**
@@ -14,17 +14,17 @@ import javax.swing.JOptionPane;
  * @author rafae
  */
 public class AddVeiculoController {
-    private VeiculoCreateView view;
+    private VeiculoView view;
     private DaoVeiculo veiculos;
     
     public void addVeiculo(){
-        String placa = view.getPlacaTextField();
-        String idCliente = view.getIDTextField();
+        String placa = view.getPlaca().getText();
         
         
         Veiculo v = new Veiculo(placa);
         
-        veiculos.gravar(v,idCliente);
+        // [CONCERTAR] - Mudei o id do cliente, criar de acordo com o CPF
+        veiculos.gravar(v,"");
         
         JOptionPane.showMessageDialog(view, "Carro salvo com sucesso!");
         
@@ -32,7 +32,6 @@ public class AddVeiculoController {
     }
     
     private void limpartela() {
-        this.view.getPlacaTextField().setText("");
-        this.view.getIDTextField().setText("");
+        this.view.getPlaca().setText("");
     }
 }
