@@ -28,7 +28,7 @@ public class DaoVeiculo{
         CAMINHOVEICULO = Util.CAMINHOPADRAO + "veiculos.txt";
     }
     
-    public static boolean gravar(Veiculo veiculo, Cliente cliente) {
+    public static boolean gravar(Veiculo veiculo, String id) {
 
         File registro = new File(CAMINHOVEICULO);
 
@@ -44,7 +44,7 @@ public class DaoVeiculo{
             }
 
             try (BufferedWriter w = new BufferedWriter(new FileWriter(registro, true))) {
-                w.write(veiculo.getPlaca()+ "&"+ cliente.getId() +"&"+ "\n");
+                w.write(veiculo.getPlaca()+ "&"+ id +"&"+ "\n");
                 w.write("§\n");
             }
             return true;
