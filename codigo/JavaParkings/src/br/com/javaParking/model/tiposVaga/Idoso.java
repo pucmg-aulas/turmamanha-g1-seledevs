@@ -17,13 +17,13 @@ public class Idoso extends Vaga {
 
     private final static double MODIFICADORPRECO = 0.85;
     
-    public Idoso(String parque,String identificador, boolean ocupada) {
+    public Idoso(Parque parque,String identificador, boolean ocupada) {
         super(parque,identificador,ocupada);
     }
     
    @Override
     public double calcularPreco(long minutosTotais) {
-        double precoTotal = Math.floor(minutosTotais / Parque.INTERVALODECOBRANCAEMMINUTOS) * Parque.VALORPORTEMPO;
+        double precoTotal = Math.floor(minutosTotais / this.getParque().getIntervaloDeCobrancaMinutos()) * this.getParque().getValorPorTempo();
         return super.aplicarLimite(precoTotal) * MODIFICADORPRECO;
     }
     

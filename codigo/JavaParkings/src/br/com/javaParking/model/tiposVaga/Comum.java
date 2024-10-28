@@ -7,7 +7,7 @@ public class Comum extends Vaga {
     
     private final static double MODIFICADORPRECO = 1.0;
     
-    public Comum(String parque,String identificador, boolean ocupada) {
+    public Comum(Parque parque,String identificador, boolean ocupada) {
         super(parque,identificador,ocupada);
     }
 
