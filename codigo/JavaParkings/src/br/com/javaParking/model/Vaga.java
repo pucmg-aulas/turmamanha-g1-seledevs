@@ -5,7 +5,7 @@ public abstract class Vaga {
     /**
      * Atributos
      */
-    private String parque;
+    private Parque parque;
     private String identificador;
     private boolean ocupada;
     private double precoBase = 4.0; // preço de 4 reais a cada 15 minutos
@@ -13,7 +13,7 @@ public abstract class Vaga {
     /**
      * Construtores
      */ 
-    public Vaga(String parque, String identificador, boolean ocupada) {
+    public Vaga(Parque parque, String identificador, boolean ocupada) {
         this.parque = parque;
         this.identificador = identificador;
         this.ocupada = ocupada;
@@ -26,7 +26,7 @@ public abstract class Vaga {
         return this.identificador;
     }
     
-    public String getParque() {
+    public Parque getParque() {
         return this.parque;
     }
 
@@ -52,7 +52,7 @@ public abstract class Vaga {
     public abstract double calcularPreco(long minutosTotais);
 
     protected double aplicarLimite(double precoTotal) {
-        return Math.min(precoTotal, Parque.VALORDEDIARIAMAXIMA);
+        return Math.min(precoTotal, this.getParque().getValorDeDiariaMaxima());
     }
     
 }

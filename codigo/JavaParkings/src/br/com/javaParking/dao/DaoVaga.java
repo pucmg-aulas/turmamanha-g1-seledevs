@@ -86,13 +86,13 @@ public class DaoVaga {
                     if (String.valueOf(parque.getId()).equals(vagaAtual.toString().split("&")[0].replace("\n", ""))) {
 
                         if (tipo.equals("Idoso")) {
-                            vaga = new Idoso(String.valueOf(parque.getId()), identificador,Boolean.parseBoolean(ocupada));
+                            vaga = new Idoso(parque, identificador,Boolean.parseBoolean(ocupada));
                         } else if (tipo.equals("Pcd")) {
-                            vaga = new Pcd(String.valueOf(parque.getId()), identificador,Boolean.parseBoolean(ocupada));
+                            vaga = new Pcd(parque, identificador,Boolean.parseBoolean(ocupada));
                         } else if (tipo.equals("Vip")) {
-                            vaga = new Vip(String.valueOf(parque.getId()), identificador,Boolean.parseBoolean(ocupada));
+                            vaga = new Vip(parque, identificador,Boolean.parseBoolean(ocupada));
                         } else if (tipo.equals("Comum")) {
-                            vaga = new Comum(String.valueOf(parque.getId()), identificador,Boolean.parseBoolean(ocupada));
+                            vaga = new Comum(parque, identificador,Boolean.parseBoolean(ocupada));
                         }
                         
                         vagas.add(vaga); 

@@ -13,7 +13,7 @@ public class Comum extends Vaga {
 
     @Override
     public double calcularPreco(long minutosTotais) {
-        double precoTotal = Math.floor(minutosTotais / Parque.INTERVALODECOBRANCAEMMINUTOS) * Parque.VALORPORTEMPO;
+        double precoTotal = Math.floor(minutosTotais / this.getParque().getIntervaloDeCobrancaMinutos()) * this.getParque().getValorPorTempo();
         return super.aplicarLimite(precoTotal) * MODIFICADORPRECO;
     }
 }

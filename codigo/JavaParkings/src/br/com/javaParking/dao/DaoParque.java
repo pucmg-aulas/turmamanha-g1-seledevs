@@ -47,6 +47,10 @@ public class DaoParque{
         }
     }
 
+    /*
+    
+    [CORRIGIR]
+    
     public static List<Parque> listar() {
         String identificador;
         int numeroVagas;
@@ -80,4 +84,6 @@ public class DaoParque{
 
         return parques;
     }
+    
+    */
 }
