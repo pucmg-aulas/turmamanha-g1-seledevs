@@ -4,8 +4,6 @@
  */
 package br.com.javaParking.dao;
 
-import br.com.javaParking.model.Parque;
-import br.com.javaParking.model.Ocupacao;
 import br.com.javaParking.model.Ocupacao;
 import br.com.javaParking.util.Util;
 import java.io.BufferedReader;

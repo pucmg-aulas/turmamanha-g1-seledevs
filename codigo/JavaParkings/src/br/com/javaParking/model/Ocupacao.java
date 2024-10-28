@@ -4,92 +4,73 @@
  */
 package br.com.javaParking.model;
 
-import br.com.javaParking.model.tiposVaga.Comum;
-import br.com.javaParking.model.tiposVaga.Idoso;
-import br.com.javaParking.model.tiposVaga.Pcd;
-import br.com.javaParking.model.tiposVaga.Vip;
-import br.com.javaParking.util.Util;
 import java.time.Duration;
-import java.time.LocalDateTime;
-import java.util.Date;
+import java.time.LocalTime;
 
 /**
  *
  * @author Leandro Alencar
  */
 public class Ocupacao {
+    
+    /**
+     * Atributos
+     */
+    
+    private Cliente cliente;
+    private Veiculo veiculo;
+    private Vaga vaga;
+    private LocalTime horaEntrada;
+    private LocalTime horaSaida;
 
-    private String cliente;
-    private String veiculo;
-    private String vaga;
-    private LocalDateTime horaEntrada;
-    private LocalDateTime horaSaida;
-
-    public Ocupacao(String cliente, String veiculo, String vaga) {
+    /**
+     * Construtores
+     */
+    
+    public Ocupacao(Cliente cliente, Veiculo veiculo, Vaga vaga, LocalTime horaEntrada) {
         this.cliente = cliente;
         this.veiculo = veiculo;
         this.vaga = vaga;
-        this.horaEntrada = LocalDateTime.now();
+        this.vaga.ocuparVaga();
+        this.horaEntrada = horaEntrada;   
     }
+    
+    /**
+     * Metodos de acesso 
+     */
 
-    public String getCliente(){
+    public Cliente getCliente(){
         return this.cliente;
     }
     
-    public String getVeiculo(){
+    public Veiculo getVeiculo(){
         return this.veiculo;
     }
     
-    public String getVaga(){
+    public Vaga getVaga(){
         return this.vaga;
     }
     
-    public LocalDateTime getEntrada(){
+    public LocalTime getEntrada(){
         return this.horaEntrada;
     }
     
-    public double custoOcupacao(Vaga vaga, LocalDateTime saida) {
-       
-        this.horaSaida = saida;
+    /**
+     * Metodos de ação 
+     */
+    
+        
+    public void desocupar(Vaga vaga) {
+        vaga.desocuparVaga();
+    }    
+    
+    public double custoOcupacao(Vaga vaga, LocalTime saida) {       
 
         // Calcula a diferença total entre hora de entrada e saída em minutos
-        Duration duracao = Duration.between(this.horaEntrada, this.horaSaida);
+        Duration duracao = Duration.between(this.horaEntrada, saida);
         long minutosTotais = duracao.toMinutes();
 
         return vaga.calcularPreco(minutosTotais);
     }
     
-    public int diferencaDias(LocalDateTime dIn, LocalDateTime dOut){
-        int ano = dOut.getYear() - dIn.getYear();
-        int mes = dOut.getMonthValue() - dIn.getMonthValue();
-        int dia = dOut.getDayOfMonth() - dIn.getDayOfMonth();
-        
-        if(ano > 0 || mes > 0 || dia > 7){
-            return -1;
-        }else {
-            return dia;
-        }
-    }
-    
-    private int diferencaMinutos(LocalDateTime dIn, LocalDateTime dOut){
-        int diferencaHoras = dOut.getHour() - dIn.getHour();
-        int diferencaMinutos = dOut.getMinute() - dIn.getMinute(); 
-        
-        int minutos = 0;
-        
-        if (diferencaHoras > 0){
-            minutos += (60 - dIn.getMinute());
-            
-            if (diferencaHoras > 1){
-                minutos += ((diferencaHoras-1)*60);
-            }
-            
-            minutos += dOut.getMinute();            
-            
-            return minutos; 
-        } else {
-            return diferencaMinutos;
-        }
-    }
-
 }
