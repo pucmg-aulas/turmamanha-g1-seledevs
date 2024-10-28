@@ -6,7 +6,7 @@ package br.com.javaParking.controller;
 
 import br.com.javaParking.dao.DaoCliente;
 import br.com.javaParking.model.Cliente;
-import br.com.javaParking.view.AddClienteView;
+import br.com.javaParking.view.cliente.ClienteCreateView;
 import javax.swing.JOptionPane;
 
 /**
@@ -15,15 +15,13 @@ import javax.swing.JOptionPane;
  */
 public class AddClienteController {
 
-    private AddClienteView view;
+    private ClienteCreateView view;
     private DaoCliente clientes;
 
     public AddClienteController() {
         
     }
 
-    
-    
     public void addCliente() {
         String id = view.getIdTextField();
         String nome = view.getNomeTextField();

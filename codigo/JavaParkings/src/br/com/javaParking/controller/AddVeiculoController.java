@@ -6,7 +6,7 @@ package br.com.javaParking.controller;
 
 import br.com.javaParking.dao.DaoVeiculo;
 import br.com.javaParking.model.Veiculo;
-import br.com.javaParking.view.AddVeiculoView;
+import br.com.javaParking.view.veiculo.VeiculoCreateView;
 import javax.swing.JOptionPane;
 
 /**
@@ -14,12 +14,8 @@ import javax.swing.JOptionPane;
  * @author rafae
  */
 public class AddVeiculoController {
-    private AddVeiculoView view;
+    private VeiculoCreateView view;
     private DaoVeiculo veiculos;
-    
-    
-    
-    
     
     public void addVeiculo(){
         String placa = view.getPlacaTextField();
