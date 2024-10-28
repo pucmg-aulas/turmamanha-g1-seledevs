@@ -4,6 +4,10 @@
  */
 package br.com.javaParking.view.sistema;
 
+import br.com.javaParking.view.cliente.ClienteView;
+import br.com.javaParking.view.parque.ParqueView;
+import br.com.javaParking.view.xulambs.PdaView;
+
 /**
  *
  * @author Leandro Alencar
@@ -291,18 +295,38 @@ public class ArrecadacaoView extends javax.swing.JFrame {
         MenCad.add(MenCadCli);
 
         MenCadOs.setText("Clientes");
+        MenCadOs.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                MenCadOsActionPerformed(evt);
+            }
+        });
         MenCad.add(MenCadOs);
 
         Menu.add(MenCad);
 
         jMenu1.setText("PDA");
         jMenu1.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
+        jMenu1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jMenu1MouseClicked(evt);
+            }
+        });
+        jMenu1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenu1ActionPerformed(evt);
+            }
+        });
         Menu.add(jMenu1);
 
         MenOpc.setText("Opções");
         MenOpc.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
 
         MenOpcSai.setText("Configurações");
+        MenOpcSai.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                MenOpcSaiActionPerformed(evt);
+            }
+        });
         MenOpc.add(MenOpcSai);
 
         MenOpcSai1.setText("Sair");
@@ -354,11 +378,39 @@ public class ArrecadacaoView extends javax.swing.JFrame {
 
     private void MenCadCliActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MenCadCliActionPerformed
         // TODO add your handling code here:
+        ParqueView tela = new ParqueView();
+        tela.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_MenCadCliActionPerformed
 
     private void MenOpcSai1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MenOpcSai1ActionPerformed
         // TODO add your handling code here:
+        this.dispose();
     }//GEN-LAST:event_MenOpcSai1ActionPerformed
+
+    private void MenCadOsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MenCadOsActionPerformed
+        // TODO add your handling code here:
+        ClienteView tela = new ClienteView();
+        tela.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_MenCadOsActionPerformed
+
+    private void jMenu1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenu1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jMenu1ActionPerformed
+
+    private void MenOpcSaiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MenOpcSaiActionPerformed
+        // TODO add your handling code here:
+        ConfiguracaoView tela = new ConfiguracaoView();
+        tela.setVisible(true);
+    }//GEN-LAST:event_MenOpcSaiActionPerformed
+
+    private void jMenu1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenu1MouseClicked
+        // TODO add your handling code here:
+        PdaView tela = new PdaView();
+        tela.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_jMenu1MouseClicked
 
     /**
      * @param args the command line arguments

@@ -4,6 +4,8 @@
  */
 package br.com.javaParking.view.parque;
 
+import br.com.javaParking.view.sistema.ArrecadacaoView;
+
 /**
  *
  * @author Leandro Alencar
@@ -120,7 +122,7 @@ public class ParqueView extends javax.swing.JFrame {
                     .addComponent(lblPesquisar1)
                     .addComponent(txtPesquisar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 511, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 511, Short.MAX_VALUE)
                 .addGap(8, 8, 8))
         );
 
@@ -386,7 +388,7 @@ public class ParqueView extends javax.swing.JFrame {
                 .addComponent(btnVoltar, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jPanel8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGap(16, 16, 16)
+                .addGap(8, 8, 8)
                 .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPanel14, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -460,6 +462,9 @@ public class ParqueView extends javax.swing.JFrame {
 
     private void btnVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVoltarActionPerformed
         // TODO add your handling code here:
+        ArrecadacaoView tela = new ArrecadacaoView();
+        tela.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_btnVoltarActionPerformed
 
     private void txtCPF6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCPF6ActionPerformed
@@ -520,28 +525,11 @@ public class ParqueView extends javax.swing.JFrame {
     private javax.swing.JButton btnRemover;
     private javax.swing.JButton btnVoltar;
     private javax.swing.JPanel jPanel10;
-    private javax.swing.JPanel jPanel11;
-    private javax.swing.JPanel jPanel12;
-    private javax.swing.JPanel jPanel13;
     private javax.swing.JPanel jPanel14;
-    private javax.swing.JPanel jPanel15;
-    private javax.swing.JPanel jPanel16;
-    private javax.swing.JPanel jPanel17;
-    private javax.swing.JPanel jPanel18;
-    private javax.swing.JPanel jPanel19;
     private javax.swing.JPanel jPanel20;
-    private javax.swing.JPanel jPanel21;
-    private javax.swing.JPanel jPanel22;
-    private javax.swing.JPanel jPanel23;
-    private javax.swing.JPanel jPanel24;
-    private javax.swing.JPanel jPanel25;
-    private javax.swing.JPanel jPanel26;
-    private javax.swing.JPanel jPanel27;
     private javax.swing.JPanel jPanel28;
     private javax.swing.JPanel jPanel29;
     private javax.swing.JPanel jPanel5;
-    private javax.swing.JPanel jPanel6;
-    private javax.swing.JPanel jPanel7;
     private javax.swing.JPanel jPanel8;
     private javax.swing.JPanel jPanel9;
     private javax.swing.JScrollPane jScrollPane3;
@@ -551,27 +539,10 @@ public class ParqueView extends javax.swing.JFrame {
     private javax.swing.JTable tbClientes;
     private javax.swing.JTable tbRanking;
     private javax.swing.JTextField txtCPF;
-    private javax.swing.JTextField txtCPF1;
-    private javax.swing.JTextField txtCPF10;
-    private javax.swing.JTextField txtCPF11;
     private javax.swing.JTextField txtCPF12;
-    private javax.swing.JTextField txtCPF13;
-    private javax.swing.JTextField txtCPF14;
-    private javax.swing.JTextField txtCPF15;
-    private javax.swing.JTextField txtCPF16;
-    private javax.swing.JTextField txtCPF17;
-    private javax.swing.JTextField txtCPF18;
-    private javax.swing.JTextField txtCPF19;
-    private javax.swing.JTextField txtCPF2;
     private javax.swing.JTextField txtCPF20;
     private javax.swing.JTextField txtCPF21;
-    private javax.swing.JTextField txtCPF3;
-    private javax.swing.JTextField txtCPF4;
-    private javax.swing.JTextField txtCPF5;
     private javax.swing.JTextField txtCPF6;
-    private javax.swing.JTextField txtCPF7;
-    private javax.swing.JTextField txtCPF8;
-    private javax.swing.JTextField txtCPF9;
     private javax.swing.JTextField txtPesquisar;
     // End of variables declaration//GEN-END:variables
 }

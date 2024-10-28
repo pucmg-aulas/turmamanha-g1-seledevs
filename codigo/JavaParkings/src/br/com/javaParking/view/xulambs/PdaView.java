@@ -4,6 +4,11 @@
  */
 package br.com.javaParking.view.xulambs;
 
+import br.com.javaParking.model.ArrecadacaoModel;
+import br.com.javaParking.view.parque.ParqueView;
+import br.com.javaParking.view.sistema.ArrecadacaoView;
+import br.com.javaParking.view.veiculo.VeiculosRegistradosView;
+
 /**
  *
  * @author Leandro Alencar
@@ -40,6 +45,8 @@ public class PdaView extends javax.swing.JFrame {
         pnCliente = new javax.swing.JPanel();
         scCliente = new javax.swing.JScrollPane();
         tbCliente = new javax.swing.JTable();
+        btnVoltar = new javax.swing.JButton();
+        btnVoltar1 = new javax.swing.JButton();
         jPanel8 = new javax.swing.JPanel();
         lblTotal = new javax.swing.JLabel();
         lblValorTotal = new javax.swing.JLabel();
@@ -54,6 +61,7 @@ public class PdaView extends javax.swing.JFrame {
         rbCredito1 = new javax.swing.JRadioButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Xumlabs Parking");
 
         jPanel4.setBackground(java.awt.SystemColor.control);
         jPanel4.setBorder(javax.swing.BorderFactory.createCompoundBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED), javax.swing.BorderFactory.createMatteBorder(2, 0, 0, 0, new java.awt.Color(204, 204, 204))));
@@ -194,6 +202,28 @@ public class PdaView extends javax.swing.JFrame {
             .addComponent(scCliente, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
         );
 
+        btnVoltar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/javaParking/assets/img/iconeSetaEsquerda-00.png"))); // NOI18N
+        btnVoltar.setToolTipText("");
+        btnVoltar.setContentAreaFilled(false);
+        btnVoltar.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        btnVoltar.setPreferredSize(new java.awt.Dimension(80, 80));
+        btnVoltar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnVoltarActionPerformed(evt);
+            }
+        });
+
+        btnVoltar1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/javaParking/assets/img/iconeSetaEsquerda-00.png"))); // NOI18N
+        btnVoltar1.setToolTipText("");
+        btnVoltar1.setContentAreaFilled(false);
+        btnVoltar1.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        btnVoltar1.setPreferredSize(new java.awt.Dimension(80, 80));
+        btnVoltar1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnVoltar1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout pnTbClientesLayout = new javax.swing.GroupLayout(pnTbClientes);
         pnTbClientes.setLayout(pnTbClientesLayout);
         pnTbClientesLayout.setHorizontalGroup(
@@ -203,19 +233,37 @@ public class PdaView extends javax.swing.JFrame {
                 .addComponent(lblPesquisarCliente)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(txtPesquisarCliente)
+                .addGap(18, 18, 18)
+                .addComponent(btnVoltar1, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
             .addComponent(pnCliente, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(pnTbClientesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(pnTbClientesLayout.createSequentialGroup()
+                    .addGap(210, 210, 210)
+                    .addComponent(btnVoltar, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap(211, Short.MAX_VALUE)))
         );
         pnTbClientesLayout.setVerticalGroup(
             pnTbClientesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnTbClientesLayout.createSequentialGroup()
-                .addGap(16, 16, 16)
-                .addGroup(pnTbClientesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblPesquisarCliente)
-                    .addComponent(txtPesquisarCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(16, 16, 16)
+                .addGroup(pnTbClientesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(pnTbClientesLayout.createSequentialGroup()
+                        .addGap(16, 16, 16)
+                        .addGroup(pnTbClientesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(txtPesquisarCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lblPesquisarCliente))
+                        .addGap(16, 16, 16))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnTbClientesLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(btnVoltar1, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)))
                 .addComponent(pnCliente, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGap(0, 0, 0))
+            .addGroup(pnTbClientesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(pnTbClientesLayout.createSequentialGroup()
+                    .addGap(182, 182, 182)
+                    .addComponent(btnVoltar, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap(183, Short.MAX_VALUE)))
         );
 
         jPanel8.setBackground(java.awt.SystemColor.control);
@@ -471,6 +519,8 @@ public class PdaView extends javax.swing.JFrame {
 
     private void tbListaDeInformaçoesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbListaDeInformaçoesMouseClicked
         // TODO add your handling code here:
+        VeiculosRegistradosView tela = new VeiculosRegistradosView();
+        tela.setVisible(true);
     }//GEN-LAST:event_tbListaDeInformaçoesMouseClicked
 
     private void rbDebito1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbDebito1ActionPerformed
@@ -480,6 +530,17 @@ public class PdaView extends javax.swing.JFrame {
     private void rbCredito1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbCredito1ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_rbCredito1ActionPerformed
+
+    private void btnVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVoltarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnVoltarActionPerformed
+
+    private void btnVoltar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVoltar1ActionPerformed
+        // TODO add your handling code here:
+        ArrecadacaoView tela = new ArrecadacaoView();
+        tela.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_btnVoltar1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -518,6 +579,8 @@ public class PdaView extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private br.com.javaParking.assets.swing.botaoArredondado botaoArredondado1;
+    private javax.swing.JButton btnVoltar;
+    private javax.swing.JButton btnVoltar1;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel7;

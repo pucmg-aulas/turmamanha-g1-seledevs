@@ -4,6 +4,8 @@
  */
 package br.com.javaParking.view.cliente;
 
+import br.com.javaParking.view.sistema.ArrecadacaoView;
+import br.com.javaParking.view.veiculo.VeiculoView;
 import javax.swing.JTextField;
 
 /**
@@ -388,12 +390,14 @@ public class ClienteView extends javax.swing.JFrame {
 
     private void btnAtualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAtualizarActionPerformed
         // TODO add your handling code here:
-       
+        VeiculoView tela = new VeiculoView();
+        tela.setVisible(true);
     }//GEN-LAST:event_btnAtualizarActionPerformed
 
     private void btnHistoricoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHistoricoActionPerformed
         // TODO add your handling code here:
-       
+        ClienteHistoricoView tela = new ClienteHistoricoView();
+        tela.setVisible(true);
     }//GEN-LAST:event_btnHistoricoActionPerformed
 
     private void txtCPFActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCPFActionPerformed
@@ -414,6 +418,9 @@ public class ClienteView extends javax.swing.JFrame {
 
     private void btnVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVoltarActionPerformed
         // TODO add your handling code here:
+        ArrecadacaoView tela = new ArrecadacaoView();
+        tela.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_btnVoltarActionPerformed
 
     /**
