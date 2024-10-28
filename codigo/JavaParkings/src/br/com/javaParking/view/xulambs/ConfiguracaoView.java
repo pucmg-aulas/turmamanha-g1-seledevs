@@ -33,7 +33,7 @@ public class ConfiguracaoView extends javax.swing.JFrame {
         txtDescricao6 = new javax.swing.JTextField();
         jPanel8 = new javax.swing.JPanel();
         txtDescricao7 = new javax.swing.JTextField();
-        botaoArredondado1 = new br.com.javaParking.swing.botaoArredondado();
+        botaoArredondado1 = new br.com.javaParking.assets.swing.botaoArredondado();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Xumlabs Parking");
@@ -176,7 +176,7 @@ public class ConfiguracaoView extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private br.com.javaParking.swing.botaoArredondado botaoArredondado1;
+    private br.com.javaParking.assets.swing.botaoArredondado botaoArredondado1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel8;
