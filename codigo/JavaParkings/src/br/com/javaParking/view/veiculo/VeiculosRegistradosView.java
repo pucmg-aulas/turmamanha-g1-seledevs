@@ -49,6 +49,7 @@ public class VeiculosRegistradosView extends javax.swing.JFrame {
         jPanel11.setBackground(java.awt.SystemColor.control);
         jPanel11.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 0, 0, new java.awt.Color(153, 153, 153)));
 
+        jPanel9.setBackground(java.awt.SystemColor.control);
         jPanel9.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createMatteBorder(1, 0, 0, 0, new java.awt.Color(153, 153, 153)), "Veiculos", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Arial", 3, 12))); // NOI18N
 
         scPdv.addMouseListener(new java.awt.event.MouseAdapter() {

@@ -70,7 +70,7 @@ public class PdaView extends javax.swing.JFrame {
         pnTbPrincipal.setBorder(javax.swing.BorderFactory.createMatteBorder(1, 1, 1, 1, new java.awt.Color(153, 153, 153)));
 
         jPanel9.setBackground(java.awt.SystemColor.control);
-        jPanel9.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createMatteBorder(1, 0, 0, 0, new java.awt.Color(153, 153, 153)), "Vagas", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Arial", 3, 12))); // NOI18N
+        jPanel9.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createMatteBorder(1, 0, 0, 0, new java.awt.Color(153, 153, 153)), "Vagas", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.TOP, new java.awt.Font("Arial", 3, 12))); // NOI18N
 
         scPdv.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -95,7 +95,6 @@ public class PdaView extends javax.swing.JFrame {
 
             }
         ));
-        tbListaDeInformaçoes.setFocusable(false);
         tbListaDeInformaçoes.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 tbListaDeInformaçoesMouseClicked(evt);
@@ -105,6 +104,11 @@ public class PdaView extends javax.swing.JFrame {
 
         lblPesquisa.setFont(new java.awt.Font("Dialog", 3, 14)); // NOI18N
         lblPesquisa.setText("Pesquisa:");
+        lblPesquisa.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                lblPesquisaKeyPressed(evt);
+            }
+        });
 
         txtPesquisa.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -511,6 +515,8 @@ public class PdaView extends javax.swing.JFrame {
 
     private void txtPesquisaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtPesquisaActionPerformed
         // TODO add your handling code here:
+        VeiculosRegistradosView tela = new VeiculosRegistradosView();
+        tela.setVisible(true);
     }//GEN-LAST:event_txtPesquisaActionPerformed
 
     private void scPdvMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_scPdvMouseClicked
@@ -519,8 +525,7 @@ public class PdaView extends javax.swing.JFrame {
 
     private void tbListaDeInformaçoesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbListaDeInformaçoesMouseClicked
         // TODO add your handling code here:
-        VeiculosRegistradosView tela = new VeiculosRegistradosView();
-        tela.setVisible(true);
+        
     }//GEN-LAST:event_tbListaDeInformaçoesMouseClicked
 
     private void rbDebito1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbDebito1ActionPerformed
@@ -541,6 +546,10 @@ public class PdaView extends javax.swing.JFrame {
         tela.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_btnVoltar1ActionPerformed
+
+    private void lblPesquisaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_lblPesquisaKeyPressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_lblPesquisaKeyPressed
 
     /**
      * @param args the command line arguments
