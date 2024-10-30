@@ -11,12 +11,15 @@ public class ocupacao extends JFrame {
     private JButton confirmarButton;
     private JButton liberarButton; 
     private JButton voltarButton;
-    private JButton selecionarVagaButton; // Novo botão para selecionar a vaga
+    private JButton selecionarVagaButton;
     private JTable vagasTable;
     private DefaultTableModel tableModel;
     private JPanel selectionPanel, vagasPanel, summaryPanel;
     private CardLayout cardLayout;
-    private EstacionamentoController controller; // Controlador do estacionamento
+    private EstacionamentoController controller;
+    private String tipoCliente; 
+    private JPanel clientePanel;  
+
 
     public ocupacao() {
         setTitle("Sistema de Estacionamento");
@@ -25,49 +28,101 @@ public class ocupacao extends JFrame {
         setLocationRelativeTo(null);
         setLayout(new CardLayout());
 
-        controller = new EstacionamentoController(); // Inicializa o controlador
-
-        // Inicializar painéis
+        controller = new EstacionamentoController(); 
+        
         initSelectionPanel();
         initSummaryPanel();
         initVagasPanel();
+        initClientePanel();    
+        initSelectionPanel(); 
+        initVagasPanel();
 
-        // Adicionar painéis ao CardLayout
+        add(selectionPanel, "selectionPanel");
+        add(vagasPanel, "vagasPanel");
+        add(clientePanel, "clientePanel");
         add(selectionPanel, "selectionPanel");
         add(vagasPanel, "vagasPanel");
 
+
         cardLayout = (CardLayout) getContentPane().getLayout();
         cardLayout.show(getContentPane(), "selectionPanel");
+        cardLayout = (CardLayout) getContentPane().getLayout();
+        cardLayout.show(getContentPane(), "clientePanel");
+    }
+
+    private void initClientePanel() {
+        clientePanel = new JPanel(new GridLayout(4, 1, 10, 10));
+        clientePanel.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
+        clientePanel.setBackground(new Color(242, 242, 242));
+    
+        JLabel clienteLabel = new JLabel("Selecione o tipo de cliente:");
+        clienteLabel.setHorizontalAlignment(SwingConstants.CENTER);
+        clienteLabel.setFont(new Font("Arial", Font.BOLD, 16));
+        clienteLabel.setForeground(new Color(51, 51, 51));
+    
+        JButton normalButton = new JButton("Cliente Normal");
+        styleButton(normalButton);
+        normalButton.addActionListener(e -> {
+            tipoCliente = "Normal";
+            cardLayout.show(getContentPane(), "selectionPanel");
+        });
+    
+        JButton anonimoButton = new JButton("Cliente Anônimo");
+        styleButton(anonimoButton);
+        anonimoButton.addActionListener(e -> {
+            tipoCliente = "Anônimo";
+            cardLayout.show(getContentPane(), "selectionPanel");
+        });
+    
+        clientePanel.add(clienteLabel);
+        clientePanel.add(normalButton);
+        clientePanel.add(anonimoButton);
+    }
+    
+
+    private void styleButton(JButton button) {
+        button.setBackground(new Color(33, 150, 243)); 
+        button.setForeground(Color.WHITE);
+        button.setFont(new Font("Arial", Font.BOLD, 14));
+        button.setFocusPainted(false);
+        button.setBorder(BorderFactory.createLineBorder(new Color(33, 150, 243), 2));
+        
+        
+        button.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                button.setBackground(new Color(30, 136, 229)); // Azul mais escuro
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                button.setBackground(new Color(33, 150, 243)); // Azul original
+            }
+        });
     }
     
     private void initSelectionPanel() {
         selectionPanel = new JPanel(new GridLayout(4, 2, 10, 10));
         selectionPanel.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
         selectionPanel.setBackground(new Color(242, 242, 242));
-
+    
         parqueSelect = new JComboBox<>(new String[]{"Chume Park", "Parque Guanabara", "Parque Festa"});
-        Dimension comboBoxSize = new Dimension(15, 7); // Tamanho ainda menor
+        Dimension comboBoxSize = new Dimension(15, 7);
         parqueSelect.setPreferredSize(comboBoxSize);
         parqueSelect.setMinimumSize(comboBoxSize);
         parqueSelect.setMaximumSize(comboBoxSize);
         
         JButton selecionarParqueButton = new JButton("Selecionar Parque");
-        selecionarParqueButton.setPreferredSize(comboBoxSize);
-        selecionarParqueButton.setMinimumSize(comboBoxSize);
-        selecionarParqueButton.setMaximumSize(comboBoxSize);
-
+        styleButton(selecionarParqueButton);
+    
         selecionarParqueButton.addActionListener(e -> {
             cardLayout.show(getContentPane(), "vagasPanel");
             updateSummaryPanel();
-            updateTable(controller.getVagas((String) tipoVagaSelect.getSelectedItem())); // Atualiza as vagas ao selecionar o parque
         });
-
+    
         selectionPanel.add(new JLabel("Selecione o Parque:"));
         selectionPanel.add(parqueSelect);
-        selectionPanel.add(new JLabel());  // Placeholder
+        selectionPanel.add(new JLabel()); 
         selectionPanel.add(selecionarParqueButton);
     }
-
+    
     private void initVagasPanel() {
         vagasPanel = new JPanel(new BorderLayout());
         vagasPanel.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
@@ -79,7 +134,7 @@ public class ocupacao extends JFrame {
         confirmarButton.setForeground(Color.WHITE);
         confirmarButton.addActionListener(e -> reservarVaga());
 
-        liberarButton = new JButton("Liberar Vaga"); // Inicialização do botão de liberar
+        liberarButton = new JButton("Liberar Vaga"); 
         liberarButton.setBackground(new Color(244, 67, 54));
         liberarButton.setForeground(Color.WHITE);
         liberarButton.addActionListener(e -> liberarVaga());
@@ -91,7 +146,7 @@ public class ocupacao extends JFrame {
 
         JPanel topPanel = new JPanel(new GridLayout(1, 5, 10, 10));
         topPanel.add(tipoVagaSelect);
-        topPanel.add(selecionarVagaButton); // Adiciona o botão de selecionar vaga
+        topPanel.add(selecionarVagaButton); 
         topPanel.add(confirmarButton);
         topPanel.add(liberarButton); 
         topPanel.add(voltarButton);
@@ -115,7 +170,7 @@ public class ocupacao extends JFrame {
         vagasPanel.add(tableContainer, BorderLayout.CENTER);
         vagasPanel.add(summaryPanel, BorderLayout.SOUTH);  
 
-        // Ação do botão de selecionar vaga
+        
         selecionarVagaButton.addActionListener(e -> selecionarVaga());
     }
 
@@ -148,13 +203,13 @@ public class ocupacao extends JFrame {
 
     private void reservarVaga() {
         String tipoVaga = (String) tipoVagaSelect.getSelectedItem();
-        int selectedRow = vagasTable.getSelectedRow(); // Obtém a linha selecionada
+        int selectedRow = vagasTable.getSelectedRow(); 
 
         if (selectedRow != -1) {
             Vaga vagaSelecionada = controller.getVagas(tipoVaga).get(selectedRow);
             try {
                 controller.reservarVaga(vagaSelecionada);
-                updateTable(controller.getVagas(tipoVaga)); // Atualiza a tabela com as vagas do controlador
+                updateTable(controller.getVagas(tipoVaga)); 
                 updateSummaryPanel();
                 JOptionPane.showMessageDialog(this, "Vaga reservada com sucesso!", "Sucesso", JOptionPane.INFORMATION_MESSAGE);
             } catch (IllegalStateException e) {
@@ -167,13 +222,13 @@ public class ocupacao extends JFrame {
 
     private void liberarVaga() {
         String tipoVaga = (String) tipoVagaSelect.getSelectedItem();
-        int selectedRow = vagasTable.getSelectedRow(); // Obtém a linha selecionada
+        int selectedRow = vagasTable.getSelectedRow();
 
         if (selectedRow != -1) {
             Vaga vagaSelecionada = controller.getVagas(tipoVaga).get(selectedRow);
             try {
                 controller.liberarVaga(vagaSelecionada);
-                updateTable(controller.getVagas(tipoVaga)); // Atualiza a tabela com as vagas do controlador
+                updateTable(controller.getVagas(tipoVaga)); 
                 updateSummaryPanel();
                 JOptionPane.showMessageDialog(this, "Vaga liberada com sucesso!", "Sucesso", JOptionPane.INFORMATION_MESSAGE);
             } catch (IllegalStateException e) {
@@ -186,7 +241,7 @@ public class ocupacao extends JFrame {
 
     private void selecionarVaga() {
         String tipoVaga = (String) tipoVagaSelect.getSelectedItem();
-        updateTable(controller.getVagas(tipoVaga)); // Atualiza a tabela com as vagas do controlador
+        updateTable(controller.getVagas(tipoVaga)); 
     }
 
     private void updateTable(ArrayList<Vaga> vagas) {
@@ -235,9 +290,16 @@ class EstacionamentoController {
         vagasIdosos = new ArrayList<>();
 
         // Inicializa as vagas
-        for (int i = 1; i <= 10; i++) {
+        for (int i = 1; i <= 25; i++) {
             vagasComum.add(new Vaga("Comum " + i, "Livre"));
+        }
+
+        for (int i = 1; i <= 15; i++){
             vagasVIP.add(new Vaga("VIP " + i, "Livre"));
+
+        }
+
+        for(int i = 1; i <= 10; i++){
             vagasIdosos.add(new Vaga("Idoso " + i, "Livre"));
         }
     }
@@ -282,3 +344,13 @@ class EstacionamentoController {
     }
 }
 
+
+
+       
+      
+   
+
+      
+      
+   
+       
