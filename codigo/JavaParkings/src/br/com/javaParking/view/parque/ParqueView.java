@@ -15,11 +15,6 @@ import javax.swing.JTextField;
  */
 public class ParqueView extends javax.swing.JFrame {
 
-    private javax.swing.JButton btnAdicionar;  // Botão para adicionar o parque
-    private javax.swing.JTextField txtnomeParque;
-    private javax.swing.JTextField txtnumeroVagas;
-    private javax.swing.JTextField txtVagasPorFileira;
-    
     private AddParqueController controller;
     
     public ParqueView() {
