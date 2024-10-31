@@ -265,9 +265,6 @@
               </Border>
             </Property>
           </Properties>
-          <AccessibilityProperties>
-            <Property name="AccessibleContext.accessibleName" type="java.lang.String" value="N&#xfa;mero de Vagas"/>
-          </AccessibilityProperties>
 
           <Layout>
             <DimensionLayout dim="0">

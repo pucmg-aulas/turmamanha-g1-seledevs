@@ -19,6 +19,7 @@ public class ParqueModel {
     private double valorDeDiariaMaxima; 
             
     private int id;
+    private String nomeParque;
     private int numeroVagas; 
     private List<VagaModel> vagas;   
     private int vagasPorFileira;
@@ -26,8 +27,9 @@ public class ParqueModel {
     /**
      * Construtores
      */  
-    public ParqueModel(int id, int numeroVagas, int vagasPorFileira, double valorPorTempo, int intervaloDeCobrancaMinutos, double valorDeDiariaMaxima) {
+    public ParqueModel(int id, String nomeParque, int numeroVagas, int vagasPorFileira, double valorPorTempo, int intervaloDeCobrancaMinutos, double valorDeDiariaMaxima) {
         this.id = id;
+        this.nomeParque = nomeParque;
         this.vagas = new ArrayList<>();
         if (Util.ePositivo(numeroVagas, vagasPorFileira)){             
             this.numeroVagas = numeroVagas;
@@ -51,6 +53,10 @@ public class ParqueModel {
         return this.id;
     }
     
+    public String getNomeParque() { 
+        return this.nomeParque;
+    }
+    
     public int getNumeroVagas(){
         return this.numeroVagas;
     }
@@ -69,6 +75,10 @@ public class ParqueModel {
     
     public double getValorDeDiariaMaxima(){
         return this.valorDeDiariaMaxima;
+    }
+    
+    public void setNomeParque(String nomeParque) {
+        this.nomeParque = nomeParque;
     }
     
     /**
@@ -136,4 +146,6 @@ public class ParqueModel {
     private List<VagaModel> listarVagas() {
         return this.vagas;
     }
+    
+    
 }

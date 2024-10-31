@@ -6,20 +6,27 @@ package br.com.javaParking.view.parque;
 
 import br.com.javaParking.view.sistema.ArrecadacaoView;
 import br.com.javaParking.controller.AddParqueController;
+import javax.swing.JTable;
 import javax.swing.JButton;
 import javax.swing.JTextField;
+import javax.swing.table.DefaultTableModel;
 
-/**
- *
- * @author Leandro Alencar
- */
 public class ParqueView extends javax.swing.JFrame {
 
-    private AddParqueController controller;
+    private AddParqueController controller; // Removida a duplicação
+    private DefaultTableModel tableModel;
+    private JTable parqueTable;
     
     public ParqueView() {
         initComponents();
         this.controller = new AddParqueController(this);
+        tableModel = new DefaultTableModel(new Object[]{"ID", "Nome", "Número de Vagas", "Vagas Por Fileira"}, 0);
+        parqueTable = new JTable(tableModel);
+        
+    }
+    
+    public void addParqueToTable(int id, String nome, int numeroVagas, int vagasPorFileira) {
+        tableModel.addRow(new Object[]{id, nome, numeroVagas, vagasPorFileira});
     }
     
     public JTextField getTxtnomeParque(){
