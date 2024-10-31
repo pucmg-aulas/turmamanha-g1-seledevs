@@ -10,7 +10,7 @@ import java.io.FileWriter;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ClienteDao{
+public class ClienteDAO{
     
     public final static String CAMINHOCLIENTE;
     

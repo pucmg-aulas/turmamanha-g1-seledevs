@@ -16,7 +16,7 @@ import java.io.FileWriter;
 import java.util.ArrayList;
 import java.util.List;
 
-public class VagaDao {
+public class VagaDAO {
 
     public final static String CAMINHOVAGA;
 

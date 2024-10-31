@@ -1,6 +1,6 @@
 package br.com.javaParking.model;
 
-import br.com.javaParking.dao.ParqueDao;
+import br.com.javaParking.dao.ParqueDAO;
 import br.com.javaParking.util.Util;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;

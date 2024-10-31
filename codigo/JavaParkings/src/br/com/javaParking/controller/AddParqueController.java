@@ -4,7 +4,7 @@
  */
 package br.com.javaParking.controller;
 
-import br.com.javaParking.dao.ParqueDao;
+import br.com.javaParking.dao.ParqueDAO;
 import br.com.javaParking.model.ParqueModel;
 import br.com.javaParking.view.parque.ParqueView;
 import javax.swing.JOptionPane;
@@ -38,7 +38,7 @@ public class AddParqueController {
             ParqueModel parque = new ParqueModel(id, nomeParque, numeroVagas, vagasPorFileira, valorPorTempo, intervaloDeCobrancaMinutos, valorDeDiariaMaxima);
 
             // Grava o parque no arquivo usando o DAO
-            if (ParqueDao.gravar(parque)) {
+            if (ParqueDAO.gravar(parque)) {
                 // Atualiza a tabela da interface com o novo parque
                 view.addParqueToTable(parque.getId(), parque.getNomeParque(), numeroVagas, vagasPorFileira);
 

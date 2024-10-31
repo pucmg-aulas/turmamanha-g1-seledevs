@@ -1,6 +1,7 @@
 package br.com.javaParking.controller;
 
 import br.com.javaParking.model.ConfiguracaoModel;
+import br.com.javaParking.view.sistema.ConfiguracaoView;
 import br.com.javaParking.view.xulambs.ConfiguracaoView;
 
 import javax.swing.JOptionPane;

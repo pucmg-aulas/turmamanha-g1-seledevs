@@ -1,110 +1,104 @@
 package br.com.javaParking.dao;
 
-import br.com.javaParking.model.ClienteModel;
 import br.com.javaParking.model.VeiculoModel;
 import br.com.javaParking.util.Util;
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileReader;
-import java.io.FileWriter;
+import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
-public class VeiculoDao{
-    
-    public final static String CAMINHOVEICULO;
-    
-    static {
-        CAMINHOVEICULO = Util.CAMINHOPADRAO + "veiculos.txt";
+public class VeiculoDAO extends AbstractDAO implements Serializable {
+
+    private List<VeiculoModel> veiculos;
+    // Atributo da própria classe, estático, para implementar o Singleton
+    private static VeiculoDAO instance;
+
+    //Endereço do arquivo serializado que contém a coleção de veiculos
+    private final String localArquivo = Util.CAMINHOPADRAO + "Veiculos.dat";
+
+    //Construtor privado, pois não podemos permitir mais de uma instância desta classe
+    //que controla a coleção de carros do sistema (Singleton)
+    private VeiculoDAO() {
+        this.veiculos = new ArrayList<>();
+        carregaVeiculos();
+    }
+
+    //Método para recuperar a única instância de veiculos
+    public static VeiculoDAO getInstance() {
+        if (instance == null) {
+            instance = new VeiculoDAO();
+        }
+        return instance;
+    }
+
+    public void addVeiculo(VeiculoModel veiculo) {
+        this.veiculos.add(veiculo);
+        grava();
+    }
+
+    private void carregaVeiculos() {
+        this.veiculos = super.leitura(localArquivo);
+    }
+
+    private void grava() {
+        super.grava(localArquivo, veiculos);
+    }
+
+    public List<VeiculoModel> getVeiculos() {
+        return veiculos;
+    }
+
+    public void excluirVeiculo(VeiculoModel veiculo) {
+        veiculos.remove(veiculo);
+        grava();
+    }
+
+    public VeiculoModel buscarCarroPorPlaca(String placa) {
+        for (VeiculoModel veiculo : veiculos) {
+            if (veiculo.getPlaca().equals(placa)) {
+                return veiculo;
+            }
+        }
+        return null;
     }
     
-    public static boolean gravar(VeiculoModel veiculo, String id) {
-
-        File registro = new File(CAMINHOVEICULO);
+    /* Nos parametros temos dois: 
+            veiculoExistente -> Em termos de codigo ele seria o novo Veiculo/Objeto que vc vai colocar no lugar de um antigo 
+                                (Observação: o novo objeto tem que ter um campo em comum com o antigo)
+            placaAnterior -> Seria o campo em comum ultilizado para localizar e substituir
+    */
+    public boolean altera(VeiculoModel veiculoExistente, String placaAnterior) {
 
         try {
+            if (veiculoExistente.getPlaca().equals(placaAnterior)) {
+                // Lista temporaria
+                ArrayList<VeiculoModel> listaTemp = new ArrayList<VeiculoModel>();
 
-            File dir = registro.getParentFile();
-            if (dir != null && !dir.exists()) {
-                dir.mkdirs(); 
-            }
+                // Loop para criar lista temporaria
+                for (Iterator<VeiculoModel> it = veiculos.iterator(); it.hasNext();) {
+                    VeiculoModel veiculo = it.next();
+                    if (!veiculo.getPlaca().equals(placaAnterior)) {
+                        listaTemp.add(veiculo);
+                    } else {
+                        listaTemp.add(veiculoExistente);
+                    }
+                }
 
-            if (!registro.exists()) {
-                registro.createNewFile(); 
-            }
+                // Zerar lista 
+                veiculos.removeAll(veiculos);
+                
+                // Preencher lista com novos dados
+                veiculos.addAll(listaTemp);
+                
+                // Sobreescrever dados antigos
+                grava();
 
-            try (BufferedWriter w = new BufferedWriter(new FileWriter(registro, true))) {
-                w.write(veiculo.getPlaca()+ "&"+ id +"&"+ "\n");
-                w.write("§\n");
+                return true;
+            }else{                
+                return false;
             }
-            return true;
         } catch (Exception e) {
-            e.printStackTrace();
             return false;
         }
     }
-
-    public static List<VeiculoModel> listar() {
-        String placa;
-        
-        File registro = new File(CAMINHOVEICULO);        
-        List<VeiculoModel> veiculos = new ArrayList<VeiculoModel>();
-
-        try (BufferedReader r = new BufferedReader(new FileReader(registro))) {
-            String linha;
-            StringBuilder veiculoAtual = new StringBuilder();
-
-            while ((linha = r.readLine()) != null) {
-                veiculoAtual.append(linha).append("\n");
-
-                if (linha.equals("§")) {
-                    
-                    placa = veiculoAtual.toString().split("&")[0].replace("\n", "");
-                    veiculos.add(new VeiculoModel(placa));                 
-                    
-                    
-                    veiculoAtual.setLength(0);
-                }
-            }
-
-        } catch (Exception e) {
-            System.out.println("Erro durante a leitura do registro: " + e.getMessage());
-        }
-
-        return veiculos;
-    }
-    
-     public static List<VeiculoModel> listar(ClienteModel cliente) {
-        String placa;
-        
-        File registro = new File(CAMINHOVEICULO);        
-        List<VeiculoModel> veiculos = new ArrayList<VeiculoModel>();
-
-        try (BufferedReader r = new BufferedReader(new FileReader(registro))) {
-            String linha;
-            StringBuilder veiculoAtual = new StringBuilder();
-
-            while ((linha = r.readLine()) != null) {
-                veiculoAtual.append(linha).append("\n");
-
-                if (linha.equals("§")) {
-                    
-                    placa = veiculoAtual.toString().split("&")[0].replace("\n", "");
-                    
-                    if(cliente.getId().equals(veiculoAtual.toString().split("&")[1].replace("\n", ""))){
-                        veiculos.add(new VeiculoModel(placa));
-                    }
-                    
-                    veiculoAtual.setLength(0);
-                }
-            }
-
-        } catch (Exception e) {
-            System.out.println("Erro durante a leitura do registro: " + e.getMessage());
-        }
-
-        return veiculos;
-    }
-    
 }

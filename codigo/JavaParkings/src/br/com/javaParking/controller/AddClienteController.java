@@ -4,7 +4,7 @@
  */
 package br.com.javaParking.controller;
 
-import br.com.javaParking.dao.ClienteDao;
+import br.com.javaParking.dao.ClienteDAO;
 import br.com.javaParking.model.ClienteModel;
 import br.com.javaParking.view.cliente.ClienteView;
 import javax.swing.JOptionPane;
@@ -16,7 +16,7 @@ import javax.swing.JOptionPane;
 public class AddClienteController {
 
     private ClienteView view;
-    private ClienteDao clientes;
+    private ClienteDAO clientes;
 
     public AddClienteController() {
         

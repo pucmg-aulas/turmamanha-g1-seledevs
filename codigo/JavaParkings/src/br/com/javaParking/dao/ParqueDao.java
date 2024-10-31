@@ -11,7 +11,7 @@ import java.io.FileWriter;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ParqueDao {
+public class ParqueDAO {
     
     public final static String CAMINHOPARQUE;
     

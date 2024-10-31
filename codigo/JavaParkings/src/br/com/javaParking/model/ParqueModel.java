@@ -1,6 +1,6 @@
 package br.com.javaParking.model;
 
-import br.com.javaParking.dao.VagaDao;
+import br.com.javaParking.dao.VagaDAO;
 import br.com.javaParking.model.tiposVaga.ComumModel;
 import br.com.javaParking.model.tiposVaga.IdosoModel;
 import br.com.javaParking.model.tiposVaga.PcdModel;
@@ -109,19 +109,19 @@ public class ParqueModel {
                 
                 if(nIdoso != 0){
                     this.vagas.add(new IdosoModel(this,Util.alfabeto().get(i).toString() + j,false)); 
-                    VagaDao.gravar(new IdosoModel(this,Util.alfabeto().get(i).toString() + j,false));
+                    VagaDAO.gravar(new IdosoModel(this,Util.alfabeto().get(i).toString() + j,false));
                     nIdoso--;
                 }else if(nPCD != 0){
                     this.vagas.add(new PcdModel(this ,Util.alfabeto().get(i).toString() + j,false)); 
-                    VagaDao.gravar(new PcdModel(this,Util.alfabeto().get(i).toString() + j,false));
+                    VagaDAO.gravar(new PcdModel(this,Util.alfabeto().get(i).toString() + j,false));
                     nPCD--;
                 }else if(nVIP != 0){
                     this.vagas.add(new VipModel(this,Util.alfabeto().get(i).toString() + j,false));
-                    VagaDao.gravar(new VipModel(this,Util.alfabeto().get(i).toString() + j,false));
+                    VagaDAO.gravar(new VipModel(this,Util.alfabeto().get(i).toString() + j,false));
                     nVIP--;
                 }else{
                     this.vagas.add(new ComumModel(this,Util.alfabeto().get(i).toString() + j,false)); 
-                    VagaDao.gravar(new ComumModel(this,Util.alfabeto().get(i).toString() + j,false));
+                    VagaDAO.gravar(new ComumModel(this,Util.alfabeto().get(i).toString() + j,false));
                 }                
                 
                 n++;
