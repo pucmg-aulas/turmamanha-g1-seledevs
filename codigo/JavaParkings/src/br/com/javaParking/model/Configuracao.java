@@ -4,11 +4,13 @@
  */
 package br.com.javaParking.model;
 
+import java.io.Serializable;
+
 /**
  *
  * @author Leandro Alencar
  */
-public class ConfiguracaoModel {
+public class Configuracao implements Serializable{
     
     public final static double PORCENTAGEMMINIMAIDOSOS = 0.10; 
     public final static double PORCENTAGEMMINIMAPCD = 0.10; 
@@ -21,7 +23,7 @@ public class ConfiguracaoModel {
     private int intervaloCobrancaMinutos;
     private double valorMaximoDiaria;
 
-    public ConfiguracaoModel(double porcentagemMinimaIdosos, double porcentagemMinimaPCD,
+    public Configuracao(double porcentagemMinimaIdosos, double porcentagemMinimaPCD,
                              double porcentagemMinimaVIP, int intervaloCobrancaMinutos,
                              double valorMaximoDiaria) {
         this.porcentagemMinimaIdosos = porcentagemMinimaIdosos;

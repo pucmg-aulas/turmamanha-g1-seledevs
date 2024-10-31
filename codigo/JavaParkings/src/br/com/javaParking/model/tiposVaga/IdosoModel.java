@@ -5,19 +5,19 @@
 
 package br.com.javaParking.model.tiposVaga;
 
-import br.com.javaParking.model.ParqueModel;
-import br.com.javaParking.model.VagaModel;
-import br.com.javaParking.model.VagaModel;
+import br.com.javaParking.model.Parque;
+import br.com.javaParking.model.Vaga;
+import br.com.javaParking.model.Vaga;
 
 /**
  *
  * @author viniciusgomesrodrigues
  */
-public class IdosoModel extends VagaModel {
+public class IdosoModel extends Vaga {
 
     private final static double MODIFICADORPRECO = 0.85;
     
-    public IdosoModel(ParqueModel parque,String identificador, boolean ocupada) {
+    public IdosoModel(Parque parque,String identificador, boolean ocupada) {
         super(parque,identificador,ocupada);
     }
     

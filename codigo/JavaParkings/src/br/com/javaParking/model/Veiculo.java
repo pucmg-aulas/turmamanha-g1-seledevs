@@ -1,9 +1,10 @@
 package br.com.javaParking.model;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class VeiculoModel {
+public class Veiculo implements Serializable{
 
     /**
      * Atributos
@@ -13,7 +14,7 @@ public class VeiculoModel {
     /**
      * Construtores
      */
-    public VeiculoModel(String placa) {
+    public Veiculo(String placa) {
         this.placa = placa;
     }
 

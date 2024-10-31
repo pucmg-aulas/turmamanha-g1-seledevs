@@ -5,7 +5,7 @@
 package br.com.javaParking.view.parque;
 
 import br.com.javaParking.view.sistema.ArrecadacaoView;
-import br.com.javaParking.controller.AddParqueController;
+import br.com.javaParking.controller.ParqueController;
 import javax.swing.JTable;
 import javax.swing.JButton;
 import javax.swing.JTextField;
@@ -13,27 +13,20 @@ import javax.swing.table.DefaultTableModel;
 
 public class ParqueView extends javax.swing.JFrame {
 
-    private AddParqueController controller; // Removida a duplicação
-    private DefaultTableModel tableModel;
-    private JTable parqueTable;
-    
     public ParqueView() {
         initComponents();
-        this.controller = new AddParqueController(this);
-        tableModel = new DefaultTableModel(new Object[]{"ID", "Nome", "Número de Vagas", "Vagas Por Fileira"}, 0);
-        parqueTable = new JTable(tableModel);
         
     }
     
-    public void addParqueToTable(int id, String nome, int numeroVagas, int vagasPorFileira) {
-        tableModel.addRow(new Object[]{id, nome, numeroVagas, vagasPorFileira});
+    public JTable getTbParques() {
+        return tbParques;
     }
     
-    public JTextField getTxtnomeParque(){
+    public JTextField getTxtNomeParque(){
         return txtnomeParque;
     }
     
-    public JTextField getTxtnumeroVagas() {
+    public JTextField getTxtNumeroVagas() {
         return txtnumeroVagas;
     }
     
@@ -41,6 +34,9 @@ public class ParqueView extends javax.swing.JFrame {
         return txtVagasPorFileira;
     }
     
+    public JButton getBtnAdicionar(){
+        return btnAdicionar;
+    }  
     
     
     /**
@@ -116,6 +112,11 @@ public class ParqueView extends javax.swing.JFrame {
         lblPesquisar1.setFont(new java.awt.Font("Arial", 3, 14)); // NOI18N
         lblPesquisar1.setText("Pesquisar:");
 
+        txtPesquisarParque.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtPesquisarParqueActionPerformed(evt);
+            }
+        });
         txtPesquisarParque.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 txtPesquisarParqueKeyReleased(evt);
@@ -209,6 +210,7 @@ public class ParqueView extends javax.swing.JFrame {
 
         btnAdicionar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/javaParking/assets/img/iconeAdicionar-00.png"))); // NOI18N
         btnAdicionar.setToolTipText("");
+        btnAdicionar.setBorderPainted(false);
         btnAdicionar.setContentAreaFilled(false);
         btnAdicionar.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         btnAdicionar.setPreferredSize(new java.awt.Dimension(80, 80));
@@ -220,9 +222,9 @@ public class ParqueView extends javax.swing.JFrame {
 
         btnAlterar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/javaParking/assets/img/iconeEditar-00.png"))); // NOI18N
         btnAlterar.setToolTipText("");
+        btnAlterar.setBorderPainted(false);
         btnAlterar.setContentAreaFilled(false);
         btnAlterar.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        btnAlterar.setEnabled(false);
         btnAlterar.setPreferredSize(new java.awt.Dimension(80, 80));
         btnAlterar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -232,9 +234,9 @@ public class ParqueView extends javax.swing.JFrame {
 
         btnRemover.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/javaParking/assets/img/iconeRemover-00.png"))); // NOI18N
         btnRemover.setToolTipText("");
+        btnRemover.setBorderPainted(false);
         btnRemover.setContentAreaFilled(false);
         btnRemover.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        btnRemover.setEnabled(false);
         btnRemover.setPreferredSize(new java.awt.Dimension(80, 80));
         btnRemover.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -299,6 +301,7 @@ public class ParqueView extends javax.swing.JFrame {
 
         btnVoltar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/javaParking/assets/img/iconeSetaEsquerda-00.png"))); // NOI18N
         btnVoltar.setToolTipText("");
+        btnVoltar.setBorderPainted(false);
         btnVoltar.setContentAreaFilled(false);
         btnVoltar.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         btnVoltar.setPreferredSize(new java.awt.Dimension(80, 80));
@@ -379,8 +382,6 @@ public class ParqueView extends javax.swing.JFrame {
             .addComponent(pnClientes2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
-        jPanel14.getAccessibleContext().setAccessibleName("Número de Vagas");
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -410,9 +411,7 @@ public class ParqueView extends javax.swing.JFrame {
     }//GEN-LAST:event_txtVagasPorFileiraActionPerformed
 
     private void btnAdicionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAdicionarActionPerformed
-        if (controller != null) {
-            controller.AddParque(); // Chama o método AddParque do controlador
-        }
+       
     }//GEN-LAST:event_btnAdicionarActionPerformed
 
     private void btnAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAlterarActionPerformed
@@ -450,6 +449,10 @@ public class ParqueView extends javax.swing.JFrame {
     private void txtnomeParqueActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtnomeParqueActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtnomeParqueActionPerformed
+
+    private void txtPesquisarParqueActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtPesquisarParqueActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtPesquisarParqueActionPerformed
 
     /**
      * @param args the command line arguments

@@ -1,5 +1,7 @@
 package br.com.javaParking.model;
 
-public class ArrecadacaoModel {
+import java.io.Serializable;
+
+public class Arrecadacao implements Serializable{
     
 }

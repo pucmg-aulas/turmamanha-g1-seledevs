@@ -1,11 +1,13 @@
 package br.com.javaParking.model;
 
-public abstract class VagaModel {
+import java.io.Serializable;
+
+public abstract class Vaga implements Serializable{
     
     /**
      * Atributos
      */
-    private ParqueModel parque;
+    private Parque parque;
     private String identificador;
     private boolean ocupada;
     private double precoBase = 4.0; // preço de 4 reais a cada 15 minutos
@@ -13,7 +15,7 @@ public abstract class VagaModel {
     /**
      * Construtores
      */ 
-    public VagaModel(ParqueModel parque, String identificador, boolean ocupada) {
+    public Vaga(Parque parque, String identificador, boolean ocupada) {
         this.parque = parque;
         this.identificador = identificador;
         this.ocupada = ocupada;
@@ -26,7 +28,7 @@ public abstract class VagaModel {
         return this.identificador;
     }
     
-    public ParqueModel getParque() {
+    public Parque getParque() {
         return this.parque;
     }
 

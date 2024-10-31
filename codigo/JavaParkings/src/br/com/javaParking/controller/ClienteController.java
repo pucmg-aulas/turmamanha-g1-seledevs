@@ -5,7 +5,7 @@
 package br.com.javaParking.controller;
 
 import br.com.javaParking.dao.ClienteDAO;
-import br.com.javaParking.model.ClienteModel;
+import br.com.javaParking.model.Cliente;
 import br.com.javaParking.view.cliente.ClienteView;
 import javax.swing.JOptionPane;
 
@@ -13,12 +13,12 @@ import javax.swing.JOptionPane;
  *
  * @author rafae
  */
-public class AddClienteController {
+public class ClienteController {
 
     private ClienteView view;
     private ClienteDAO clientes;
 
-    public AddClienteController() {
+    public ClienteController() {
         
     }
 
@@ -26,7 +26,7 @@ public class AddClienteController {
         String id = view.getTxtCPF().getText();
         String nome = view.getTxtNome().getText();
 
-        ClienteModel c = new ClienteModel(id, nome);
+        Cliente c = new Cliente(id, nome);
 
         clientes.gravar(c);
 

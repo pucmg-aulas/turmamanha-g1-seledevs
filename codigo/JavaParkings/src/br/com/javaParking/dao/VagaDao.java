@@ -1,8 +1,8 @@
 package br.com.javaParking.dao;
 
-import br.com.javaParking.model.ParqueModel;
-import br.com.javaParking.model.VagaModel;
-import br.com.javaParking.model.VagaModel;
+import br.com.javaParking.model.Parque;
+import br.com.javaParking.model.Vaga;
+import br.com.javaParking.model.Vaga;
 import br.com.javaParking.model.tiposVaga.ComumModel;
 import br.com.javaParking.model.tiposVaga.IdosoModel;
 import br.com.javaParking.model.tiposVaga.PcdModel;
@@ -24,7 +24,7 @@ public class VagaDAO {
         CAMINHOVAGA = Util.CAMINHOPADRAO + "vagas.txt";
     }
 
-    public static boolean gravar(VagaModel vaga) {
+    public static boolean gravar(Vaga vaga) {
 
         File registro = new File(CAMINHOVAGA);
 
@@ -61,18 +61,18 @@ public class VagaDAO {
         }
     }
 
-    public static List<VagaModel> listar(ParqueModel parque) {
+    public static List<Vaga> listar(Parque parque) {
         String identificador;
         String ocupada;
         String tipo;
 
         File registro = new File(CAMINHOVAGA);
-        List<VagaModel> vagas = new ArrayList<VagaModel>();
+        List<Vaga> vagas = new ArrayList<Vaga>();
 
         try (BufferedReader r = new BufferedReader(new FileReader(registro))) {
             String linha;
             StringBuilder vagaAtual = new StringBuilder();
-            VagaModel vaga = null;
+            Vaga vaga = null;
 
             while ((linha = r.readLine()) != null) {
                 vagaAtual.append(linha).append("\n");

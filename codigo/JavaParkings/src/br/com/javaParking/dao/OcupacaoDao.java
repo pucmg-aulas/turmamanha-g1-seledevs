@@ -1,6 +1,6 @@
 package br.com.javaParking.dao;
 
-import br.com.javaParking.model.OcupacaoModel;
+import br.com.javaParking.model.Ocupacao;
 import br.com.javaParking.util.Util;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -18,7 +18,7 @@ public class OcupacaoDAO {
         CAMINHOOCUPACAO = Util.CAMINHOPADRAO + "ocupacaos.txt";
     }
 
-    public static boolean gravar(OcupacaoModel ocupacao) {
+    public static boolean gravar(Ocupacao ocupacao) {
 
         File registro = new File(CAMINHOOCUPACAO);
 

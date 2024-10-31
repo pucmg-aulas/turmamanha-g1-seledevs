@@ -5,7 +5,7 @@
 package br.com.javaParking.controller;
 
 import br.com.javaParking.dao.VeiculoDAO;
-import br.com.javaParking.model.VeiculoModel;
+import br.com.javaParking.model.Veiculo;
 import br.com.javaParking.view.veiculo.VeiculoView;
 import javax.swing.JOptionPane;
 
@@ -13,7 +13,7 @@ import javax.swing.JOptionPane;
  *
  * @author rafae
  */
-public class AddVeiculoController {
+public class VeiculoController {
     private VeiculoView view;
     private VeiculoDAO veiculos;
     
@@ -21,7 +21,7 @@ public class AddVeiculoController {
         String placa = view.getPlaca().getText();
         
         
-        VeiculoModel v = new VeiculoModel(placa);
+        Veiculo v = new Veiculo(placa);
         
         // [CONCERTAR] - Mudei o id do cliente, criar de acordo com o CPF
         veiculos.gravar(v,"");

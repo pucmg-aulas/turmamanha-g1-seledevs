@@ -1,6 +1,6 @@
 package br.com.javaParking.dao;
 
-import br.com.javaParking.model.ClienteModel;
+import br.com.javaParking.model.Cliente;
 import br.com.javaParking.util.Util;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -18,7 +18,7 @@ public class ClienteDAO{
         CAMINHOCLIENTE = Util.CAMINHOPADRAO + "clientes.txt";
     }
     
-    public static boolean gravar(ClienteModel cliente) {
+    public static boolean gravar(Cliente cliente) {
 
         File registro = new File(CAMINHOCLIENTE);
 
@@ -44,12 +44,12 @@ public class ClienteDAO{
         }
     }
 
-    public static List<ClienteModel> listar() {
+    public static List<Cliente> listar() {
         String nome;
         String identificador;
         
         File registro = new File(CAMINHOCLIENTE);        
-        List<ClienteModel> clientes = new ArrayList<ClienteModel>();
+        List<Cliente> clientes = new ArrayList<Cliente>();
 
         try (BufferedReader r = new BufferedReader(new FileReader(registro))) {
             String linha;
@@ -63,7 +63,7 @@ public class ClienteDAO{
                     nome = clienteAtual.toString().split("&")[0].replace("\n", "");
                     identificador = clienteAtual.toString().split("&")[1].replace("\n", "");
                     
-                    clientes.add(new ClienteModel(nome, identificador));
+                    clientes.add(new Cliente(nome, identificador));
                     
                     clienteAtual.setLength(0);
                 }

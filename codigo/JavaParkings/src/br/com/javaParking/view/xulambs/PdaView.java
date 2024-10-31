@@ -4,7 +4,7 @@
  */
 package br.com.javaParking.view.xulambs;
 
-import br.com.javaParking.model.ArrecadacaoModel;
+import br.com.javaParking.model.Arrecadacao;
 import br.com.javaParking.view.parque.ParqueView;
 import br.com.javaParking.view.sistema.ArrecadacaoView;
 import br.com.javaParking.view.veiculo.VeiculosRegistradosView;

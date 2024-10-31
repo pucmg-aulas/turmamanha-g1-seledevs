@@ -1,6 +1,6 @@
 package br.com.javaParking.dao;
 
-import br.com.javaParking.model.VeiculoModel;
+import br.com.javaParking.model.Veiculo;
 import br.com.javaParking.util.Util;
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -9,7 +9,7 @@ import java.util.List;
 
 public class VeiculoDAO extends AbstractDAO implements Serializable {
 
-    private List<VeiculoModel> veiculos;
+    private List<Veiculo> veiculos;
     // Atributo da própria classe, estático, para implementar o Singleton
     private static VeiculoDAO instance;
 
@@ -31,7 +31,7 @@ public class VeiculoDAO extends AbstractDAO implements Serializable {
         return instance;
     }
 
-    public void addVeiculo(VeiculoModel veiculo) {
+    public void addVeiculo(Veiculo veiculo) {
         this.veiculos.add(veiculo);
         grava();
     }
@@ -44,17 +44,17 @@ public class VeiculoDAO extends AbstractDAO implements Serializable {
         super.grava(localArquivo, veiculos);
     }
 
-    public List<VeiculoModel> getVeiculos() {
+    public List<Veiculo> getVeiculos() {
         return veiculos;
     }
 
-    public void excluirVeiculo(VeiculoModel veiculo) {
+    public void excluirVeiculo(Veiculo veiculo) {
         veiculos.remove(veiculo);
         grava();
     }
 
-    public VeiculoModel buscarCarroPorPlaca(String placa) {
-        for (VeiculoModel veiculo : veiculos) {
+    public Veiculo buscarCarroPorPlaca(String placa) {
+        for (Veiculo veiculo : veiculos) {
             if (veiculo.getPlaca().equals(placa)) {
                 return veiculo;
             }
@@ -67,16 +67,16 @@ public class VeiculoDAO extends AbstractDAO implements Serializable {
                                 (Observação: o novo objeto tem que ter um campo em comum com o antigo)
             placaAnterior -> Seria o campo em comum ultilizado para localizar e substituir
     */
-    public boolean altera(VeiculoModel veiculoExistente, String placaAnterior) {
+    public boolean altera(Veiculo veiculoExistente, String placaAnterior) {
 
         try {
             if (veiculoExistente.getPlaca().equals(placaAnterior)) {
                 // Lista temporaria
-                ArrayList<VeiculoModel> listaTemp = new ArrayList<VeiculoModel>();
+                ArrayList<Veiculo> listaTemp = new ArrayList<Veiculo>();
 
                 // Loop para criar lista temporaria
-                for (Iterator<VeiculoModel> it = veiculos.iterator(); it.hasNext();) {
-                    VeiculoModel veiculo = it.next();
+                for (Iterator<Veiculo> it = veiculos.iterator(); it.hasNext();) {
+                    Veiculo veiculo = it.next();
                     if (!veiculo.getPlaca().equals(placaAnterior)) {
                         listaTemp.add(veiculo);
                     } else {

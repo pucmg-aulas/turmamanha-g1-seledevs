@@ -1,15 +1,15 @@
 package br.com.javaParking.model;
 
-import br.com.javaParking.dao.VagaDAO;
 import br.com.javaParking.model.tiposVaga.ComumModel;
 import br.com.javaParking.model.tiposVaga.IdosoModel;
 import br.com.javaParking.model.tiposVaga.PcdModel;
 import br.com.javaParking.model.tiposVaga.VipModel;
 import br.com.javaParking.util.Util;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ParqueModel {
+public class Parque implements Serializable{
 
     /**
      * Atributos
@@ -21,22 +21,19 @@ public class ParqueModel {
     private int id;
     private String nomeParque;
     private int numeroVagas; 
-    private List<VagaModel> vagas;   
+    private List<Vaga> vagas;   
     private int vagasPorFileira;
      
     /**
      * Construtores
      */  
-    public ParqueModel(int id, String nomeParque, int numeroVagas, int vagasPorFileira, double valorPorTempo, int intervaloDeCobrancaMinutos, double valorDeDiariaMaxima) {
+    public Parque(int id, String nomeParque, int numeroVagas, int vagasPorFileira) {
         this.id = id;
         this.nomeParque = nomeParque;
         this.vagas = new ArrayList<>();
         if (Util.ePositivo(numeroVagas, vagasPorFileira)){             
             this.numeroVagas = numeroVagas;
             this.vagasPorFileira = vagasPorFileira; 
-            this.valorPorTempo = valorPorTempo;
-            this.intervaloDeCobrancaMinutos = intervaloDeCobrancaMinutos;
-            this.valorDeDiariaMaxima = valorDeDiariaMaxima;
         }else{
             throw new RuntimeException();
         }
@@ -97,9 +94,9 @@ public class ParqueModel {
         
         int n = 0;
         
-        int nIdoso = (int) Math.floor(this.numeroVagas  * ConfiguracaoModel.PORCENTAGEMMINIMAIDOSOS);
-        int nPCD = (int) Math.floor(this.numeroVagas  * ConfiguracaoModel.PORCENTAGEMMINIMAPCD);
-        int nVIP = (int) Math.floor(this.numeroVagas  * ConfiguracaoModel.PORCENTAGEMMINIMAVIP); 
+        int nIdoso = (int) Math.floor(this.numeroVagas  * Configuracao.PORCENTAGEMMINIMAIDOSOS);
+        int nPCD = (int) Math.floor(this.numeroVagas  * Configuracao.PORCENTAGEMMINIMAPCD);
+        int nVIP = (int) Math.floor(this.numeroVagas  * Configuracao.PORCENTAGEMMINIMAVIP); 
         
         for(int i = 0; i < Util.alfabeto().size(); i++){
             for(int j = 0; j < this.vagasPorFileira; j++){
@@ -109,19 +106,19 @@ public class ParqueModel {
                 
                 if(nIdoso != 0){
                     this.vagas.add(new IdosoModel(this,Util.alfabeto().get(i).toString() + j,false)); 
-                    VagaDAO.gravar(new IdosoModel(this,Util.alfabeto().get(i).toString() + j,false));
+                    VagaDao.gravar(new IdosoModel(this,Util.alfabeto().get(i).toString() + j,false));
                     nIdoso--;
                 }else if(nPCD != 0){
                     this.vagas.add(new PcdModel(this ,Util.alfabeto().get(i).toString() + j,false)); 
-                    VagaDAO.gravar(new PcdModel(this,Util.alfabeto().get(i).toString() + j,false));
+                    VagaDao.gravar(new PcdModel(this,Util.alfabeto().get(i).toString() + j,false));
                     nPCD--;
                 }else if(nVIP != 0){
                     this.vagas.add(new VipModel(this,Util.alfabeto().get(i).toString() + j,false));
-                    VagaDAO.gravar(new VipModel(this,Util.alfabeto().get(i).toString() + j,false));
+                    VagaDao.gravar(new VipModel(this,Util.alfabeto().get(i).toString() + j,false));
                     nVIP--;
                 }else{
                     this.vagas.add(new ComumModel(this,Util.alfabeto().get(i).toString() + j,false)); 
-                    VagaDAO.gravar(new ComumModel(this,Util.alfabeto().get(i).toString() + j,false));
+                    VagaDao.gravar(new ComumModel(this,Util.alfabeto().get(i).toString() + j,false));
                 }                
                 
                 n++;
@@ -143,7 +140,7 @@ public class ParqueModel {
         return false;
     }
     
-    private List<VagaModel> listarVagas() {
+    private List<Vaga> listarVagas() {
         return this.vagas;
     }
     

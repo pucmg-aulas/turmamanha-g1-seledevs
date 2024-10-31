@@ -1,24 +1,25 @@
 package br.com.javaParking.model;
 
+import java.io.Serializable;
 import java.time.Duration;
 import java.time.LocalTime;
 
-public class OcupacaoModel {
+public class Ocupacao implements Serializable{
     
     /**
      * Atributos
      */
     private int id;
-    private ClienteModel cliente;
-    private VeiculoModel veiculo;
-    private VagaModel vaga;
+    private Cliente cliente;
+    private Veiculo veiculo;
+    private Vaga vaga;
     private LocalTime horaEntrada;
     private LocalTime horaSaida;
 
     /**
      * Construtores
      */    
-    public OcupacaoModel(ClienteModel cliente, VeiculoModel veiculo, VagaModel vaga, LocalTime horaEntrada) {
+    public Ocupacao(Cliente cliente, Veiculo veiculo, Vaga vaga, LocalTime horaEntrada) {
         this.cliente = cliente;
         this.veiculo = veiculo;
         this.vaga = vaga;
@@ -33,15 +34,15 @@ public class OcupacaoModel {
         return this.id;
     }
     
-    public ClienteModel getCliente(){
+    public Cliente getCliente(){
         return this.cliente;
     }
     
-    public VeiculoModel getVeiculo(){
+    public Veiculo getVeiculo(){
         return this.veiculo;
     }
     
-    public VagaModel getVaga(){
+    public Vaga getVaga(){
         return this.vaga;
     }
     
@@ -52,11 +53,11 @@ public class OcupacaoModel {
     /**
      * Metodos de ação 
      */ 
-    public void desocupar(VagaModel vaga) {
+    public void desocupar(Vaga vaga) {
         vaga.desocuparVaga();
     }    
     
-    public double custoOcupacao(VagaModel vaga, LocalTime saida) {       
+    public double custoOcupacao(Vaga vaga, LocalTime saida) {       
 
         // Calcula a diferença total entre hora de entrada e saída em minutos
         Duration duracao = Duration.between(this.horaEntrada, saida);

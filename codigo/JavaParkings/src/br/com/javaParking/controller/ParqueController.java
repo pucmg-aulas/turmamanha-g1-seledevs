@@ -5,52 +5,73 @@
 package br.com.javaParking.controller;
 
 import br.com.javaParking.dao.ParqueDAO;
-import br.com.javaParking.model.ParqueModel;
+import br.com.javaParking.model.Parque;
 import br.com.javaParking.view.parque.ParqueView;
+import java.util.Iterator;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
  * @author viniciusgomesrodrigues
  */
 
-public class AddParqueController {
+public class ParqueController {
     
-    private ParqueView view;
+    private ParqueView view;    
+    ParqueDAO parques;
     
-    public AddParqueController(ParqueView view) {
-        this.view = view;
+    public ParqueController() {   
+        
+        this.parques = ParqueDAO.getInstance();
+        this.view = new ParqueView();
+        
+        this.view.getBtnAdicionar().addActionListener((e) -> {
+            AddParque();
+        });        
+        carregaTabela();
+        this.view.setVisible(true);
+    }
+    
+    private void carregaTabela(){
+        Object colunas[] = {"Nome", "NºVagas"};
+        DefaultTableModel tm = new DefaultTableModel(colunas, 0);
+       
+        tm.setNumRows(0);
+        Iterator<Parque> it = parques.getParques().iterator();
+        while (it.hasNext()) {
+            Parque x = it.next();
+            tm.addRow(new Object[]{x.getNomeParque(), x.getNumeroVagas()});
+        }
+        view.getTbParques().setModel(tm);
     }
     
     public void AddParque() {
         try {
-            String nomeParque = view.getTxtnomeParque().getText();
-            int numeroVagas = Integer.parseInt(view.getTxtnumeroVagas().getText());
+            carregaTabela();
+            String nomeParque = view.getTxtNomeParque().getText();
+            int numeroVagas = Integer.parseInt(view.getTxtNumeroVagas().getText());
             int vagasPorFileira = Integer.parseInt(view.getTxtVagasPorFileira().getText());
-            double valorPorTempo = 4.0; // Exemplo fixo, ajuste conforme sua lógica
-            int intervaloDeCobrancaMinutos = 15; // Exemplo fixo, ajuste conforme sua lógica
-            double valorDeDiariaMaxima = 50.0; // Exemplo fixo, ajuste conforme sua lógica
 
             // Gere um ID de forma adequada para o novo parque
-            int id = gerarId(); // Utilize sua lógica de geração de ID
 
             // Cria uma nova instância do modelo usando o construtor existente
-            ParqueModel parque = new ParqueModel(id, nomeParque, numeroVagas, vagasPorFileira, valorPorTempo, intervaloDeCobrancaMinutos, valorDeDiariaMaxima);
-
+            Parque parque = new Parque(gerarId(), nomeParque, numeroVagas, vagasPorFileira);
+            
             // Grava o parque no arquivo usando o DAO
-            if (ParqueDAO.gravar(parque)) {
+            if (parques.addParque(parque)) {
                 // Atualiza a tabela da interface com o novo parque
-                view.addParqueToTable(parque.getId(), parque.getNomeParque(), numeroVagas, vagasPorFileira);
-
                 JOptionPane.showMessageDialog(view, "<html> <strong>Parque " + nomeParque + " salvo com sucesso! </strong> </html>");
                 
                 // Limpa os campos após adicionar o parque
                 limparTela();
             } else {
                 JOptionPane.showMessageDialog(view, "Erro ao salvar o parque!", "Erro", JOptionPane.ERROR_MESSAGE);
-            }
+            }            
         } catch (NumberFormatException e) {
             JOptionPane.showMessageDialog(view, "Por favor, insira valores válidos para Número de Vagas e Vagas por Fileira.", "Erro de Formato", JOptionPane.ERROR_MESSAGE);
+        }finally{ // Finally: Responde ao Try, onde independente do erro que acontecer, oq for posto dentro do finally sera executado.
+            carregaTabela();
         }
     }
 
@@ -60,8 +81,8 @@ public class AddParqueController {
     }
 
     private void limparTela() {
-        view.getTxtnomeParque().setText("");
-        view.getTxtnumeroVagas().setText("");
+        view.getTxtNomeParque().setText("");
+        view.getTxtNumeroVagas().setText("");
         view.getTxtVagasPorFileira().setText("");
     }
 }

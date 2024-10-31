@@ -4,6 +4,8 @@
  */
 package br.com.javaParking;
 
+import br.com.javaParking.controller.ParqueController;
+
 /**
  *
  * @author Leandro Alencar
@@ -12,7 +14,7 @@ package br.com.javaParking;
 public class Main {
 
     public static void main(String[] args) {
-        
+        new ParqueController();
     }
 
 }
