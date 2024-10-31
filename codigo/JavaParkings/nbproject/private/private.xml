@@ -2,6 +2,19 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group/>
+        <group>
+            <file>file:/C:/Users/Islayder%20Jackson/Documents/turmamanha-g1-seledevs/turmamanha-g1-seledevs/codigo/JavaParkings/src/br/com/javaParking/model/OcupacaoModel.java</file>
+            <file>file:/C:/Users/Islayder%20Jackson/Documents/turmamanha-g1-seledevs/turmamanha-g1-seledevs/codigo/JavaParkings/src/br/com/javaParking/dao/ConfiguracaoDAO.java</file>
+            <file>file:/C:/Users/Islayder%20Jackson/Documents/turmamanha-g1-seledevs/turmamanha-g1-seledevs/codigo/JavaParkings/src/br/com/javaParking/dao/ClienteDAO.java</file>
+            <file>file:/C:/Users/Islayder%20Jackson/Documents/turmamanha-g1-seledevs/turmamanha-g1-seledevs/codigo/JavaParkings/src/br/com/javaParking/dao/ParqueDAO.java</file>
+            <file>file:/C:/Users/Islayder%20Jackson/Documents/turmamanha-g1-seledevs/turmamanha-g1-seledevs/codigo/JavaParkings/src/br/com/javaParking/dao/VeiculoDAO.java</file>
+            <file>file:/C:/Users/Islayder%20Jackson/Documents/turmamanha-g1-seledevs/turmamanha-g1-seledevs/codigo/JavaParkings/src/br/com/javaParking/dao/OcupacaoDAO.java</file>
+            <file>file:/C:/Users/Islayder%20Jackson/Documents/turmamanha-g1-seledevs/turmamanha-g1-seledevs/codigo/JavaParkings/src/br/com/javaParking/dao/ArrecadacaoDAO.java</file>
+            <file>file:/C:/Users/Islayder%20Jackson/Documents/turmamanha-g1-seledevs/turmamanha-g1-seledevs/codigo/JavaParkings/src/br/com/javaParking/view/xulambs/ConfiguracaoView.java</file>
+            <file>file:/C:/Users/Islayder%20Jackson/Documents/turmamanha-g1-seledevs/turmamanha-g1-seledevs/codigo/JavaParkings/src/br/com/javaParking/dao/VagaDAO.java</file>
+            <file>file:/C:/Users/Islayder%20Jackson/Documents/turmamanha-g1-seledevs/turmamanha-g1-seledevs/codigo/JavaParkings/src/br/com/javaParking/dao/AbstractDAO.java</file>
+            <file>file:/C:/Users/Islayder%20Jackson/Documents/turmamanha-g1-seledevs/turmamanha-g1-seledevs/codigo/JavaParkings/src/br/com/javaParking/controller/ConfiguracaoController.java</file>
+            <file>file:/C:/Users/Islayder%20Jackson/Documents/turmamanha-g1-seledevs/turmamanha-g1-seledevs/codigo/JavaParkings/src/br/com/javaParking/model/ConfiguracaoModel.java</file>
+        </group>
     </open-files>
 </project-private>
