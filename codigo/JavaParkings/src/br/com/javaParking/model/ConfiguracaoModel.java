@@ -1,21 +1,15 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package br.com.javaParking.model;
 
-/**
- *
- * @author Leandro Alencar
- */
-public class ConfiguracaoModel {
-    
+import java.io.Serializable;
+
+public class ConfiguracaoModel implements Serializable {
+    private static final long serialVersionUID = 1L; 
+
     public final static double PORCENTAGEMMINIMAIDOSOS = 0.10; 
     public final static double PORCENTAGEMMINIMAPCD = 0.10; 
     public final static double PORCENTAGEMMINIMAVIP = 0.20; 
-    
-    
-       private double porcentagemMinimaIdosos;
+
+    private double porcentagemMinimaIdosos;
     private double porcentagemMinimaPCD;
     private double porcentagemMinimaVIP;
     private int intervaloCobrancaMinutos;
@@ -59,26 +53,20 @@ public class ConfiguracaoModel {
         double soma = porcentagemMinimaIdosos + porcentagemMinimaPCD + porcentagemMinimaVIP;
         return soma <= 1.0;
     }
-    
+
     public void setPorcentagemMinimaIdosos(double porcentagemMinimaIdosos) {
         this.porcentagemMinimaIdosos = porcentagemMinimaIdosos;
-        if (!validarPorcentagens()) {
-            throw new IllegalArgumentException("A soma das porcentagens não pode ultrapassar 100%");
-        }
+        validarPorcentagens();
     }
 
     public void setPorcentagemMinimaPCD(double porcentagemMinimaPCD) {
         this.porcentagemMinimaPCD = porcentagemMinimaPCD;
-        if (!validarPorcentagens()) {
-            throw new IllegalArgumentException("A soma das porcentagens não pode ultrapassar 100%");
-        }
+        validarPorcentagens();
     }
 
     public void setPorcentagemMinimaVIP(double porcentagemMinimaVIP) {
         this.porcentagemMinimaVIP = porcentagemMinimaVIP;
-        if (!validarPorcentagens()) {
-            throw new IllegalArgumentException("A soma das porcentagens não pode ultrapassar 100%");
-        }
+        validarPorcentagens();
     }
 
     public void setIntervaloCobrancaMinutos(int intervaloCobrancaMinutos) {

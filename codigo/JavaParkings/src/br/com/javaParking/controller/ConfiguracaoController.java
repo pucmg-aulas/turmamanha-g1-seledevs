@@ -1,18 +1,21 @@
 package br.com.javaParking.controller;
 
+import br.com.javaParking.dao.ConfiguracaoDAO;
 import br.com.javaParking.model.ConfiguracaoModel;
 import br.com.javaParking.view.sistema.ConfiguracaoView;
-import br.com.javaParking.view.xulambs.ConfiguracaoView;
 
-import javax.swing.JOptionPane;
+import javax.swing.*;
 
 public class ConfiguracaoController {
     private ConfiguracaoModel model;
     private ConfiguracaoView view;
+    private ConfiguracaoDAO dao;
 
     public ConfiguracaoController(ConfiguracaoModel model, ConfiguracaoView view) {
         this.model = model;
         this.view = view;
+        this.dao = new ConfiguracaoDAO();
+        carregarConfiguracao(); // Carrega a configuração ao iniciar o controller
         initController();
     }
 
@@ -36,12 +39,24 @@ public class ConfiguracaoController {
             model.setValorMaximoDiaria(valorMaximoDiaria);
 
             if (model.validarPorcentagens()) {
+                dao.salvarConfiguracao(model); 
                 JOptionPane.showMessageDialog(view, "Configurações salvas com sucesso.");
-            } else {
-                JOptionPane.showMessageDialog(view, "A soma das porcentagens não pode ultrapassar 100%.");
             }
         } catch (NumberFormatException ex) {
             JOptionPane.showMessageDialog(view, "Por favor, insira valores válidos.");
+        } catch (IllegalArgumentException ex) {
+            JOptionPane.showMessageDialog(view, ex.getMessage());
+        }
+    }
+
+    private void carregarConfiguracao() {
+        ConfiguracaoModel configuracaoCarregada = dao.carregarConfiguracao();
+        if (configuracaoCarregada != null) {
+            model.setPorcentagemMinimaIdosos(configuracaoCarregada.getPorcentagemMinimaIdosos());
+            model.setPorcentagemMinimaPCD(configuracaoCarregada.getPorcentagemMinimaPCD());
+            model.setPorcentagemMinimaVIP(configuracaoCarregada.getPorcentagemMinimaVIP());
+            model.setIntervaloCobrancaMinutos(configuracaoCarregada.getIntervaloCobrancaMinutos());
+            model.setValorMaximoDiaria(configuracaoCarregada.getValorMaximoDiaria());
         }
     }
 
