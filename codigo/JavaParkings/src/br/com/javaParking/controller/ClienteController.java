@@ -95,7 +95,7 @@ public class ClienteController {
         tm.setNumRows(0);
 
         for (Cliente cliente : clientes.getClientes()) {
-            String linha[] = {cliente.getCpf(), cliente.getNome()};
+            String linha[] = {cliente.getId(), cliente.getNome()};
             tm.addRow(linha);
         }
         view.getTbClientes().setModel(tm);
