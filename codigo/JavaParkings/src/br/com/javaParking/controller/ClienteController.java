@@ -4,7 +4,7 @@
  */
 package br.com.javaParking.controller;
 
-import br.com.javaParking.dao.ClienteDAO;
+import br.com.javaParking.dao.ClienteDao;
 import br.com.javaParking.model.Cliente;
 import br.com.javaParking.view.cliente.ClienteView;
 import javax.swing.JOptionPane;
@@ -17,7 +17,7 @@ import javax.swing.table.DefaultTableModel;
 public class ClienteController {
 
     private ClienteView view;
-    private ClienteDAO clientes;
+    private ClienteDao clientes;
 
     public ClienteController() {
         
@@ -77,7 +77,7 @@ public class ClienteController {
        
         tm.setNumRows(0);
         
-        for(Cliente cliente : clientes.getCLientes()){
+        for(Cliente cliente : clientes.getClientes()){
             String c = cliente.toString();
             String linha[] = c.split("%");
             tm.addRow(new Object[]{linha[0], linha[1]});
