@@ -47,6 +47,9 @@ public class ClienteView extends javax.swing.JFrame {
     public JButton getBtnRemover(){
         return btnRemover;
     }
+    public JButton getBtnAdicionar(){
+        return btnAdicionar;
+    }
     
     /**
      * This method is called from within the constructor to initialize the form.
