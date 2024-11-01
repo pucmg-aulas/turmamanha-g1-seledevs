@@ -20,30 +20,32 @@ public class ClienteController {
     private ClienteDao clientes;
 
     public ClienteController() {
+        this.clientes = ClienteDao.getInstance();
+        this.view = new ClienteView();
+
+        carregarTabela();
         
-         this.clientes = clientes.getInstance();
-         this.view = new ClienteView();
-         
-         carregarTabela();
-        
-        if(this.view.getTbClientes().getSelectedRow() != -1){
-            
-            this.view.getBtnAlterar().setEnabled(true);
-            this.view.getBtnRemover().setEnabled(true);
-            this.view.getBtnAdicionar().setEnabled(false);
-            
-            this.view.getBtnAlterar().addActionListener((e)->{
-                editarCliente();
-            });
-            
-            this.view.getBtnRemover().addActionListener((e)->{
-                deleteCliente();
-            });
-            
-        }
-        
-        this.view.getBtnAdicionar().addActionListener((e)->{
+        this.view.getBtnAdicionar().addActionListener((e) -> {
             addCliente();
+        });
+
+        this.view.getBtnAlterar().addActionListener((e) -> {
+            if (this.view.getTbClientes().getSelectedRow() != -1) {
+                editarCliente();
+            }
+        });
+
+        this.view.getBtnRemover().addActionListener((e) -> {
+            if (this.view.getTbClientes().getSelectedRow() != -1) {
+                deleteCliente();
+            }
+        });
+
+        this.view.getTbClientes().getSelectionModel().addListSelectionListener(e -> {
+            boolean linhaSelecionada = this.view.getTbClientes().getSelectedRow() != -1;
+            this.view.getBtnAlterar().setEnabled(linhaSelecionada);
+            this.view.getBtnRemover().setEnabled(linhaSelecionada);
+            this.view.getBtnAdicionar().setEnabled(!linhaSelecionada);
         });
     }
 
@@ -52,32 +54,28 @@ public class ClienteController {
         String nome = view.getTxtNome().getText();
 
         Cliente c = new Cliente(id, nome);
-
         clientes.addCliente(c);
 
         JOptionPane.showMessageDialog(view, "Cliente salvo com sucesso!");
-
         limpartela();
+        carregarTabela();
     }
 
     private void editarCliente() {
+        int linha = this.view.getTbClientes().getSelectedRow();
+        String nome = (String) this.view.getTbClientes().getValueAt(linha, 1);
+        String cpf = (String) this.view.getTbClientes().getValueAt(linha, 0);
 
-        //ta errado mas a logica ta certa arrumar       
-            int linha = this.view.getTbClientes().getSelectedRow();
-            String nome = (String) this.view.getTbClientes().getValueAt(linha, 1);
-            String cpf = (String) this.view.getTbClientes().getValueAt(linha, 0);
-
-            int op = JOptionPane.showConfirmDialog(view, "Deseja editar " + nome + "?");
-            if (op == JOptionPane.YES_OPTION) {
-                Cliente cliente = clientes.pesquisarPorCpf(cpf);
-                clientes.alterarCliente(cliente, nome);
-                JOptionPane.showMessageDialog(view, nome + " Editado com Sucesso!");
-                //chamar função para recarregar tabelas
-            }
+        int op = JOptionPane.showConfirmDialog(view, "Deseja editar " + nome + "?");
+        if (op == JOptionPane.YES_OPTION) {
+            Cliente cliente = clientes.pesquisarPorCpf(cpf);
+            clientes.alterarCliente(cliente, nome);
+            JOptionPane.showMessageDialog(view, nome + " editado com sucesso!");
+            carregarTabela();
+        }
     }
 
     private void deleteCliente() {
-
         int linha = this.view.getTbClientes().getSelectedRow();
         String nome = (String) this.view.getTbClientes().getValueAt(linha, 1);
         String cpf = (String) this.view.getTbClientes().getValueAt(linha, 0);
@@ -86,22 +84,19 @@ public class ClienteController {
         if (op == JOptionPane.YES_OPTION) {
             Cliente cliente = clientes.pesquisarPorCpf(cpf);
             clientes.excluirCliente(cliente);
-            JOptionPane.showMessageDialog(view, nome + " Excluído com Sucesso!");
-            //chamar função para recarregar tabelas
+            JOptionPane.showMessageDialog(view, nome + " excluído com sucesso!");
+            carregarTabela();
         }
-
     }
 
     private void carregarTabela() {
-        Object colunas[] = {"Nome", "Marca"};
+        Object colunas[] = {"CPF", "Nome"};
         DefaultTableModel tm = new DefaultTableModel(colunas, 0);
-
         tm.setNumRows(0);
 
         for (Cliente cliente : clientes.getClientes()) {
-            String c = cliente.toString();
-            String linha[] = c.split("%");
-            tm.addRow(new Object[]{linha[0], linha[1]});
+            String linha[] = {cliente.getCpf(), cliente.getNome()};
+            tm.addRow(linha);
         }
         view.getTbClientes().setModel(tm);
     }
