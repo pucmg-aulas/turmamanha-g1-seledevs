@@ -70,7 +70,7 @@
                           <EmptySpace min="-2" pref="8" max="-2" attributes="0"/>
                           <Component id="btnAlterar" min="-2" pref="69" max="-2" attributes="0"/>
                           <EmptySpace min="-2" pref="8" max="-2" attributes="0"/>
-                          <Component id="btnRemover" min="-2" max="-2" attributes="0"/>
+                          <Component id="btnExcluir" min="-2" max="-2" attributes="0"/>
                           <EmptySpace min="-2" pref="8" max="-2" attributes="0"/>
                           <Component id="btnHistorico" min="-2" max="-2" attributes="0"/>
                           <EmptySpace min="0" pref="54" max="32767" attributes="0"/>
@@ -110,7 +110,7 @@
                       <Component id="btnAdicionar" alignment="0" pref="0" max="32767" attributes="0"/>
                       <Component id="btnAlterar" alignment="0" min="-2" pref="66" max="-2" attributes="0"/>
                       <Component id="btnHistorico" alignment="0" max="32767" attributes="0"/>
-                      <Component id="btnRemover" alignment="0" min="-2" pref="66" max="-2" attributes="0"/>
+                      <Component id="btnExcluir" alignment="0" min="-2" pref="66" max="-2" attributes="0"/>
                   </Group>
               </Group>
               <Component id="pnClientes2" alignment="0" max="32767" attributes="0"/>
@@ -219,7 +219,13 @@
                         <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
                           <Table columnCount="0" rowCount="4"/>
                         </Property>
+                        <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">
+                          <TableColumnModel selectionModel="0"/>
+                        </Property>
                         <Property name="focusable" type="boolean" value="false"/>
+                        <Property name="tableHeader" type="javax.swing.table.JTableHeader" editor="org.netbeans.modules.form.editors2.JTableHeaderEditor">
+                          <TableHeader reorderingAllowed="true" resizingAllowed="true"/>
+                        </Property>
                       </Properties>
                       <Events>
                         <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="tbParquesMouseClicked"/>
@@ -367,7 +373,7 @@
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnAlterarActionPerformed"/>
           </Events>
         </Component>
-        <Component class="javax.swing.JButton" name="btnRemover">
+        <Component class="javax.swing.JButton" name="btnExcluir">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
               <Image iconType="3" name="/br/com/javaParking/assets/img/iconeRemover-00.png"/>
@@ -383,7 +389,7 @@
             </Property>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnRemoverActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnExcluirActionPerformed"/>
           </Events>
         </Component>
         <Component class="javax.swing.JToggleButton" name="btnHistorico">

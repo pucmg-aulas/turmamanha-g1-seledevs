@@ -14,26 +14,26 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-public class ParqueDAO extends AbstractDAO implements Serializable{
+public class ParqueDao extends AbstractDAO implements Serializable{
     
     private List<Parque> parques;
     // Atributo da própria classe, estático, para implementar o Singleton
-    private static ParqueDAO instance;
+    private static ParqueDao instance;
 
     //Endereço do arquivo serializado que contém a coleção de veiculos
     private final String localArquivo = Util.CAMINHOPADRAO + "Parques.dat";
 
     //Construtor privado, pois não podemos permitir mais de uma instância desta classe
     //que controla a coleção de carros do sistema (Singleton)
-    private ParqueDAO() {
+    private ParqueDao() {
         this.parques = new ArrayList<>();
         carregaParques();
     }
 
     //Método para recuperar a única instância de veiculos
-    public static ParqueDAO getInstance() {
+    public static ParqueDao getInstance() {
         if (instance == null) {
-            instance = new ParqueDAO();
+            instance = new ParqueDao();
         }
         return instance;
     }

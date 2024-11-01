@@ -2,7 +2,6 @@ package br.com.javaParking.dao;
 
 import br.com.javaParking.model.Parque;
 import br.com.javaParking.model.Vaga;
-import br.com.javaParking.model.Vaga;
 import br.com.javaParking.model.tiposVaga.ComumModel;
 import br.com.javaParking.model.tiposVaga.IdosoModel;
 import br.com.javaParking.model.tiposVaga.PcdModel;
@@ -16,7 +15,7 @@ import java.io.FileWriter;
 import java.util.ArrayList;
 import java.util.List;
 
-public class VagaDAO {
+public class VagaDao {
 
     public final static String CAMINHOVAGA;
 

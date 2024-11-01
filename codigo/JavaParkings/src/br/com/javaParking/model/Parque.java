@@ -4,6 +4,7 @@ import br.com.javaParking.model.tiposVaga.ComumModel;
 import br.com.javaParking.model.tiposVaga.IdosoModel;
 import br.com.javaParking.model.tiposVaga.PcdModel;
 import br.com.javaParking.model.tiposVaga.VipModel;
+import br.com.javaParking.dao.VagaDao;
 import br.com.javaParking.util.Util;
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -24,9 +25,7 @@ public class Parque implements Serializable{
     private List<Vaga> vagas;   
     private int vagasPorFileira;
      
-    /**
-     * Construtores
-     */  
+      
     public Parque(int id, String nomeParque, int numeroVagas, int vagasPorFileira) {
         this.id = id;
         this.nomeParque = nomeParque;
@@ -143,6 +142,5 @@ public class Parque implements Serializable{
     private List<Vaga> listarVagas() {
         return this.vagas;
     }
-    
-    
+
 }

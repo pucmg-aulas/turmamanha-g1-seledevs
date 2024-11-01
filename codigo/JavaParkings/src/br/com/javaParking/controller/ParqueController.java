@@ -4,7 +4,7 @@
  */
 package br.com.javaParking.controller;
 
-import br.com.javaParking.dao.ParqueDAO;
+import br.com.javaParking.dao.ParqueDao;
 import br.com.javaParking.model.Parque;
 import br.com.javaParking.view.parque.ParqueView;
 import java.util.Iterator;
@@ -19,16 +19,20 @@ import javax.swing.table.DefaultTableModel;
 public class ParqueController {
     
     private ParqueView view;    
-    ParqueDAO parques;
+    ParqueDao parques;
     
     public ParqueController() {   
         
-        this.parques = ParqueDAO.getInstance();
+        this.parques = ParqueDao.getInstance();
         this.view = new ParqueView();
         
         this.view.getBtnAdicionar().addActionListener((e) -> {
             AddParque();
-        });        
+        }); 
+        this.view.getBtnExcluir().addActionListener((e) -> {
+            excluirParque();
+        });
+        
         carregaTabela();
         this.view.setVisible(true);
     }
@@ -75,6 +79,25 @@ public class ParqueController {
         }
     }
 
+    private void excluirParque() {
+    int selectedRow = view.getTbParques().getSelectedRow(); // Obtém a linha selecionada
+    if (selectedRow == -1) {
+        JOptionPane.showMessageDialog(view, "Por favor, selecione um parque para excluir.", "Erro", JOptionPane.ERROR_MESSAGE);
+        return;
+    }
+
+    String nomeParque = (String) view.getTbParques().getValueAt(selectedRow, 0); // Obtém o nome do parque na linha selecionada
+    Parque parque = parques.buscarPorNome(nomeParque); // Busca o parque pelo nome
+
+    if (parque != null) {
+        parques.excluirParque(parque); // Exclui o parque do DAO
+        JOptionPane.showMessageDialog(view, "Parque excluído com sucesso!");
+        carregaTabela(); // Atualiza a tabela
+    } else {
+        JOptionPane.showMessageDialog(view, "Erro ao excluir o parque.", "Erro", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+    
     private int gerarId() {
         // Lógica para gerar um ID único para o novo parque
         return (int) (Math.random() * 1000); // Exemplo simples, altere conforme necessário

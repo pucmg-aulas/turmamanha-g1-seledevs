@@ -4,8 +4,10 @@
  */
 package br.com.javaParking.view.parque;
 
-import br.com.javaParking.view.sistema.ArrecadacaoView;
+import br.com.javaParking.view.xulambs.ArrecadacaoView;
 import br.com.javaParking.controller.ParqueController;
+import br.com.javaParking.model.Parque;
+import br.com.javaParking.dao.ParqueDao;
 import javax.swing.JTable;
 import javax.swing.JButton;
 import javax.swing.JTextField;
@@ -38,6 +40,10 @@ public class ParqueView extends javax.swing.JFrame {
         return btnAdicionar;
     }  
     
+    public JButton getBtnExcluir() {
+        return btnExcluir; // Retorne a referência ao botão de exclusão
+    }
+    
     
     /**
      * This method is called from within the constructor to initialize the form.
@@ -63,7 +69,7 @@ public class ParqueView extends javax.swing.JFrame {
         txtVagasPorFileira = new javax.swing.JTextField();
         btnAdicionar = new javax.swing.JButton();
         btnAlterar = new javax.swing.JButton();
-        btnRemover = new javax.swing.JButton();
+        btnExcluir = new javax.swing.JButton();
         btnHistorico = new javax.swing.JToggleButton();
         jPanel8 = new javax.swing.JPanel();
         jScrollPane3 = new javax.swing.JScrollPane();
@@ -232,15 +238,15 @@ public class ParqueView extends javax.swing.JFrame {
             }
         });
 
-        btnRemover.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/javaParking/assets/img/iconeRemover-00.png"))); // NOI18N
-        btnRemover.setToolTipText("");
-        btnRemover.setBorderPainted(false);
-        btnRemover.setContentAreaFilled(false);
-        btnRemover.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        btnRemover.setPreferredSize(new java.awt.Dimension(80, 80));
-        btnRemover.addActionListener(new java.awt.event.ActionListener() {
+        btnExcluir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/javaParking/assets/img/iconeRemover-00.png"))); // NOI18N
+        btnExcluir.setToolTipText("");
+        btnExcluir.setBorderPainted(false);
+        btnExcluir.setContentAreaFilled(false);
+        btnExcluir.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        btnExcluir.setPreferredSize(new java.awt.Dimension(80, 80));
+        btnExcluir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnRemoverActionPerformed(evt);
+                btnExcluirActionPerformed(evt);
             }
         });
 
@@ -345,7 +351,7 @@ public class ParqueView extends javax.swing.JFrame {
                         .addGap(8, 8, 8)
                         .addComponent(btnAlterar, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(8, 8, 8)
-                        .addComponent(btnRemover, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnExcluir, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(8, 8, 8)
                         .addComponent(btnHistorico)
                         .addGap(0, 54, Short.MAX_VALUE))
@@ -378,7 +384,7 @@ public class ParqueView extends javax.swing.JFrame {
                     .addComponent(btnAdicionar, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                     .addComponent(btnAlterar, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnHistorico, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnRemover, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(btnExcluir, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)))
             .addComponent(pnClientes2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
@@ -418,9 +424,9 @@ public class ParqueView extends javax.swing.JFrame {
 
     }//GEN-LAST:event_btnAlterarActionPerformed
 
-    private void btnRemoverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRemoverActionPerformed
+    private void btnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirActionPerformed
 
-    }//GEN-LAST:event_btnRemoverActionPerformed
+    }//GEN-LAST:event_btnExcluirActionPerformed
 
     private void btnHistoricoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHistoricoActionPerformed
         // TODO add your handling code here:
@@ -493,8 +499,8 @@ public class ParqueView extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAdicionar;
     private javax.swing.JButton btnAlterar;
+    private javax.swing.JButton btnExcluir;
     private javax.swing.JToggleButton btnHistorico;
-    private javax.swing.JButton btnRemover;
     private javax.swing.JButton btnVoltar;
     private javax.swing.JPanel jPanel10;
     private javax.swing.JPanel jPanel14;

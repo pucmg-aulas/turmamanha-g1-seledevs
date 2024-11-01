@@ -2,11 +2,12 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-package br.com.javaParking.view.sistema.;
+package br.com.javaParking.view.xulambs;
 
 import br.com.javaParking.view.cliente.ClienteView;
 import br.com.javaParking.view.parque.ParqueView;
 import br.com.javaParking.view.xulambs.PdaView;
+import br.com.javaParking.model.Configuracao;
 
 /**
  *

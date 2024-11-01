@@ -1,13 +1,14 @@
 package br.com.javaParking.model;
 
 import java.io.Serializable;
+import br.com.javaParking.dao.ConfiguracaoDao;
 
 <<<<<<< HEAD:codigo/JavaParkings/src/br/com/javaParking/model/Configuracao.java
 /**
  *
  * @author Leandro Alencar
  */
-public class Configuracao implements Serializable{
+public class Configuracao implements Serializable {
     
 =======
 public class ConfiguracaoModel implements Serializable {
@@ -84,5 +85,6 @@ public class ConfiguracaoModel implements Serializable {
 
     public void setValorMaximoDiaria(double valorMaximoDiaria) {
         this.valorMaximoDiaria = valorMaximoDiaria;
+    }
     }
 }
