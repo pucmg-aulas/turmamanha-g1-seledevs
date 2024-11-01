@@ -11,7 +11,7 @@ import javax.swing.JOptionPane;
 
 /**
  *
- * @author rafae
+ * @author rafael
  */
 public class VeiculoController {
     private VeiculoView view;
@@ -24,7 +24,7 @@ public class VeiculoController {
         Veiculo v = new Veiculo(placa);
         
         // [CONCERTAR] - Mudei o id do cliente, criar de acordo com o CPF
-        veiculos.gravar(v,"");
+        veiculos.addVeiculo(v);
         
         JOptionPane.showMessageDialog(view, "Carro salvo com sucesso!");
         

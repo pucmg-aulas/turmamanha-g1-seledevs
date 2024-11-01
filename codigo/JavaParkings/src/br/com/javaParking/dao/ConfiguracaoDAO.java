@@ -1,6 +1,6 @@
 package br.com.javaParking.dao;
 
-import br.com.javaParking.model.ConfiguracaoModel;
+import br.com.javaParking.model.Configuracao.ConfiguracaoModel;
 import br.com.javaParking.util.Util;
 
 import java.io.*;

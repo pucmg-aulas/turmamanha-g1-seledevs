@@ -8,10 +8,11 @@ import br.com.javaParking.dao.ClienteDAO;
 import br.com.javaParking.model.Cliente;
 import br.com.javaParking.view.cliente.ClienteView;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
- * @author rafae
+ * @author rafael
  */
 public class ClienteController {
 
@@ -22,27 +23,68 @@ public class ClienteController {
         
     }
 
-    public void addCliente() {
+    private void addCliente() {
         String id = view.getTxtCPF().getText();
         String nome = view.getTxtNome().getText();
 
         Cliente c = new Cliente(id, nome);
 
-        clientes.gravar(c);
+        clientes.addCliente(c);
 
         JOptionPane.showMessageDialog(view, "Cliente salvo com sucesso!");
 
         limpartela();
     }
     
-    public void deleteCliente(){
+    private void editarCliente(){
         
+        //ta errado mas a logica ta certa arrumar
+        if(view.getTbClientes().getSelectedRow() != -1){
+            int linha = this.view.getTbClientes().getSelectedRow();
+            String nome = (String) this.view.getTbClientes().getValueAt(linha, 1);
+            String cpf = (String) this.view.getTbClientes().getValueAt(linha, 0);
+            
+            int op = JOptionPane.showConfirmDialog(view, "Deseja editar " + nome + "?");
+            if(op == JOptionPane.YES_OPTION){
+                Cliente cliente = clientes.pesquisarPorCpf(cpf);
+                clientes.alterarCliente(cliente, nome);
+                JOptionPane.showMessageDialog(view, nome + " Editado com Sucesso!");
+                //chamar função para recarregar tabelas
+            }
+        }
+    }
+    
+    private void deleteCliente(){
+        if(view.getTbClientes().getSelectedRow() != -1){
+            
+            int linha = this.view.getTbClientes().getSelectedRow();
+            String nome = (String) this.view.getTbClientes().getValueAt(linha, 1);
+            String cpf = (String) this.view.getTbClientes().getValueAt(linha, 0);
+            
+            int op = JOptionPane.showConfirmDialog(view, "Deseja excluir " + nome + "?");
+            if(op == JOptionPane.YES_OPTION){
+                Cliente cliente = clientes.pesquisarPorCpf(cpf);
+                clientes.excluirCliente(cliente);
+            JOptionPane.showMessageDialog(view, nome + " Excluído com Sucesso!");
+            //chamar função para recarregar tabelas
+            }
+        }
     }
 
-    public void cancelar() {
-        this.view.dispose();
+    private void carregarTabela(){
+         Object colunas[] = {"Nome", "Marca"};
+        DefaultTableModel tm = new DefaultTableModel(colunas, 0);
+       
+        tm.setNumRows(0);
+        
+        for(Cliente cliente : clientes.getCLientes()){
+            String c = cliente.toString();
+            String linha[] = c.split("%");
+            tm.addRow(new Object[]{linha[0], linha[1]});
+        }
+      view.getTbClientes().setModel(tm);  
     }
-
+    
     private void limpartela() {
         this.view.getTxtCPF().setText("");
         this.view.getTxtNome().setText("");

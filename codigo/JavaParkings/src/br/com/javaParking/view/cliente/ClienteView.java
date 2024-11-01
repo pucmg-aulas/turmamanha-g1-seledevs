@@ -6,6 +6,8 @@ package br.com.javaParking.view.cliente;
 
 import br.com.javaParking.view.sistema.ArrecadacaoView;
 import br.com.javaParking.view.veiculo.VeiculoView;
+import javax.swing.JButton;
+import javax.swing.JTable;
 import javax.swing.JTextField;
 
 /**
@@ -24,9 +26,26 @@ public class ClienteView extends javax.swing.JFrame {
     public JTextField getTxtNome(){
         return txtNome;
     }
-    
     public JTextField getTxtCPF(){
         return txtNome;
+    }
+    public JTextField getTxtPesquisar(){
+        return txtPesquisar;
+    }
+    
+    public JTable getTbClientes(){
+        return tbClientes;
+    }
+    
+    public JTable getTbRankingClientes(){
+        return tbRanking;
+    }
+    
+    public JButton getBtnAlterar(){
+        return btnAlterar;
+    }
+    public JButton getBtnRemover(){
+        return btnRemover;
     }
     
     /**

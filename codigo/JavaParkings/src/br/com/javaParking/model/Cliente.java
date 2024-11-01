@@ -59,4 +59,10 @@ public class Cliente implements Serializable{
          */
         return false;
     }
+    
+    
+     @Override
+    public String toString() {
+        return id + "%" + nome;
+    }
 }
