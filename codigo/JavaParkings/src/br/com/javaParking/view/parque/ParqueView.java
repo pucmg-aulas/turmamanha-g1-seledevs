@@ -25,6 +25,10 @@ public class ParqueView extends javax.swing.JFrame {
         return tbParques;
     }
     
+    public JTable getTbVagasDoParque() {
+        return tbVagasDoParque;
+    }
+    
     public JTextField getTxtNomeParque(){
         return txtnomeParque;
     }
@@ -65,7 +69,7 @@ public class ParqueView extends javax.swing.JFrame {
     
     
     @SuppressWarnings("unchecked")
-    // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
+    // <editor-fold defaultstate="collapsed" desc="Generated Code">                          
     private void initComponents() {
 
         jPanel10 = new javax.swing.JPanel();
@@ -418,59 +422,59 @@ public class ParqueView extends javax.swing.JFrame {
 
         setSize(new java.awt.Dimension(816, 609));
         setLocationRelativeTo(null);
-    }// </editor-fold>//GEN-END:initComponents
+    }// </editor-fold>                        
 
-    private void tbParquesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbParquesMouseClicked
+    private void tbParquesMouseClicked(java.awt.event.MouseEvent evt) {                                       
         // TODO add your handling code here:
-    }//GEN-LAST:event_tbParquesMouseClicked
+    }                                      
 
-    private void txtVagasPorFileiraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtVagasPorFileiraActionPerformed
+    private void txtVagasPorFileiraActionPerformed(java.awt.event.ActionEvent evt) {                                                   
         // TODO add your handling code here:
-    }//GEN-LAST:event_txtVagasPorFileiraActionPerformed
+    }                                                  
 
-    private void btnAdicionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAdicionarActionPerformed
+    private void btnAdicionarActionPerformed(java.awt.event.ActionEvent evt) {                                             
        
-    }//GEN-LAST:event_btnAdicionarActionPerformed
+    }                                            
 
-    private void btnAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAlterarActionPerformed
+    private void btnAlterarActionPerformed(java.awt.event.ActionEvent evt) {                                           
 
-    }//GEN-LAST:event_btnAlterarActionPerformed
+    }                                          
 
-    private void btnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirActionPerformed
+    private void btnExcluirActionPerformed(java.awt.event.ActionEvent evt) {                                           
 
-    }//GEN-LAST:event_btnExcluirActionPerformed
+    }                                          
 
-    private void btnAtualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAtualizarActionPerformed
+    private void btnAtualizarActionPerformed(java.awt.event.ActionEvent evt) {                                             
         // TODO add your handling code here:
 
-    }//GEN-LAST:event_btnAtualizarActionPerformed
+    }                                            
 
-    private void tbVagasDoParqueMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbVagasDoParqueMouseClicked
+    private void tbVagasDoParqueMouseClicked(java.awt.event.MouseEvent evt) {                                             
         // TODO add your handling code here:
-    }//GEN-LAST:event_tbVagasDoParqueMouseClicked
+    }                                            
 
-    private void txtPesquisarParqueKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPesquisarParqueKeyReleased
+    private void txtPesquisarParqueKeyReleased(java.awt.event.KeyEvent evt) {                                               
         // TODO add your handling code here:
-    }//GEN-LAST:event_txtPesquisarParqueKeyReleased
+    }                                              
 
-    private void btnVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVoltarActionPerformed
+    private void btnVoltarActionPerformed(java.awt.event.ActionEvent evt) {                                          
         // TODO add your handling code here:
         ArrecadacaoView tela = new ArrecadacaoView();
         tela.setVisible(true);
         this.dispose();
-    }//GEN-LAST:event_btnVoltarActionPerformed
+    }                                         
 
-    private void txtnumeroVagasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtnumeroVagasActionPerformed
+    private void txtnumeroVagasActionPerformed(java.awt.event.ActionEvent evt) {                                               
         // TODO add your handling code here:
-    }//GEN-LAST:event_txtnumeroVagasActionPerformed
+    }                                              
 
-    private void txtnomeParqueActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtnomeParqueActionPerformed
+    private void txtnomeParqueActionPerformed(java.awt.event.ActionEvent evt) {                                              
         // TODO add your handling code here:
-    }//GEN-LAST:event_txtnomeParqueActionPerformed
+    }                                             
 
-    private void txtPesquisarParqueActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtPesquisarParqueActionPerformed
+    private void txtPesquisarParqueActionPerformed(java.awt.event.ActionEvent evt) {                                                   
         // TODO add your handling code here:
-    }//GEN-LAST:event_txtPesquisarParqueActionPerformed
+    }                                                  
 
     /**
      * @param args the command line arguments
@@ -508,7 +512,7 @@ public class ParqueView extends javax.swing.JFrame {
         });
     }
 
-    // Variables declaration - do not modify//GEN-BEGIN:variables
+    // Variables declaration - do not modify                     
     private javax.swing.JButton btnAdicionar;
     private javax.swing.JButton btnAlterar;
     private javax.swing.JToggleButton btnAtualizar;
@@ -530,5 +534,5 @@ public class ParqueView extends javax.swing.JFrame {
     private javax.swing.JTextField txtVagasPorFileira;
     private javax.swing.JTextField txtnomeParque;
     private javax.swing.JTextField txtnumeroVagas;
-    // End of variables declaration//GEN-END:variables
+    // End of variables declaration                   
 }
