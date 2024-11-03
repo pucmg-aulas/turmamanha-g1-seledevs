@@ -88,7 +88,7 @@ public class Parque implements Serializable{
     
     // MÉTODOS ESPECIAIS:
     
-    private boolean validarNumeroDeVagas(){
+    public boolean validarNumeroDeVagas(){
         int maximo = Util.alfabeto().size() * this.vagasPorFileira;
         
         if(maximo < this.numeroVagas )
@@ -133,7 +133,7 @@ public class Parque implements Serializable{
         }
     }
     
-    private boolean atualizarNumeroVagas(int numeroVagas) {
+    public boolean atualizarNumeroVagas(int numeroVagas) {
         if(Util.ePositivo(numeroVagas)){
             
             if(!validarNumeroDeVagas()) 
@@ -147,7 +147,7 @@ public class Parque implements Serializable{
         return false;
     }
     
-    private List<Vaga> listarVagas() {
+    public List<Vaga> listarVagas() {
         return this.vagas;
     }
 
