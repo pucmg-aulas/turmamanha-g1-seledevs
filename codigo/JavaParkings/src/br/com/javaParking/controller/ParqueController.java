@@ -7,6 +7,7 @@ package br.com.javaParking.controller;
 import br.com.javaParking.dao.ParqueDao;
 import br.com.javaParking.model.Parque;
 import br.com.javaParking.view.parque.ParqueView;
+import br.com.javaParking.model.Vaga;
 import java.util.Iterator;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -63,6 +64,29 @@ public class ParqueController {
             }
         });
         
+        // Evento para capturar o click do mouse na linha e carregar as vagas do parque selecionado
+        this.view.getTbParques().addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                int linha = view.getTbParques().getSelectedRow();
+                if (linha != -1) {
+                    String nomeParque = (String) view.getTbParques().getValueAt(linha, 0);
+                    parqueSelecionado = parques.buscarPorNome(nomeParque);
+
+                    if (parqueSelecionado != null) {
+                        // Preenche os campos com os dados do parque selecionado
+                        view.getTxtNomeParque().setText(parqueSelecionado.getNomeParque());
+                        view.getTxtNumeroVagas().setText(String.valueOf(parqueSelecionado.getNumeroVagas()));
+                        view.getTxtVagasPorFileira().setText(String.valueOf(parqueSelecionado.getVagasPorFileira()));
+
+                        // Gera as vagas do parque e exibe na tabela
+                        parqueSelecionado.montarVagas(); // Gera as vagas
+                        carregarVagasDoParque(parqueSelecionado.listarVagas());
+                    }
+                }
+            }
+        });
+        
         this.view.getBtnAtualizar().addActionListener((e) -> {
             AtualizarTabela();
         });
@@ -101,6 +125,18 @@ public class ParqueController {
             tm.addRow(new Object[]{x.getNomeParque(), x.getNumeroVagas()});
         }
         view.getTbParques().setModel(tm);
+    }
+    
+    public void carregarVagasDoParque(List<Vaga> vagas) {
+        Object colunas[] = {"ID da Vaga", "Tipo"};
+        DefaultTableModel tm = new DefaultTableModel(colunas, 0);
+
+        for (Vaga vaga : vagas) {
+            String tipoVaga = vaga.getClass().getSimpleName(); // Obtém o tipo de vaga (IdosoModel, PcdModel, etc.)
+            tm.addRow(new Object[]{vaga.getIdentificador(), tipoVaga});
+        }
+
+        view.getTbVagasDoParque().setModel(tm); // Define o modelo para a tabela
     }
     
     public void AddParque() {
