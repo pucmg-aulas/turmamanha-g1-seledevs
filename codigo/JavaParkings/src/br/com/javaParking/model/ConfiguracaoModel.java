@@ -1,23 +1,17 @@
 package br.com.javaParking.model;
 
 import java.io.Serializable;
-import br.com.javaParking.dao.ConfiguracaoDao;
 
-<<<<<<< HEAD:codigo/JavaParkings/src/br/com/javaParking/model/Configuracao.java
 /**
- *
- * @author Leandro Alencar
+ * Configuração do sistema de estacionamento.
+ * Contém as porcentagens mínimas e valores de cobrança.
  */
-public class Configuracao implements Serializable {
-    
-=======
 public class ConfiguracaoModel implements Serializable {
     private static final long serialVersionUID = 1L; 
 
->>>>>>> 2ff6eb1a51db12a7eb63a652ba9948a588942673:codigo/JavaParkings/src/br/com/javaParking/model/ConfiguracaoModel.java
-    public final static double PORCENTAGEMMINIMAIDOSOS = 0.10; 
-    public final static double PORCENTAGEMMINIMAPCD = 0.10; 
-    public final static double PORCENTAGEMMINIMAVIP = 0.20; 
+    public static final double PORCENTAGEMMINIMAIDOSOS = 0.10; 
+    public static final double PORCENTAGEMMINIMAPCD = 0.10; 
+    public static final double PORCENTAGEMMINIMAVIP = 0.20; 
 
     private double porcentagemMinimaIdosos;
     private double porcentagemMinimaPCD;
@@ -25,7 +19,7 @@ public class ConfiguracaoModel implements Serializable {
     private int intervaloCobrancaMinutos;
     private double valorMaximoDiaria;
 
-    public Configuracao(double porcentagemMinimaIdosos, double porcentagemMinimaPCD,
+    public ConfiguracaoModel(double porcentagemMinimaIdosos, double porcentagemMinimaPCD,
                              double porcentagemMinimaVIP, int intervaloCobrancaMinutos,
                              double valorMaximoDiaria) {
         this.porcentagemMinimaIdosos = porcentagemMinimaIdosos;
@@ -59,24 +53,30 @@ public class ConfiguracaoModel implements Serializable {
         return valorMaximoDiaria;
     }
 
-    public boolean validarPorcentagens() {
+    private boolean validarPorcentagens() {
         double soma = porcentagemMinimaIdosos + porcentagemMinimaPCD + porcentagemMinimaVIP;
         return soma <= 1.0;
     }
 
     public void setPorcentagemMinimaIdosos(double porcentagemMinimaIdosos) {
         this.porcentagemMinimaIdosos = porcentagemMinimaIdosos;
-        validarPorcentagens();
+        if (!validarPorcentagens()) {
+            throw new IllegalArgumentException("A soma das porcentagens não pode ultrapassar 100%");
+        }
     }
 
     public void setPorcentagemMinimaPCD(double porcentagemMinimaPCD) {
         this.porcentagemMinimaPCD = porcentagemMinimaPCD;
-        validarPorcentagens();
+        if (!validarPorcentagens()) {
+            throw new IllegalArgumentException("A soma das porcentagens não pode ultrapassar 100%");
+        }
     }
 
     public void setPorcentagemMinimaVIP(double porcentagemMinimaVIP) {
         this.porcentagemMinimaVIP = porcentagemMinimaVIP;
-        validarPorcentagens();
+        if (!validarPorcentagens()) {
+            throw new IllegalArgumentException("A soma das porcentagens não pode ultrapassar 100%");
+        }
     }
 
     public void setIntervaloCobrancaMinutos(int intervaloCobrancaMinutos) {
@@ -85,6 +85,5 @@ public class ConfiguracaoModel implements Serializable {
 
     public void setValorMaximoDiaria(double valorMaximoDiaria) {
         this.valorMaximoDiaria = valorMaximoDiaria;
-    }
     }
 }
