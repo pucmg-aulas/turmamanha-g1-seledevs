@@ -39,11 +39,11 @@ public class ParqueDao extends AbstractDAO implements Serializable{
     }
 
     public boolean addParque(Parque parque) {
-        try{
+        try {
             this.parques.add(parque);
             grava();
             return true;
-        }catch(Exception e){
+        } catch(Exception e) {
             return false;
         }
     }
@@ -65,13 +65,32 @@ public class ParqueDao extends AbstractDAO implements Serializable{
         grava();
     }
 
-    public Parque buscarPorNome(String nome) {
+    public Parque buscarPorNome(String nomeParque) {
         for (Parque parque : parques) {
-            if (parque.getNomeParque().equals(nome)) {
+            if (parque.getNomeParque().equals(nomeParque)) {
                 return parque;
             }
         }
         return null;
+    }
+    
+    public Parque buscarPorId(int id) {
+        for (Parque parque : parques) {
+            if (parque.getId() == id) {
+                    return parque;
+                }
+            }
+        return null;
+    }
+    
+    public List<Parque> buscarPorNomeParcial(String nomeParcial) {
+        List<Parque> resultado = new ArrayList<>();
+            for (Parque parque : parques) { // Supondo que listaDeParques é a lista de todos os parques
+                if (parque.getNomeParque().toLowerCase().contains(nomeParcial.toLowerCase())) {
+                    resultado.add(parque);
+                }
+            }
+        return resultado;
     }
     
     /* Nos parametros temos dois: 
@@ -79,38 +98,20 @@ public class ParqueDao extends AbstractDAO implements Serializable{
                                 (Observação: o novo objeto tem que ter um campo em comum com o antigo)
             placaAnterior -> Seria o campo em comum ultilizado para localizar e substituir
     */
-    public boolean altera(Parque parqueAlterado, int parqueIdentificador) {
-
+    public boolean alterarParque(Parque parqueSelecionado, int parqueIdentificador) {
         try {
-            if (parqueAlterado.getId() == parqueIdentificador) {
-                // Lista temporaria
-                ArrayList<Parque> listaTemp = new ArrayList<Parque>();
-
-                // Loop para criar lista temporaria
-                for (Iterator<Parque> it = parques.iterator(); it.hasNext();) {
-                    Parque parque = it.next();
-                    if (parqueAlterado.getId() != parqueIdentificador) {
-                        listaTemp.add(parque);
-                    } else {
-                        listaTemp.add(parqueAlterado);
-                    }
-                }
-
-                // Zerar lista 
-                parques.removeAll(parques);
-                
-                // Preencher lista com novos dados
-                parques.addAll(listaTemp);
-                
-                // Sobreescrever dados antigos
-                grava();
-
+        // Localiza e substitui o parque com o identificador correto
+        for (int i = 0; i < parques.size(); i++) {
+            if (parques.get(i).getId() == parqueIdentificador) {
+                parques.set(i, parqueSelecionado); // Substitui o parque existente pelo atualizado
+                grava(); // Grava a lista atualizada
                 return true;
-            }else{                
-                return false;
             }
-        } catch (Exception e) {
-            return false;
         }
+        return false; // Retorna false se o parque com o identificador não foi encontrado
+    } catch (Exception e) {
+        e.printStackTrace(); // Imprime a pilha de erro para facilitar a depuração
+        return false;
     }
+}
 }
