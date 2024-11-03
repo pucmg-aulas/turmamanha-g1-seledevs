@@ -4,6 +4,8 @@ import br.com.javaParking.model.tiposVaga.ComumModel;
 import br.com.javaParking.model.tiposVaga.IdosoModel;
 import br.com.javaParking.model.tiposVaga.PcdModel;
 import br.com.javaParking.model.tiposVaga.VipModel;
+import br.com.javaParking.model.Configuracao;
+import br.com.javaParking.dao.ConfiguracaoDao;
 import br.com.javaParking.dao.VagaDao;
 import br.com.javaParking.util.Util;
 import java.io.Serializable;
@@ -77,6 +79,14 @@ public class Parque implements Serializable{
         this.nomeParque = nomeParque;
     }
     
+    public void setNumeroVagas(int numeroVagas) {
+        this.numeroVagas = numeroVagas;
+    }
+    
+    public void setVagasPorFileira(int vagasPorFileira) {
+        this.vagasPorFileira = vagasPorFileira;
+    }
+    
     /**
      * Metodos de ação 
      */     
@@ -142,5 +152,7 @@ public class Parque implements Serializable{
     private List<Vaga> listarVagas() {
         return this.vagas;
     }
+
+    
 
 }
