@@ -1,14 +1,14 @@
 package br.com.javaParking.dao;
 
-import br.com.javaParking.model.ConfiguracaoModel;
+import br.com.javaParking.model.Configuracao;
 import br.com.javaParking.util.Util;
 
 import java.io.*;
 
-public class ConfiguracaoDAO {
+public class ConfiguracaoDao {
     public static final String CAMINHOCONFIGURACAO = Util.CAMINHOPADRAO + "configuracao.txt";
 
-    public void salvarConfiguracao(ConfiguracaoModel configuracao) {
+    public void salvarConfiguracao(Configuracao configuracao) {
         File registro = new File(CAMINHOCONFIGURACAO);
 
         try {
@@ -34,9 +34,9 @@ public class ConfiguracaoDAO {
         }
     }
 
-    public ConfiguracaoModel carregarConfiguracao() {
+    public Configuracao carregarConfiguracao() {
         File registro = new File(CAMINHOCONFIGURACAO);
-        ConfiguracaoModel configuracao = null;
+        Configuracao configuracao = null;
 
         if (registro.exists()) {
             try (BufferedReader reader = new BufferedReader(new FileReader(registro))) {
@@ -49,7 +49,7 @@ public class ConfiguracaoDAO {
                     int intervaloCobranca = Integer.parseInt(dados[3]);
                     double valorMaximoDiaria = Double.parseDouble(dados[4]);
 
-                    configuracao = new ConfiguracaoModel(porcentagemIdosos, porcentagemPCD,
+                    configuracao = new Configuracao(porcentagemIdosos, porcentagemPCD,
                                                          porcentagemVIP, intervaloCobranca,
                                                          valorMaximoDiaria);
                 }
