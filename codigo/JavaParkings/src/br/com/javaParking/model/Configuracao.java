@@ -1,12 +1,13 @@
 package br.com.javaParking.model;
 
 import java.io.Serializable;
+import br.com.javaParking.model.Parque;
 
 /**
  * Configuração do sistema de estacionamento.
  * Contém as porcentagens mínimas e valores de cobrança.
  */
-public class ConfiguracaoModel implements Serializable {
+public class Configuracao implements Serializable {
     private static final long serialVersionUID = 1L; 
 
     public static final double PORCENTAGEMMINIMAIDOSOS = 0.10; 
@@ -19,7 +20,7 @@ public class ConfiguracaoModel implements Serializable {
     private int intervaloCobrancaMinutos;
     private double valorMaximoDiaria;
 
-    public ConfiguracaoModel(double porcentagemMinimaIdosos, double porcentagemMinimaPCD,
+    public Configuracao(double porcentagemMinimaIdosos, double porcentagemMinimaPCD,
                              double porcentagemMinimaVIP, int intervaloCobrancaMinutos,
                              double valorMaximoDiaria) {
         this.porcentagemMinimaIdosos = porcentagemMinimaIdosos;
