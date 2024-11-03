@@ -4,8 +4,8 @@
  */
 package br.com.javaParking.view.xulambs;
 
-import br.com.javaParking.dao.ConfiguracaoDAO;
-import br.com.javaParking.model.ConfiguracaoModel;
+import br.com.javaParking.dao.ConfiguracaoDao;
+import br.com.javaParking.model.Configuracao;
 import javax.swing.JOptionPane;
 
 /**
@@ -14,14 +14,14 @@ import javax.swing.JOptionPane;
  */
 public class ConfiguracaoView extends javax.swing.JFrame {
 
-    private ConfiguracaoDAO configuracaoDAO;
+    private ConfiguracaoDao configuracaoDao;
 
     /**
      * Creates new form ConfiguracaoView
      */
     public ConfiguracaoView() {
         initComponents();
-        configuracaoDAO = new ConfiguracaoDAO();
+        configuracaoDao = new ConfiguracaoDao();
 
     }
 
@@ -199,8 +199,8 @@ public class ConfiguracaoView extends javax.swing.JFrame {
             double porcentagemPCD = Double.parseDouble(pcdText);
             double porcentagemVIP = Double.parseDouble(vipText);
 
-            ConfiguracaoModel configuracao = new ConfiguracaoModel(porcentagemIdosos, porcentagemPCD, porcentagemVIP, 15, 100.0);
-            configuracaoDAO.salvarConfiguracao(configuracao);
+            Configuracao configuracao = new Configuracao(porcentagemIdosos, porcentagemPCD, porcentagemVIP, 15, 100.0);
+            configuracaoDao.salvarConfiguracao(configuracao);
             JOptionPane.showMessageDialog(this, "Configurações salvas com sucesso!", "Sucesso", JOptionPane.INFORMATION_MESSAGE);
         } catch (IllegalArgumentException e) {
             JOptionPane.showMessageDialog(this, e.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
