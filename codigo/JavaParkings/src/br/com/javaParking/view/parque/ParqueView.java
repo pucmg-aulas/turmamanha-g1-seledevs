@@ -11,6 +11,7 @@ import br.com.javaParking.dao.ParqueDao;
 import javax.swing.JTable;
 import javax.swing.JButton;
 import javax.swing.JTextField;
+import javax.swing.JToggleButton;
 import javax.swing.table.DefaultTableModel;
 
 public class ParqueView extends javax.swing.JFrame {
@@ -36,6 +37,10 @@ public class ParqueView extends javax.swing.JFrame {
         return txtVagasPorFileira;
     }
     
+    public JTextField getTxtPesquisarParque() {
+        return txtPesquisarParque;
+    }
+    
     public JButton getBtnAdicionar(){
         return btnAdicionar;
     }  
@@ -44,6 +49,13 @@ public class ParqueView extends javax.swing.JFrame {
         return btnExcluir; // Retorne a referência ao botão de exclusão
     }
     
+    public JButton getBtnAlterar() {
+        return btnAlterar;
+    }
+    
+    public JToggleButton getBtnAtualizar() {
+        return btnAtualizar;
+    }
     
     /**
      * This method is called from within the constructor to initialize the form.
@@ -70,10 +82,10 @@ public class ParqueView extends javax.swing.JFrame {
         btnAdicionar = new javax.swing.JButton();
         btnAlterar = new javax.swing.JButton();
         btnExcluir = new javax.swing.JButton();
-        btnHistorico = new javax.swing.JToggleButton();
+        btnAtualizar = new javax.swing.JToggleButton();
         jPanel8 = new javax.swing.JPanel();
         jScrollPane3 = new javax.swing.JScrollPane();
-        tbVagas = new javax.swing.JTable();
+        tbVagasDoParque = new javax.swing.JTable();
         btnVoltar = new javax.swing.JButton();
         jPanel15 = new javax.swing.JPanel();
         txtnomeParque = new javax.swing.JTextField();
@@ -90,7 +102,7 @@ public class ParqueView extends javax.swing.JFrame {
         jPanel9.setBackground(java.awt.SystemColor.control);
         jPanel9.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createMatteBorder(1, 0, 0, 0, new java.awt.Color(153, 153, 153)), "Parques", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.TOP, new java.awt.Font("Arial", 3, 12))); // NOI18N
 
-        tbVagas = new javax.swing.JTable(){
+        tbVagasDoParque = new javax.swing.JTable(){
             public boolean isCellEditable(int rowIndex, int colIndex){
                 return false;
             }
@@ -250,26 +262,26 @@ public class ParqueView extends javax.swing.JFrame {
             }
         });
 
-        btnHistorico.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/javaParking/assets/img/iconeAtualizar-00.png"))); // NOI18N
-        btnHistorico.setToolTipText("");
-        btnHistorico.setBorderPainted(false);
-        btnHistorico.setContentAreaFilled(false);
-        btnHistorico.addActionListener(new java.awt.event.ActionListener() {
+        btnAtualizar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/javaParking/assets/img/iconeAtualizar-00.png"))); // NOI18N
+        btnAtualizar.setToolTipText("");
+        btnAtualizar.setBorderPainted(false);
+        btnAtualizar.setContentAreaFilled(false);
+        btnAtualizar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnHistoricoActionPerformed(evt);
+                btnAtualizarActionPerformed(evt);
             }
         });
 
         jPanel8.setBackground(java.awt.SystemColor.control);
         jPanel8.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createMatteBorder(1, 0, 0, 0, new java.awt.Color(153, 153, 153)), "Vagas do Parque", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.TOP, new java.awt.Font("Arial", 3, 12))); // NOI18N
 
-        tbVagas = new javax.swing.JTable(){
+        tbVagasDoParque = new javax.swing.JTable(){
             public boolean isCellEditable(int rowIndex, int colIndex){
                 return false;
             }
         };
-        tbVagas.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
-        tbVagas.setModel(new javax.swing.table.DefaultTableModel(
+        tbVagasDoParque.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
+        tbVagasDoParque.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {},
                 {},
@@ -280,13 +292,13 @@ public class ParqueView extends javax.swing.JFrame {
 
             }
         ));
-        tbVagas.setFocusable(false);
-        tbVagas.addMouseListener(new java.awt.event.MouseAdapter() {
+        tbVagasDoParque.setFocusable(false);
+        tbVagasDoParque.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                tbVagasMouseClicked(evt);
+                tbVagasDoParqueMouseClicked(evt);
             }
         });
-        jScrollPane3.setViewportView(tbVagas);
+        jScrollPane3.setViewportView(tbVagasDoParque);
 
         javax.swing.GroupLayout jPanel8Layout = new javax.swing.GroupLayout(jPanel8);
         jPanel8.setLayout(jPanel8Layout);
@@ -353,7 +365,7 @@ public class ParqueView extends javax.swing.JFrame {
                         .addGap(8, 8, 8)
                         .addComponent(btnExcluir, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(8, 8, 8)
-                        .addComponent(btnHistorico)
+                        .addComponent(btnAtualizar)
                         .addGap(0, 54, Short.MAX_VALUE))
                     .addGroup(jPanel10Layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -383,7 +395,7 @@ public class ParqueView extends javax.swing.JFrame {
                 .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(btnAdicionar, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                     .addComponent(btnAlterar, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnHistorico, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnAtualizar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btnExcluir, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)))
             .addComponent(pnClientes2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
@@ -428,14 +440,14 @@ public class ParqueView extends javax.swing.JFrame {
 
     }//GEN-LAST:event_btnExcluirActionPerformed
 
-    private void btnHistoricoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHistoricoActionPerformed
+    private void btnAtualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAtualizarActionPerformed
         // TODO add your handling code here:
 
-    }//GEN-LAST:event_btnHistoricoActionPerformed
+    }//GEN-LAST:event_btnAtualizarActionPerformed
 
-    private void tbVagasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbVagasMouseClicked
+    private void tbVagasDoParqueMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbVagasDoParqueMouseClicked
         // TODO add your handling code here:
-    }//GEN-LAST:event_tbVagasMouseClicked
+    }//GEN-LAST:event_tbVagasDoParqueMouseClicked
 
     private void txtPesquisarParqueKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPesquisarParqueKeyReleased
         // TODO add your handling code here:
@@ -499,8 +511,8 @@ public class ParqueView extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAdicionar;
     private javax.swing.JButton btnAlterar;
+    private javax.swing.JToggleButton btnAtualizar;
     private javax.swing.JButton btnExcluir;
-    private javax.swing.JToggleButton btnHistorico;
     private javax.swing.JButton btnVoltar;
     private javax.swing.JPanel jPanel10;
     private javax.swing.JPanel jPanel14;
@@ -513,7 +525,7 @@ public class ParqueView extends javax.swing.JFrame {
     private javax.swing.JLabel lblPesquisar1;
     private javax.swing.JPanel pnClientes2;
     private javax.swing.JTable tbParques;
-    private javax.swing.JTable tbVagas;
+    private javax.swing.JTable tbVagasDoParque;
     private javax.swing.JTextField txtPesquisarParque;
     private javax.swing.JTextField txtVagasPorFileira;
     private javax.swing.JTextField txtnomeParque;
