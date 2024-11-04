@@ -45,29 +45,11 @@ public class ParqueController {
             AlterarParque();
         });
         
-        // EVENTO PARA CAPTURAR O CLICK DO MOUSE NA LINHA E PEGAR O NOME DO PARQUE SELECIONADO NA TABELA:
-        this.view.getTbParques().addMouseListener(new MouseAdapter() {
-            @Override
-            public void mouseClicked(MouseEvent e) {
-                int linha = view.getTbParques().getSelectedRow();
-                if (linha != -1) {
-                    String nomeParque = (String) view.getTbParques().getValueAt(linha, 0);
-                    parqueSelecionado = parques.buscarPorNome(nomeParque);
-
-                    if (parqueSelecionado != null) {
-                        // Preenche os campos com os dados do parque selecionado
-                        view.getTxtNomeParque().setText(parqueSelecionado.getNomeParque());
-                        view.getTxtNumeroVagas().setText(String.valueOf(parqueSelecionado.getNumeroVagas()));
-                        view.getTxtVagasPorFileira().setText(String.valueOf(parqueSelecionado.getVagasPorFileira()));
-                    }
-                }
-            }
-        });
-        
         // Evento para capturar o click do mouse na linha e carregar as vagas do parque selecionado
         this.view.getTbParques().addMouseListener(new MouseAdapter() {
             @Override
-            public void mouseClicked(MouseEvent e) {
+            public void mouseClicked(MouseEvent e) {      
+                limparVagasParque();                
                 int linha = view.getTbParques().getSelectedRow();
                 if (linha != -1) {
                     String nomeParque = (String) view.getTbParques().getValueAt(linha, 0);
@@ -82,13 +64,16 @@ public class ParqueController {
                         // Gera as vagas do parque e exibe na tabela
                         parqueSelecionado.montarVagas(); // Gera as vagas
                         carregarVagasDoParque(parqueSelecionado.listarVagas());
+                        editMode();
                     }
                 }
             }
         });
         
         this.view.getBtnAtualizar().addActionListener((e) -> {
-            AtualizarTabela();
+            limparCampos();
+            limparVagasParque();
+            createMode();
         });
         
         // Adiciona o DocumentListener para a pesquisa em tempo real
@@ -110,8 +95,31 @@ public class ParqueController {
         });
         
         carregaTabela();
+        createMode();
         this.view.setVisible(true);
     
+    }
+    
+    
+    private void limparCampos(){
+        this.view.getTxtNomeParque().setText("");
+        this.view.getTxtNumeroVagas().setText("");
+        this.view.getTxtPesquisarParque().setText("");
+        this.view.getTxtVagasPorFileira().setText("");
+    }
+    
+    private void createMode(){
+        this.view.getBtnAdicionar().setEnabled(true);
+        this.view.getBtnAlterar().setEnabled(false);
+        this.view.getBtnAtualizar().setEnabled(true);
+        this.view.getBtnExcluir().setEnabled(false);
+    }
+    
+    private void editMode(){
+        this.view.getBtnAdicionar().setEnabled(false);
+        this.view.getBtnAlterar().setEnabled(true);
+        this.view.getBtnAtualizar().setEnabled(true);
+        this.view.getBtnExcluir().setEnabled(true);
     }
     
     private void carregaTabela(){
@@ -139,6 +147,11 @@ public class ParqueController {
         view.getTbVagasDoParque().setModel(tm); // Define o modelo para a tabela
     }
     
+    public void limparVagasParque() {
+        DefaultTableModel tm = new DefaultTableModel(0, 0);
+        view.getTbVagasDoParque().setModel(tm); // Define o modelo para a tabela
+    }
+    
     public void AddParque() {
         try {
             carregaTabela();
@@ -157,7 +170,8 @@ public class ParqueController {
                 JOptionPane.showMessageDialog(view, "<html> <strong>Parque " + nomeParque + " salvo com sucesso! </strong> </html>");
                 
                 // Limpa os campos após adicionar o parque
-                limparTela();
+                limparCampos();
+                createMode();
             } else {
                 JOptionPane.showMessageDialog(view, "Erro ao salvar o parque!", "Erro", JOptionPane.ERROR_MESSAGE);
             }            
@@ -192,6 +206,9 @@ public class ParqueController {
                 parques.excluirParque(parque); // Exclui o parque do DAO
                 JOptionPane.showMessageDialog(view, "Parque" + nomeParque + " excluído com sucesso!");
                 carregaTabela(); // Atualiza a tabela"
+                limparCampos();
+                createMode();
+                 limparVagasParque();
             } else {
                 JOptionPane.showMessageDialog(view, "Erro ao excluir o parque.", "Erro", JOptionPane.ERROR_MESSAGE);
             }
@@ -219,7 +236,9 @@ public class ParqueController {
                 JOptionPane.showMessageDialog(view, "Parque " + parqueSelecionado.getNomeParque() + " editado com sucesso!");
 
                 // Limpa a seleção e os campos após a alteração
-                limparTela();
+                limparCampos();
+                createMode();
+                 limparVagasParque();
                 parqueSelecionado = null;
 
                 // Atualiza a tabela
@@ -254,10 +273,5 @@ public class ParqueController {
     view.getTbParques().setModel(tm);
     }
     
-    public void limparTela() {
-        view.getTxtNomeParque().setText("");
-        view.getTxtNumeroVagas().setText("");
-        view.getTxtVagasPorFileira().setText("");
-    }
 }
 

@@ -2,10 +2,10 @@ package br.com.javaParking.dao;
 
 import br.com.javaParking.model.Parque;
 import br.com.javaParking.model.Vaga;
-import br.com.javaParking.model.tiposVaga.ComumModel;
-import br.com.javaParking.model.tiposVaga.IdosoModel;
-import br.com.javaParking.model.tiposVaga.PcdModel;
-import br.com.javaParking.model.tiposVaga.VipModel;
+import br.com.javaParking.model.tiposVaga.Comum;
+import br.com.javaParking.model.tiposVaga.Idoso;
+import br.com.javaParking.model.tiposVaga.PCD;
+import br.com.javaParking.model.tiposVaga.VIP;
 import br.com.javaParking.util.Util;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -39,13 +39,13 @@ public class VagaDao {
             }
 
             try (BufferedWriter w = new BufferedWriter(new FileWriter(registro, true))) {
-                if (vaga instanceof IdosoModel) {
+                if (vaga instanceof Idoso) {
                     w.write(vaga.getParque() + "&" + vaga.getIdentificador() + "&" + vaga.isOcupada() + "&" + "Idoso" + "&" + "\n");
-                } else if (vaga instanceof PcdModel) {
+                } else if (vaga instanceof PCD) {
                     w.write(vaga.getParque() + "&" + vaga.getIdentificador() + "&" + vaga.isOcupada() + "&" + "Pcd" + "&" + "\n");
-                } else if (vaga instanceof VipModel) {
+                } else if (vaga instanceof VIP) {
                     w.write(vaga.getParque() + "&" + vaga.getIdentificador() + "&" + vaga.isOcupada() + "&" + "Vip" + "&" + "\n");
-                } else if (vaga instanceof ComumModel) {
+                } else if (vaga instanceof Comum) {
                     w.write(vaga.getParque() + "&" + vaga.getIdentificador() + "&" + vaga.isOcupada() + "&" + "Comum" + "&" + "\n");
                 }
 
@@ -85,13 +85,13 @@ public class VagaDao {
                     if (String.valueOf(parque.getId()).equals(vagaAtual.toString().split("&")[0].replace("\n", ""))) {
 
                         if (tipo.equals("Idoso")) {
-                            vaga = new IdosoModel(parque, identificador,Boolean.parseBoolean(ocupada));
+                            vaga = new Idoso(parque, identificador,Boolean.parseBoolean(ocupada));
                         } else if (tipo.equals("Pcd")) {
-                            vaga = new PcdModel(parque, identificador,Boolean.parseBoolean(ocupada));
+                            vaga = new PCD(parque, identificador,Boolean.parseBoolean(ocupada));
                         } else if (tipo.equals("Vip")) {
-                            vaga = new VipModel(parque, identificador,Boolean.parseBoolean(ocupada));
+                            vaga = new VIP(parque, identificador,Boolean.parseBoolean(ocupada));
                         } else if (tipo.equals("Comum")) {
-                            vaga = new ComumModel(parque, identificador,Boolean.parseBoolean(ocupada));
+                            vaga = new Comum(parque, identificador,Boolean.parseBoolean(ocupada));
                         }
                         
                         vagas.add(vaga); 

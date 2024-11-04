@@ -1,9 +1,9 @@
 package br.com.javaParking.model;
 
-import br.com.javaParking.model.tiposVaga.ComumModel;
-import br.com.javaParking.model.tiposVaga.IdosoModel;
-import br.com.javaParking.model.tiposVaga.PcdModel;
-import br.com.javaParking.model.tiposVaga.VipModel;
+import br.com.javaParking.model.tiposVaga.Comum;
+import br.com.javaParking.model.tiposVaga.Idoso;
+import br.com.javaParking.model.tiposVaga.PCD;
+import br.com.javaParking.model.tiposVaga.VIP;
 import br.com.javaParking.model.Configuracao;
 import br.com.javaParking.dao.ConfiguracaoDao;
 import br.com.javaParking.dao.VagaDao;
@@ -105,6 +105,8 @@ public class Parque implements Serializable{
         int nPCD = (int) Math.floor(this.numeroVagas * Configuracao.PORCENTAGEMMINIMAPCD);
         int nVIP = (int) Math.floor(this.numeroVagas * Configuracao.PORCENTAGEMMINIMAVIP); 
         
+        this.vagas.removeAll(this.vagas);
+        
         for(int i = 0; i < Util.alfabeto().size(); i++){
             for(int j = 0; j < this.vagasPorFileira; j++){
                 
@@ -112,20 +114,20 @@ public class Parque implements Serializable{
                     return;
                 
                 if(nIdoso != 0){
-                    this.vagas.add(new IdosoModel(this,Util.alfabeto().get(i).toString() + j,false)); 
-                    VagaDao.gravar(new IdosoModel(this,Util.alfabeto().get(i).toString() + j,false));
+                    this.vagas.add(new Idoso(this,Util.alfabeto().get(i).toString() + j,false)); 
+                    VagaDao.gravar(new Idoso(this,Util.alfabeto().get(i).toString() + j,false));
                     nIdoso--;
                 } else if(nPCD != 0) {
-                    this.vagas.add(new PcdModel(this ,Util.alfabeto().get(i).toString() + j,false)); 
-                    VagaDao.gravar(new PcdModel(this,Util.alfabeto().get(i).toString() + j,false));
+                    this.vagas.add(new PCD(this ,Util.alfabeto().get(i).toString() + j,false)); 
+                    VagaDao.gravar(new PCD(this,Util.alfabeto().get(i).toString() + j,false));
                     nPCD--;
                 } else if(nVIP != 0) {
-                    this.vagas.add(new VipModel(this,Util.alfabeto().get(i).toString() + j,false));
-                    VagaDao.gravar(new VipModel(this,Util.alfabeto().get(i).toString() + j,false));
+                    this.vagas.add(new VIP(this,Util.alfabeto().get(i).toString() + j,false));
+                    VagaDao.gravar(new VIP(this,Util.alfabeto().get(i).toString() + j,false));
                     nVIP--;
                 } else {
-                    this.vagas.add(new ComumModel(this,Util.alfabeto().get(i).toString() + j,false)); 
-                    VagaDao.gravar(new ComumModel(this,Util.alfabeto().get(i).toString() + j,false));
+                    this.vagas.add(new Comum(this,Util.alfabeto().get(i).toString() + j,false)); 
+                    VagaDao.gravar(new Comum(this,Util.alfabeto().get(i).toString() + j,false));
                 }                
                 
                 n++;

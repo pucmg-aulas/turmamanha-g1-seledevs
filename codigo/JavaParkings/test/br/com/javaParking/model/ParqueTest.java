@@ -1,9 +1,9 @@
 package br.com.javaParking.model;
 
-import br.com.javaParking.model.tiposVaga.ComumModel;
-import br.com.javaParking.model.tiposVaga.IdosoModel;
-import br.com.javaParking.model.tiposVaga.PcdModel;
-import br.com.javaParking.model.tiposVaga.VipModel;
+import br.com.javaParking.model.tiposVaga.Comum;
+import br.com.javaParking.model.tiposVaga.Idoso;
+import br.com.javaParking.model.tiposVaga.PCD;
+import br.com.javaParking.model.tiposVaga.VIP;
 import java.util.List;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
