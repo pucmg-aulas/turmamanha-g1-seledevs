@@ -4,6 +4,7 @@
  */
 package br.com.javaParking;
 
+import br.com.javaParking.controller.ClienteController;
 import br.com.javaParking.controller.ParqueController;
 
 /**
@@ -14,7 +15,7 @@ import br.com.javaParking.controller.ParqueController;
 public class Main {
 
     public static void main(String[] args) {
-        new ParqueController();
+        new ClienteController();
     }
 
 }

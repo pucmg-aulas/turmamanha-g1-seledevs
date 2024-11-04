@@ -26,6 +26,9 @@ public class Cliente implements Serializable{
     public String getNome() {
         return this.nome;
     }
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
 
     public String getId() {
         return this.id;

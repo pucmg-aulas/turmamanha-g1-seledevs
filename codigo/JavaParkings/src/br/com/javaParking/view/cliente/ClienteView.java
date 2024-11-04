@@ -9,6 +9,7 @@ import br.com.javaParking.view.xulambs.ArrecadacaoView;
 import javax.swing.JButton;
 import javax.swing.JTable;
 import javax.swing.JTextField;
+import javax.swing.JToggleButton;
 
 /**
  *
@@ -27,7 +28,7 @@ public class ClienteView extends javax.swing.JFrame {
         return txtNome;
     }
     public JTextField getTxtCPF(){
-        return txtNome;
+        return txtCPF;
     }
     public JTextField getTxtPesquisar(){
         return txtPesquisar;
@@ -41,6 +42,9 @@ public class ClienteView extends javax.swing.JFrame {
         return tbRanking;
     }
     
+    public JButton getBtnVoltar(){
+        return btnVoltar;
+    }
     public JButton getBtnAlterar(){
         return btnAlterar;
     }
@@ -49,6 +53,12 @@ public class ClienteView extends javax.swing.JFrame {
     }
     public JButton getBtnAdicionar(){
         return btnAdicionar;
+    }
+    public JToggleButton getBtnVeiculo(){
+        return btnAtualizar;
+    }
+    public JToggleButton getBtnHistorico(){
+        return btnHistorico;
     }
     
     /**

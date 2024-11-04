@@ -60,7 +60,26 @@ public class ClienteDao extends AbstractDAO implements Serializable {
         }
         return null;
     }
+    
+    public Cliente buscarPorNome(String nome) {
+        for (Cliente cliente : clientes) {
+            if (cliente.getNome().equals(nome)) {
+                return cliente;
+            }
+        }
+        return null;
+    }
 
+    public List<Cliente> buscarPorNomeParcial(String nomeParcial) {
+        List<Cliente> resultado = new ArrayList<>();
+            for (Cliente cliente : clientes) { // Supondo que listaDeParques é a lista de todos os parques
+                if (cliente.getNome().toLowerCase().contains(nomeParcial.toLowerCase())) {
+                    resultado.add(cliente);
+                }
+            }
+        return resultado;
+    }
+    
     public boolean alterarCliente(Cliente clienteExistente, String cpfAnterior) {
         try {
             if (clienteExistente.getId().equals(cpfAnterior)) {
