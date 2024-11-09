@@ -18,12 +18,12 @@ import static org.junit.jupiter.api.Assertions.*;
 
 public class ConfiguracaoDaoTest {
     
-    private ConfiguracaoDao configuracaoDao;
-    private static final String CAMINHOCONFIGURACAO = ConfiguracaoDao.CAMINHOCONFIGURACAO;
+    private ConfiguracaoDAO configuracaoDao;
+    private static final String CAMINHOCONFIGURACAO = ConfiguracaoDAO.CAMINHOCONFIGURACAO;
     
     @BeforeEach
     public void setUp() {
-        configuracaoDao = new ConfiguracaoDao();
+        configuracaoDao = new ConfiguracaoDAO();
     }
     
     @AfterEach

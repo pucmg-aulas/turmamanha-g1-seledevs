@@ -4,7 +4,7 @@
  */
 package br.com.javaParking.controller;
 
-import br.com.javaParking.dao.ClienteDao;
+import br.com.javaParking.dao.ClienteDAO;
 import br.com.javaParking.model.Cliente;
 import br.com.javaParking.view.cliente.ClienteView;
 import java.util.List;
@@ -20,11 +20,11 @@ import javax.swing.table.DefaultTableModel;
 public class ClienteController {
 
     private ClienteView view;
-    private ClienteDao clientes;
+    private ClienteDAO clientes;
     private Cliente clienteSelecionado;
 
     public ClienteController() {
-        this.clientes = ClienteDao.getInstance();
+        this.clientes = ClienteDAO.getInstance();
         this.view = new ClienteView();
 
         this.view.getBtnAlterar().setBorderPainted(false);

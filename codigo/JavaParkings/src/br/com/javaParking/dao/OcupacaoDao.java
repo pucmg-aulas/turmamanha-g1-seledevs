@@ -10,7 +10,7 @@ import java.io.FileWriter;
 import java.util.ArrayList;
 import java.util.List;
 
-public class OcupacaoDao {
+public class OcupacaoDAO {
 
     public final static String CAMINHOOCUPACAO;
 

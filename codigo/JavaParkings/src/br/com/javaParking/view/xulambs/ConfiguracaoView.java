@@ -4,26 +4,53 @@
  */
 package br.com.javaParking.view.xulambs;
 
-import br.com.javaParking.dao.ConfiguracaoDao;
+import br.com.javaParking.assets.swing.botaoArredondado;
+import br.com.javaParking.dao.ConfiguracaoDAO;
 import br.com.javaParking.model.Configuracao;
 import javax.swing.JOptionPane;
+import javax.swing.JTextField;
 
 /**
  *
  * @author viniciusgomesrodrigues
  */
 public class ConfiguracaoView extends javax.swing.JFrame {
-
-    private ConfiguracaoDao configuracaoDao;
-
     /**
      * Creates new form ConfiguracaoView
      */
     public ConfiguracaoView() {
         initComponents();
-        configuracaoDao = new ConfiguracaoDao();
-
     }
+
+    public botaoArredondado getBtnSalvar() {
+        return btnSalvar;
+    }
+
+    public JTextField getTxtIntervaloEmMinutos() {
+        return txtIntervaloEmMinutos;
+    }
+
+    public JTextField getTxtPeriodoDeTempo() {
+        return txtPeriodoDeTempo;
+    }
+
+    public JTextField getTxtPorcentagemIdoso() {
+        return txtPorcentagemIdoso;
+    }
+
+    public JTextField getTxtPorcentagemPCD() {
+        return txtPorcentagemPCD;
+    }
+
+    public JTextField getTxtPorcentagemVIP() {
+        return txtPorcentagemVIP;
+    }
+
+    public JTextField getTxtValorMaximoDiaria() {
+        return txtValorMaximoDiaria;
+    }
+    
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -262,27 +289,7 @@ public class ConfiguracaoView extends javax.swing.JFrame {
     }//GEN-LAST:event_txtPorcentagemIdosoActionPerformed
 
     private void btnSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarActionPerformed
-        String idosoText = txtPeriodoDeTempo.getText();
-        String pcdText = txtIntervaloEmMinutos.getText();
-        String vipText = txtPorcentagemIdoso.getText();
-
-        // Verificação se os textos são números válidos
-        if (!idosoText.matches("\\d+(\\.\\d+)?") || !pcdText.matches("\\d+(\\.\\d+)?") || !vipText.matches("\\d+(\\.\\d+)?")) {
-            JOptionPane.showMessageDialog(this, "Porcentagens devem ser números válidos (use ponto para decimais).", "Erro", JOptionPane.ERROR_MESSAGE);
-            return; // Sai do método se a validação falhar
-        }
-
-        try {
-            double porcentagemIdosos = Double.parseDouble(idosoText);
-            double porcentagemPCD = Double.parseDouble(pcdText);
-            double porcentagemVIP = Double.parseDouble(vipText);
-
-            Configuracao configuracao = new Configuracao(porcentagemIdosos, porcentagemPCD, porcentagemVIP, 15, 100.0);
-            configuracaoDao.salvarConfiguracao(configuracao);
-            JOptionPane.showMessageDialog(this, "Configurações salvas com sucesso!", "Sucesso", JOptionPane.INFORMATION_MESSAGE);
-        } catch (IllegalArgumentException e) {
-            JOptionPane.showMessageDialog(this, e.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
-        }
+        
     }//GEN-LAST:event_btnSalvarActionPerformed
 
     private void txtValorMaximoDiariaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtValorMaximoDiariaActionPerformed

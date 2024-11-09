@@ -7,7 +7,7 @@ package br.com.javaParking.view.parque;
 import br.com.javaParking.view.xulambs.ArrecadacaoView;
 import br.com.javaParking.controller.ParqueController;
 import br.com.javaParking.model.Parque;
-import br.com.javaParking.dao.ParqueDao;
+import br.com.javaParking.dao.ParqueDAO;
 import javax.swing.JTable;
 import javax.swing.JButton;
 import javax.swing.JTextField;

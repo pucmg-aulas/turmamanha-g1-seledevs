@@ -7,26 +7,26 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-public class VeiculoDao extends AbstractDAO implements Serializable {
+public class VeiculoDAO extends ConexaoDAO implements Serializable {
 
     private List<Veiculo> veiculos;
     // Atributo da própria classe, estático, para implementar o Singleton
-    private static VeiculoDao instance;
+    private static VeiculoDAO instance;
 
     //Endereço do arquivo serializado que contém a coleção de veiculos
     private final String localArquivo = Util.CAMINHOPADRAO + "Veiculos.txt";
 
     //Construtor privado, pois não podemos permitir mais de uma instância desta classe
     //que controla a coleção de carros do sistema (Singleton)
-    private VeiculoDao() {
+    private VeiculoDAO() {
         this.veiculos = new ArrayList<>();
         carregaVeiculos();
     }
 
     //Método para recuperar a única instância de veiculos
-    public static VeiculoDao getInstance() {
+    public static VeiculoDAO getInstance() {
         if (instance == null) {
-            instance = new VeiculoDao();
+            instance = new VeiculoDAO();
         }
         return instance;
     }

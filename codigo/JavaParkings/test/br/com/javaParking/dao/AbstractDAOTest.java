@@ -21,13 +21,13 @@ import static org.junit.jupiter.api.Assertions.*;
 
 public class AbstractDAOTest {
 
-    private AbstractDAO abstractDAO;
+    private ConexaoDAO abstractDAO;
     private final String filePath = "test.dat"; // Caminho para o arquivo de teste
     private List<String> testList;
 
     @BeforeEach
     public void setUp() {
-        abstractDAO = new AbstractDAO();
+        abstractDAO = new ConexaoDAO();
         testList = new ArrayList<>();
         testList.add("Item 1");
         testList.add("Item 2");

@@ -7,25 +7,25 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-public class ClienteDao extends AbstractDAO implements Serializable {
+public class ClienteDAO extends ConexaoDAO implements Serializable {
 
     private List<Cliente> clientes;
     // Atributo da própria classe, estático, para implementar o Singleton
-    private static ClienteDao instance;
+    private static ClienteDAO instance;
 
     // Endereço do arquivo serializado que contém a coleção de clientes
     private final String localArquivo = Util.CAMINHOPADRAO + "Clientes.dat";
 
     // Construtor privado para implementar o padrão Singleton
-    private ClienteDao() {
+    private ClienteDAO() {
         this.clientes = new ArrayList<>();
         carregaClientes();
     }
 
     // Método para recuperar a única instância de clientes
-    public static ClienteDao getInstance() {
+    public static ClienteDAO getInstance() {
         if (instance == null) {
-            instance = new ClienteDao();
+            instance = new ClienteDAO();
         }
         return instance;
     }

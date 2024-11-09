@@ -5,7 +5,9 @@
 package br.com.javaParking;
 
 import br.com.javaParking.controller.ClienteController;
+import br.com.javaParking.controller.ConfiguracaoController;
 import br.com.javaParking.controller.ParqueController;
+import br.com.javaParking.dao.ConexaoDAO;
 
 /**
  *
@@ -15,7 +17,10 @@ import br.com.javaParking.controller.ParqueController;
 public class Main {
 
     public static void main(String[] args) {
-        new ClienteController();
+        ConexaoDAO.Conexao();
+        ConexaoDAO.Tabelas();
+        
+        new ConfiguracaoController();
     }
 
 }

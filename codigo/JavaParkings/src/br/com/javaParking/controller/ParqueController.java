@@ -4,7 +4,7 @@
  */
 package br.com.javaParking.controller;
 
-import br.com.javaParking.dao.ParqueDao;
+import br.com.javaParking.dao.ParqueDAO;
 import br.com.javaParking.model.Parque;
 import br.com.javaParking.view.parque.ParqueView;
 import br.com.javaParking.model.Vaga;
@@ -25,12 +25,12 @@ import javax.swing.event.DocumentListener;
 public class ParqueController {
     
     private ParqueView view;    
-    private ParqueDao parques;
+    private ParqueDAO parques;
     private Parque parqueSelecionado;
     
     public ParqueController() {   
         
-        this.parques = ParqueDao.getInstance();
+        this.parques = ParqueDAO.getInstance();
         this.view = new ParqueView();
         carregaTabela();
         

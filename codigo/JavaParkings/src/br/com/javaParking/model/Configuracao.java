@@ -2,36 +2,48 @@ package br.com.javaParking.model;
 
 import java.io.Serializable;
 import br.com.javaParking.model.Parque;
+import javax.swing.JOptionPane;
 
 /**
- * Configuração do sistema de estacionamento.
- * Contém as porcentagens mínimas e valores de cobrança.
+ * Configuração do sistema de estacionamento. Contém as porcentagens mínimas e
+ * valores de cobrança.
  */
 public class Configuracao implements Serializable {
-    private static final long serialVersionUID = 1L; 
-
-    public static final double PORCENTAGEMMINIMAIDOSOS = 0.10; 
-    public static final double PORCENTAGEMMINIMAPCD = 0.10; 
-    public static final double PORCENTAGEMMINIMAVIP = 0.20; 
 
     private double porcentagemMinimaIdosos;
     private double porcentagemMinimaPCD;
     private double porcentagemMinimaVIP;
+
+    private double valorPeriodoPorTempo;
     private int intervaloCobrancaMinutos;
     private double valorMaximoDiaria;
 
-    public Configuracao(double porcentagemMinimaIdosos, double porcentagemMinimaPCD,
-                             double porcentagemMinimaVIP, int intervaloCobrancaMinutos,
-                             double valorMaximoDiaria) {
-        this.porcentagemMinimaIdosos = porcentagemMinimaIdosos;
-        this.porcentagemMinimaPCD = porcentagemMinimaPCD;
-        this.porcentagemMinimaVIP = porcentagemMinimaVIP;
-        this.intervaloCobrancaMinutos = intervaloCobrancaMinutos;
-        this.valorMaximoDiaria = valorMaximoDiaria;
+    public Configuracao(double porcentagemMinimaIdosos,
+            double porcentagemMinimaPCD,
+            double porcentagemMinimaVIP,
+            int intervaloCobrancaMinutos,
+            double valorMaximoDiaria,
+            double valorPeriodoPorTempo) {
+        try {
+            this.porcentagemMinimaIdosos = porcentagemMinimaIdosos;
+            this.porcentagemMinimaPCD = porcentagemMinimaPCD;
+            this.porcentagemMinimaVIP = porcentagemMinimaVIP;
+            this.intervaloCobrancaMinutos = intervaloCobrancaMinutos;
+            this.valorMaximoDiaria = valorMaximoDiaria;
+            this.valorPeriodoPorTempo = valorPeriodoPorTempo;
 
-        if (!validarPorcentagens()) {
-            throw new IllegalArgumentException("A soma das porcentagens não pode ultrapassar 100%");
+            if (!validarPorcentagens()) {
+                throw new IllegalArgumentException("A soma das porcentagens não pode ultrapassar 100%");
+            }
+        } catch (Exception e) {
+            throw new RuntimeException();
         }
+
+    }
+
+    private boolean validarPorcentagens() {
+        double soma = porcentagemMinimaIdosos + porcentagemMinimaPCD + porcentagemMinimaVIP;
+        return soma <= 100;
     }
 
     public double getPorcentagemMinimaIdosos() {
@@ -54,9 +66,8 @@ public class Configuracao implements Serializable {
         return valorMaximoDiaria;
     }
 
-    private boolean validarPorcentagens() {
-        double soma = porcentagemMinimaIdosos + porcentagemMinimaPCD + porcentagemMinimaVIP;
-        return soma <= 1.0;
+    public double getValorPeriodoPorTempo() {
+        return valorPeriodoPorTempo;
     }
 
     public void setPorcentagemMinimaIdosos(double porcentagemMinimaIdosos) {
@@ -87,4 +98,9 @@ public class Configuracao implements Serializable {
     public void setValorMaximoDiaria(double valorMaximoDiaria) {
         this.valorMaximoDiaria = valorMaximoDiaria;
     }
+
+    public void setValorPeriodoPorTempo(double valorPeriodoPorTempo) {
+        this.valorPeriodoPorTempo = valorPeriodoPorTempo;
+    }
+
 }
