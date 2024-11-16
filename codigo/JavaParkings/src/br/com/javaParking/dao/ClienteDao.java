@@ -1,116 +1,168 @@
 package br.com.javaParking.dao;
 
 import br.com.javaParking.model.Cliente;
-import br.com.javaParking.util.Util;
-import java.io.Serializable;
+import br.com.javaParking.util.Comunicacao;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
-public class ClienteDAO extends ConexaoDAO implements Serializable {
+public class ClienteDao {
 
-    private List<Cliente> clientes;
-    // Atributo da própria classe, estático, para implementar o Singleton
-    private static ClienteDAO instance;
-
-    // Endereço do arquivo serializado que contém a coleção de clientes
-    private final String localArquivo = Util.CAMINHOPADRAO + "Clientes.dat";
-
-    // Construtor privado para implementar o padrão Singleton
-    private ClienteDAO() {
-        this.clientes = new ArrayList<>();
-        carregaClientes();
-    }
-
-    // Método para recuperar a única instância de clientes
-    public static ClienteDAO getInstance() {
-        if (instance == null) {
-            instance = new ClienteDAO();
+    // Cria a tabela de clientes no banco de dados
+    public static String criarTabela() {
+        try {
+            Comunicacao.setSql("""
+                CREATE TABLE IF NOT EXISTS
+                    interno.tbcliente (
+                        id VARCHAR(14) PRIMARY KEY, -- CPF do cliente (id)
+                        nome VARCHAR(255) NOT NULL
+                    );
+                """);
+            Comunicacao.prepararConexcao();
+            Comunicacao.executar();
+        } catch (Exception e) {
+            return "Erro ao criar tabela de clientes: " + e;
         }
-        return instance;
+        return "Tabela de clientes criada com sucesso";
     }
 
-    public void addCliente(Cliente cliente) {
-        this.clientes.add(cliente);
-        grava();
+    // Adiciona um novo cliente no banco de dados
+    public static void addCliente(Cliente cliente) {
+        try {
+            Comunicacao.setSql("""
+                INSERT INTO
+                    interno.tbcliente (id, nome)
+                VALUES
+                    (?, ?);
+                """);
+            Comunicacao.prepararConexcao();
+            Comunicacao.getPst().setString(1, cliente.getId());
+            Comunicacao.getPst().setString(2, cliente.getNome());
+            Comunicacao.executar();
+        } catch (Exception e) {
+            System.out.println("Erro ao adicionar cliente: " + e);
+        }
     }
 
-    private void carregaClientes() {
-        this.clientes = super.leitura(localArquivo);
+    // Busca um cliente pelo CPF
+    public static Cliente buscarPorCpf(String cpf) {
+        try {
+            Comunicacao.setSql("SELECT * FROM interno.tbcliente WHERE id = ?;");
+            Comunicacao.prepararConexcao();
+            Comunicacao.getPst().setString(1, cpf);
+            Comunicacao.executarQuery();
+
+            if (Comunicacao.getRs().next()) {
+                Cliente cliente = new Cliente(
+                        Comunicacao.getRs().getString("nome"),
+                        Comunicacao.getRs().getString("id")
+                );
+                return cliente;
+            }
+        } catch (Exception e) {
+            System.out.println("Erro ao buscar cliente por CPF: " + e);
+        }
+        return null;
     }
 
-    private void grava() {
-        super.grava(localArquivo, clientes);
-    }
+    // Lista todos os clientes
+    public static List<Cliente> listarClientes() {
+        List<Cliente> clientes = new ArrayList<>();
+        try {
+            Comunicacao.setSql("SELECT * FROM interno.tbcliente;");
+            Comunicacao.prepararConexcao();
+            Comunicacao.executarQuery();
 
-    public List<Cliente> getClientes() {
+            while (Comunicacao.getRs().next()) {
+                Cliente cliente = new Cliente(
+                        Comunicacao.getRs().getString("nome"),
+                        Comunicacao.getRs().getString("id")
+                );
+                clientes.add(cliente);
+            }
+        } catch (Exception e) {
+            System.out.println("Erro ao listar clientes: " + e);
+        }
         return clientes;
     }
 
-    public void excluirCliente(Cliente cliente) {
-        clientes.remove(cliente);
-        grava();
-    }
-
-    public Cliente pesquisarPorCpf(String cpf) {
-        for (Cliente cliente : clientes) {
-            if (cliente.getId().equals(cpf)) {
-                return cliente;
-            }
-        }
-        return null;
-    }
-    
-    public Cliente buscarPorNome(String nome) {
-        for (Cliente cliente : clientes) {
-            if (cliente.getNome().equals(nome)) {
-                return cliente;
-            }
-        }
-        return null;
-    }
-
-    public List<Cliente> buscarPorNomeParcial(String nomeParcial) {
-        List<Cliente> resultado = new ArrayList<>();
-            for (Cliente cliente : clientes) { // Supondo que listaDeParques é a lista de todos os parques
-                if (cliente.getNome().toLowerCase().contains(nomeParcial.toLowerCase())) {
-                    resultado.add(cliente);
-                }
-            }
-        return resultado;
-    }
-    
-    public boolean alterarCliente(Cliente clienteExistente, String cpfAnterior) {
+    // Exclui um cliente pelo CPF
+    public static void excluirCliente(String cpf) {
         try {
-            if (clienteExistente.getId().equals(cpfAnterior)) {
-                
-                ArrayList<Cliente> listaTemp = new ArrayList<>();
+            Comunicacao.setSql("DELETE FROM interno.tbcliente WHERE id = ?;");
+            Comunicacao.prepararConexcao();
+            Comunicacao.getPst().setString(1, cpf);
+            Comunicacao.executar();
+        } catch (Exception e) {
+            System.out.println("Erro ao excluir cliente: " + e);
+        }
+    }
 
-                // Loop para criar lista temporária
-                for (Iterator<Cliente> it = clientes.iterator(); it.hasNext();) {
-                    Cliente cliente = it.next();
-                    if (!cliente.getId().equals(cpfAnterior)) {
-                        listaTemp.add(cliente);
-                    } else {
-                        listaTemp.add(clienteExistente);
-                    }
-                }
+    // Altera um cliente no banco de dados
+    public static void alterarCliente(Cliente cliente) {
+        try {
+            Comunicacao.setSql("""
+                UPDATE
+                    interno.tbcliente
+                SET
+                    nome = ?
+                WHERE
+                    id = ?;
+                """);
+            Comunicacao.prepararConexcao();
+            Comunicacao.getPst().setString(1, cliente.getNome());
+            Comunicacao.getPst().setString(2, cliente.getId());
+            Comunicacao.executar();
+        } catch (Exception e) {
+            System.out.println("Erro ao alterar cliente: " + e);
+        }
+    }
 
-                // Zerar lista
-                clientes.clear();
+    // Método para validar se um cliente com o CPF já existe no banco
+    public static boolean validarCliente(String cpf) {
+        Cliente cliente = buscarPorCpf(cpf);
+        return cliente == null; // Retorna true se o cliente não existir
+    }
 
-                // Preencher lista com novos dados
-                clientes.addAll(listaTemp);
+    // Método para pesquisar cliente por nome exato
+    public static Cliente pesquisarPorNome(String nome) {
+        try {
+            Comunicacao.setSql("SELECT * FROM interno.tbcliente WHERE nome = ?;");
+            Comunicacao.prepararConexcao();
+            Comunicacao.getPst().setString(1, nome);
+            Comunicacao.executarQuery();
 
-                // Sobreescrever dados antigos
-                grava();
-
-                return true;
-            } else {
-                return false;
+            if (Comunicacao.getRs().next()) {
+                Cliente cliente = new Cliente(
+                        Comunicacao.getRs().getString("nome"),
+                        Comunicacao.getRs().getString("id")
+                );
+                return cliente;
             }
         } catch (Exception e) {
-            return false;
+            System.out.println("Erro ao pesquisar cliente por nome: " + e);
         }
+        return null;
+    }
+
+    // Método para pesquisar clientes por nome parcial (ex: "Jo" retornará "João", "Joaquim")
+    public static List<Cliente> pesquisarPorNomeParcial(String nomeParcial) {
+        List<Cliente> clientes = new ArrayList<>();
+        try {
+            Comunicacao.setSql("SELECT * FROM interno.tbcliente WHERE nome LIKE ?;");
+            Comunicacao.prepararConexcao();
+            Comunicacao.getPst().setString(1, "%" + nomeParcial + "%");
+            Comunicacao.executarQuery();
+
+            while (Comunicacao.getRs().next()) {
+                Cliente cliente = new Cliente(
+                        Comunicacao.getRs().getString("nome"),
+                        Comunicacao.getRs().getString("id")
+                );
+                clientes.add(cliente);
+            }
+        } catch (Exception e) {
+            System.out.println("Erro ao pesquisar cliente por nome parcial: " + e);
+        }
+        return clientes;
     }
 }

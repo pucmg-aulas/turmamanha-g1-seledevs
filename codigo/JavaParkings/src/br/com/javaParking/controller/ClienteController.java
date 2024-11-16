@@ -1,10 +1,6 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package br.com.javaParking.controller;
 
-import br.com.javaParking.dao.ClienteDAO;
+import br.com.javaParking.dao.ClienteDao;
 import br.com.javaParking.model.Cliente;
 import br.com.javaParking.view.cliente.ClienteView;
 import java.util.List;
@@ -20,11 +16,11 @@ import javax.swing.table.DefaultTableModel;
 public class ClienteController {
 
     private ClienteView view;
-    private ClienteDAO clientes;
+    private ClienteDao clientes;  // Alterado para usar ClienteDao
     private Cliente clienteSelecionado;
 
     public ClienteController() {
-        this.clientes = ClienteDAO.getInstance();
+        this.clientes = new ClienteDao();  // Alterado para instanciar ClienteDao
         this.view = new ClienteView();
 
         this.view.getBtnAlterar().setBorderPainted(false);
@@ -41,9 +37,7 @@ public class ClienteController {
         });
 
         this.view.getBtnAlterar().addActionListener((e) -> {
-
             editarCliente();
-
         });
 
         this.view.getBtnRemover().addActionListener((e) -> {
@@ -54,32 +48,32 @@ public class ClienteController {
             int linha = this.view.getTbClientes().getSelectedRow();
             if (linha != -1) {
                 String cpf = (String) view.getTbClientes().getValueAt(linha, 1);
-                clienteSelecionado = clientes.pesquisarPorCpf(cpf);
+                clienteSelecionado = clientes.buscarPorCpf(cpf);  // Alterado para usar buscarPorCpf
 
                 if (clienteSelecionado != null) {
                     view.getTxtCPF().setText(clienteSelecionado.getId());
                     view.getTxtNome().setText(clienteSelecionado.getNome());
-                    
+
                     updateMode();
                 }
             }
         });
-        
-         // Adiciona o DocumentListener para a pesquisa em tempo real
+
+        // Adiciona o DocumentListener para a pesquisa em tempo real
         this.view.getTxtPesquisar().getDocument().addDocumentListener(new DocumentListener() {
             @Override
             public void insertUpdate(DocumentEvent e) {
-                pesquisarParque();
+                pesquisarCliente();
             }
 
             @Override
             public void removeUpdate(DocumentEvent e) {
-                pesquisarParque();
+                pesquisarCliente();
             }
 
             @Override
             public void changedUpdate(DocumentEvent e) {
-                pesquisarParque();
+                pesquisarCliente();
             }
         });
 
@@ -87,27 +81,28 @@ public class ClienteController {
         this.view.setVisible(true);
     }
 
-    public void pesquisarParque() {
+    // Método para pesquisar cliente por nome parcial
+    public void pesquisarCliente() {
         String nome = view.getTxtPesquisar().getText().trim();
 
-        // Se o campo estiver vazio, carrega todos os parques novamente
+        // Se o campo estiver vazio, carrega todos os clientes novamente
         if (nome.isEmpty()) {
             carregarTabela();
             return;
         }
 
-        // Pesquisa o parque pelo nome ou caracteres inseridos
-        List<Cliente> clientesEncontrados = clientes.buscarPorNomeParcial(nome);
+        // Pesquisa os clientes pelo nome ou caracteres inseridos
+        List<Cliente> clientesEncontrados = clientes.pesquisarPorNomeParcial(nome);
 
-        // Atualizar a tabela com os resultados encontrados
+        // Atualiza a tabela com os resultados encontrados
         DefaultTableModel tm = new DefaultTableModel(new Object[]{"Nome", "CPF"}, 0);
         for (Cliente cliente : clientesEncontrados) {
             tm.addRow(new Object[]{cliente.getNome(), cliente.getId()});
         }
-        
-       view.getTbClientes().setModel(tm);
+
+        view.getTbClientes().setModel(tm);
     }
-    
+
     private void limparCampos() {
         this.view.getTxtCPF().setText("");
         this.view.getTxtNome().setText("");
@@ -142,8 +137,8 @@ public class ClienteController {
             JOptionPane.showMessageDialog(view, "Cliente salvo com sucesso!");
             limparCampos();
             carregarTabela();
-        }else{
-            JOptionPane.showMessageDialog(view, "Campos nome e CPF são obrigatorios!");
+        } else {
+            JOptionPane.showMessageDialog(view, "Campos nome e CPF são obrigatórios!");
         }
     }
 
@@ -153,9 +148,9 @@ public class ClienteController {
 
         int op = JOptionPane.showConfirmDialog(view, "Deseja editar " + nome + "?");
         if (op == JOptionPane.YES_OPTION) {
-            Cliente cliente = clientes.pesquisarPorCpf(cpf);
+            Cliente cliente = clientes.buscarPorCpf(cpf);  
             cliente.setNome(nome);
-            clientes.alterarCliente(cliente, cpf);
+            clientes.alterarCliente(cliente);  
             JOptionPane.showMessageDialog(view, nome + " editado com sucesso!");
             carregarTabela();
             createMode();
@@ -170,12 +165,18 @@ public class ClienteController {
 
         int op = JOptionPane.showConfirmDialog(view, "Deseja excluir " + nome + "?");
         if (op == JOptionPane.YES_OPTION) {
-            Cliente cliente = clientes.pesquisarPorCpf(cpf);
-            clientes.excluirCliente(cliente);
+            Cliente cliente = ClienteDao.buscarPorCpf(cpf);
+            if (cliente == null) {
+                JOptionPane.showMessageDialog(view, "Cliente não encontrado.");
+                return; 
+            }
+
+            // Exclui o cliente pelo CPF
+            ClienteDao.excluirCliente(cpf); 
             JOptionPane.showMessageDialog(view, nome + " excluído com sucesso!");
-            carregarTabela();
-            createMode();
-            limparCampos();
+            carregarTabela();  
+            createMode();      
+            limparCampos();    
         }
     }
 
@@ -184,7 +185,7 @@ public class ClienteController {
         DefaultTableModel tm = new DefaultTableModel(colunas, 0);
         tm.setNumRows(0);
 
-        for (Cliente cliente : clientes.getClientes()) {
+        for (Cliente cliente : clientes.listarClientes()) {  // Alterado para listarClientes
             String linha[] = {cliente.getNome(), cliente.getId()};
             tm.addRow(linha);
         }
