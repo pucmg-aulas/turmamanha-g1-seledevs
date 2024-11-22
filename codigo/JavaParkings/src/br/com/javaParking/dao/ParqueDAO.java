@@ -20,38 +20,24 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-public class ParqueDAO extends ConexaoDAO implements Serializable{
-    
-    private List<Parque> parques;
-    
-    // Atributo da própria classe, estático, para implementar o Singleton
-    private static ParqueDAO instance;
+public class ParqueDAO extends ConexaoDAO {
 
-    //Endereço do arquivo serializado que contém a coleção de veiculos
-    private final String localArquivo = Util.CAMINHOPADRAO + "Parques.dat";
 
-    /*  Construtor privado, pois não podemos permitir mais de uma instância desta classe
-        que controla a coleção de carros do sistema (Singleton)
-    */ 
-    
-    private ParqueDAO() {
-        this.parques = new ArrayList<>();
-        carregaParques();
-    }
-
-    public static String criarTabelaParques () {
+    public static String criarTabela() {
         try {
             Comunicacao.setSql  ("""
                                     CREATE TABLE IF NOT EXISTS 
                                         interno.tbparques(
-                                            id SERIAL PRIMARY KEY IS NOT NULL,
+                                            id SERIAL,
                                             nomeParque VARCHAR(100),
                                             numeroDeVagas INT NOT NULL,
                                             vagasPorFileira INT NOT NULL,
+                                            PRIMARY KEY (id)
+                                 );
                                 """);
             Comunicacao.prepararConexcao();
             Comunicacao.executar();
-            adicionarParqueInicial();
+            //adicionarParqueInicial();
 
         } catch (Exception e) {
             return "Erro ao criar tabela tbparques: " + e;
@@ -59,6 +45,7 @@ public class ParqueDAO extends ConexaoDAO implements Serializable{
         return "Tabela tbparques criada com sucesso";
     }
     
+    /*
     private static void adicionarParqueInicial() {
         try {
             if (getInstance().buscarTodosParques().isEmpty()) {
@@ -100,25 +87,7 @@ public class ParqueDAO extends ConexaoDAO implements Serializable{
     
     // INICIO DOS MÉTODOS AUXILIARES DO CRUD:
     
-    public static ParqueDAO getInstance() { //Método para recuperar a única instância de veiculos
-        if (instance == null) {
-            instance = new ParqueDAO();
-        }
-        return instance;
-    }
-
-    public void carregaParques() {
-        this.parques = super.leitura(localArquivo);
-    }
-
-    public void grava() {
-        super.grava(localArquivo, parques);
-    }
-
-    public List<Parque> getParques() {
-        return parques;
-    }
-
+/*
     public Parque buscarPorNome(String nomeParque) {
         for (Parque parque : parques) {
             if (parque.getNomeParque().equals(nomeParque)) {
@@ -136,7 +105,8 @@ public class ParqueDAO extends ConexaoDAO implements Serializable{
             }
         return null;
     }
-    
+    */
+    /*
     public List<Parque> buscarPorNomeParcial(String nomeParcial) {
         List<Parque> resultado = new ArrayList<>();
             for (Parque parque : parques) { // Supondo que listaDeParques é a lista de todos os parques
@@ -190,6 +160,7 @@ public class ParqueDAO extends ConexaoDAO implements Serializable{
     */
     }
     
+    /*
     public boolean alterarParque(Parque parqueSelecionado, int parqueIdentificador) {
         try {
         // Localiza e substitui o parque com o identificador correto
@@ -213,5 +184,5 @@ public class ParqueDAO extends ConexaoDAO implements Serializable{
     }
     
     // FIM DOS MÉTODOS ESPECIAIS DE CRUD DO PARQUE:
-    
+    */
 }
