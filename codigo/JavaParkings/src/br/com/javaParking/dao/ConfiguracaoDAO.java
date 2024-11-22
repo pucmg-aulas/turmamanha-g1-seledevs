@@ -17,7 +17,9 @@ public class ConfiguracaoDAO {
                                         intervaloCobrancaMinutos INT,  
                                         porcentagemPDC NUMERIC(1000,2),
                                         porcentagemIdoso NUMERIC(1000,2),
-                                        porcentagemVIP NUMERIC(1000,2));
+                                        porcentagemVIP NUMERIC(1000,2),
+                                        PRIMARY KEY (id)
+                               );
 					""");
             Comunicacao.prepararConexcao();
             Comunicacao.executar();
