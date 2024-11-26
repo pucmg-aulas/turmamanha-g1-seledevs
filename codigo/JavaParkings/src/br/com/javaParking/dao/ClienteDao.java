@@ -12,9 +12,9 @@ public class ClienteDao {
         try {
             Comunicacao.setSql("""
                 CREATE TABLE IF NOT EXISTS
-                    interno.tbcliente (
-                        id VARCHAR(14) PRIMARY KEY, -- CPF do cliente (id)
-                        nome VARCHAR(255) NOT NULL
+                    interno.tbcliente(
+                                    id SERIAL,
+                                    nome VARCHAR(255) NOT NULL
                     );
                 """);
             Comunicacao.prepararConexcao();
@@ -32,7 +32,7 @@ public class ClienteDao {
                 INSERT INTO
                     interno.tbcliente (id, nome)
                 VALUES
-                    (?, ?);
+                    (?,?);
                 """);
             Comunicacao.prepararConexcao();
             Comunicacao.getPst().setString(1, cliente.getId());
