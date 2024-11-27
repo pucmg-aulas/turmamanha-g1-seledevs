@@ -2,6 +2,7 @@ package br.com.javaParking.controller;
 
 import br.com.javaParking.dao.ClienteDao;
 import br.com.javaParking.model.Cliente;
+import br.com.javaParking.util.validadores.CPFValidator;
 import br.com.javaParking.view.cliente.ClienteView;
 import java.util.List;
 import javax.swing.JOptionPane;
@@ -51,7 +52,7 @@ public class ClienteController {
                 clienteSelecionado = clientes.buscarPorCpf(cpf);  // Alterado para usar buscarPorCpf
 
                 if (clienteSelecionado != null) {
-                    view.getTxtCPF().setText(clienteSelecionado.getId());
+                    view.getTxtCPF().setText(clienteSelecionado.getCpf());
                     view.getTxtNome().setText(clienteSelecionado.getNome());
 
                     updateMode();
@@ -97,7 +98,7 @@ public class ClienteController {
         // Atualiza a tabela com os resultados encontrados
         DefaultTableModel tm = new DefaultTableModel(new Object[]{"Nome", "CPF"}, 0);
         for (Cliente cliente : clientesEncontrados) {
-            tm.addRow(new Object[]{cliente.getNome(), cliente.getId()});
+            tm.addRow(new Object[]{cliente.getNome(), cliente.getCpf()});
         }
 
         view.getTbClientes().setModel(tm);
@@ -127,18 +128,31 @@ public class ClienteController {
     }
 
     private void addCliente() {
-        String id = view.getTxtCPF().getText();
-        String nome = view.getTxtNome().getText();
+        try {
+            String cpf = view.getTxtCPF().getText();
+            String nome = view.getTxtNome().getText();
 
-        if (!id.isEmpty() && !nome.isEmpty()) {
-            Cliente c = new Cliente(nome, id);
-            clientes.addCliente(c);
+            if (!cpf.isEmpty() && !nome.isEmpty()) {
+                Cliente c = new Cliente();
+                c.setNome(nome);
 
-            JOptionPane.showMessageDialog(view, "Cliente salvo com sucesso!");
-            limparCampos();
-            carregarTabela();
-        } else {
-            JOptionPane.showMessageDialog(view, "Campos nome e CPF são obrigatórios!");
+                if (CPFValidator.isCPF(cpf)) {
+                    c.setCpf(cpf);
+                } else {
+                    JOptionPane.showMessageDialog(view, "CPF invalido!");
+                    return;
+                }
+
+                clientes.addCliente(c);
+
+                JOptionPane.showMessageDialog(view, "Cliente salvo com sucesso!");
+                limparCampos();
+                carregarTabela();
+            } else {
+                JOptionPane.showMessageDialog(view, "Campos nome e CPF são obrigatórios!");
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e);
         }
     }
 
@@ -146,15 +160,22 @@ public class ClienteController {
         String nome = view.getTxtNome().getText();
         String cpf = view.getTxtCPF().getText();
 
-        int op = JOptionPane.showConfirmDialog(view, "Deseja editar " + nome + "?");
-        if (op == JOptionPane.YES_OPTION) {
-            Cliente cliente = clientes.buscarPorCpf(cpf);  
-            cliente.setNome(nome);
-            clientes.alterarCliente(cliente);  
-            JOptionPane.showMessageDialog(view, nome + " editado com sucesso!");
-            carregarTabela();
-            createMode();
-            limparCampos();
+        if (!CPFValidator.isCPF(cpf)) { 
+            JOptionPane.showMessageDialog(view, "CPF invalido!");
+            return;
+        } 
+
+        if (!cpf.isEmpty() && !nome.isEmpty()) {
+            int op = JOptionPane.showConfirmDialog(view, "Deseja editar " + nome + "?");
+            if (op == JOptionPane.YES_OPTION) {
+                Cliente cliente = clientes.buscarPorCpf(cpf);
+                cliente.setNome(nome);
+                clientes.alterarCliente(cliente);
+                JOptionPane.showMessageDialog(view, nome + " editado com sucesso!");
+                carregarTabela();
+                createMode();
+                limparCampos();
+            }
         }
     }
 
@@ -168,15 +189,15 @@ public class ClienteController {
             Cliente cliente = ClienteDao.buscarPorCpf(cpf);
             if (cliente == null) {
                 JOptionPane.showMessageDialog(view, "Cliente não encontrado.");
-                return; 
+                return;
             }
 
             // Exclui o cliente pelo CPF
-            ClienteDao.excluirCliente(cpf); 
+            ClienteDao.excluirCliente(ClienteDao.buscarPorCpf(cpf).getId());
             JOptionPane.showMessageDialog(view, nome + " excluído com sucesso!");
-            carregarTabela();  
-            createMode();      
-            limparCampos();    
+            carregarTabela();
+            createMode();
+            limparCampos();
         }
     }
 
@@ -186,7 +207,7 @@ public class ClienteController {
         tm.setNumRows(0);
 
         for (Cliente cliente : clientes.listarClientes()) {  // Alterado para listarClientes
-            String linha[] = {cliente.getNome(), cliente.getId()};
+            String linha[] = {cliente.getNome(), cliente.getCpf()};
             tm.addRow(linha);
         }
         view.getTbClientes().setModel(tm);

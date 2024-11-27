@@ -55,6 +55,7 @@ public class ConexaoDAO {
             return "Erro ao Criar SchemaInterno: " + e;
         } finally {
             ConfiguracaoDAO.criarTabela();
+            ClienteDao.criarTabela();
         }
         return "";
     }

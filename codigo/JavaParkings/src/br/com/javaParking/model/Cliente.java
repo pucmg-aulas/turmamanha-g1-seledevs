@@ -10,58 +10,46 @@ public class Cliente implements Serializable {
     /**
      * Atributos
      */
+    private int id;
     private String nome;
-    private String id;
-    private List<Veiculo> veiculos;
-
-    /**
-     * Construtores
-     */
-    public Cliente(String nome, String identificador) {
-        this.nome = nome;
-        this.id = identificador;
-        this.veiculos = new ArrayList<>();  // Inicializa a lista de veículos
-    }
-
+    private String cpf;
+    
     /**
      * Métodos de acesso
      */
+    
+    public int getId() {
+        return id;
+    }
+
     public String getNome() {
-        return this.nome;
+        return nome;
+    }
+
+    public String getCpf() {
+        return cpf;
+    }
+
+    
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public void setNome(String nome) {
         this.nome = nome;
     }
 
-    public String getId() {
-        return this.id;
+    public void setCpf(String cpf) {
+        this.cpf = cpf;
     }
 
-    public List<Veiculo> listaVeiculos() {
-        return this.veiculos;
-    }
-
-    /**
-     * Métodos de ação
-     */
-    public void addVeiculo(Veiculo veiculo) {
-        this.veiculos.add(veiculo);
-    }
-
-    public void delVeiculo(Veiculo veiculo) {
-        for (int i = 0; i < this.veiculos.size(); i++) {
-            if (this.veiculos.get(i).getPlaca().equals(veiculo.getPlaca())) {
-                this.veiculos.remove(i);
-            }
-        }
-    }
-
+   
     /**
      * Método de validação
      */
     public boolean validarCliente() {
-        return ClienteDao.validarCliente(this.id);  // Utiliza o DAO para verificar se o cliente já existe
+        return ClienteDao.validarCliente(this.cpf);  // Utiliza o DAO para verificar se o cliente já existe
     }
 
     /**

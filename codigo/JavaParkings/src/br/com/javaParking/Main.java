@@ -20,7 +20,7 @@ public class Main {
         ConexaoDAO.Conexao();
         ConexaoDAO.Tabelas();
         
-        new ConfiguracaoController();
+        new ClienteController();
     }
 
 }

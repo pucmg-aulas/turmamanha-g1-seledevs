@@ -14,7 +14,8 @@ public class ClienteDao {
                 CREATE TABLE IF NOT EXISTS
                     interno.tbcliente(
                                     id SERIAL,
-                                    nome VARCHAR(255) NOT NULL
+                                    nome VARCHAR(255) NOT NULL,
+                                    cpf VARCHAR(255) NOT NULL
                     );
                 """);
             Comunicacao.prepararConexcao();
@@ -30,13 +31,13 @@ public class ClienteDao {
         try {
             Comunicacao.setSql("""
                 INSERT INTO
-                    interno.tbcliente (id, nome)
+                    interno.tbcliente (nome, cpf)
                 VALUES
                     (?,?);
                 """);
             Comunicacao.prepararConexcao();
-            Comunicacao.getPst().setString(1, cliente.getId());
-            Comunicacao.getPst().setString(2, cliente.getNome());
+            Comunicacao.getPst().setString(1, cliente.getNome());
+            Comunicacao.getPst().setString(2, cliente.getCpf());
             Comunicacao.executar();
         } catch (Exception e) {
             System.out.println("Erro ao adicionar cliente: " + e);
@@ -46,17 +47,19 @@ public class ClienteDao {
     // Busca um cliente pelo CPF
     public static Cliente buscarPorCpf(String cpf) {
         try {
-            Comunicacao.setSql("SELECT * FROM interno.tbcliente WHERE id = ?;");
+            Comunicacao.setSql("SELECT * FROM interno.tbcliente WHERE cpf = ?;");
             Comunicacao.prepararConexcao();
             Comunicacao.getPst().setString(1, cpf);
             Comunicacao.executarQuery();
 
             if (Comunicacao.getRs().next()) {
-                Cliente cliente = new Cliente(
-                        Comunicacao.getRs().getString("nome"),
-                        Comunicacao.getRs().getString("id")
-                );
-                return cliente;
+                
+                Cliente x = new Cliente();
+                x.setId(Comunicacao.getRs().getInt("id"));
+                x.setCpf(Comunicacao.getRs().getString("cpf"));
+                x.setNome(Comunicacao.getRs().getString("nome"));
+                
+                return x;
             }
         } catch (Exception e) {
             System.out.println("Erro ao buscar cliente por CPF: " + e);
@@ -73,11 +76,12 @@ public class ClienteDao {
             Comunicacao.executarQuery();
 
             while (Comunicacao.getRs().next()) {
-                Cliente cliente = new Cliente(
-                        Comunicacao.getRs().getString("nome"),
-                        Comunicacao.getRs().getString("id")
-                );
-                clientes.add(cliente);
+                Cliente x = new Cliente();
+                x.setId(Comunicacao.getRs().getInt("id"));
+                x.setCpf(Comunicacao.getRs().getString("cpf"));
+                x.setNome(Comunicacao.getRs().getString("nome"));
+                
+                clientes.add(x);
             }
         } catch (Exception e) {
             System.out.println("Erro ao listar clientes: " + e);
@@ -86,11 +90,11 @@ public class ClienteDao {
     }
 
     // Exclui um cliente pelo CPF
-    public static void excluirCliente(String cpf) {
+    public static void excluirCliente(int id) {
         try {
             Comunicacao.setSql("DELETE FROM interno.tbcliente WHERE id = ?;");
             Comunicacao.prepararConexcao();
-            Comunicacao.getPst().setString(1, cpf);
+            Comunicacao.getPst().setInt(1, id);
             Comunicacao.executar();
         } catch (Exception e) {
             System.out.println("Erro ao excluir cliente: " + e);
@@ -110,7 +114,7 @@ public class ClienteDao {
                 """);
             Comunicacao.prepararConexcao();
             Comunicacao.getPst().setString(1, cliente.getNome());
-            Comunicacao.getPst().setString(2, cliente.getId());
+            Comunicacao.getPst().setInt(2, cliente.getId());
             Comunicacao.executar();
         } catch (Exception e) {
             System.out.println("Erro ao alterar cliente: " + e);
@@ -132,11 +136,12 @@ public class ClienteDao {
             Comunicacao.executarQuery();
 
             if (Comunicacao.getRs().next()) {
-                Cliente cliente = new Cliente(
-                        Comunicacao.getRs().getString("nome"),
-                        Comunicacao.getRs().getString("id")
-                );
-                return cliente;
+                Cliente x = new Cliente();
+                x.setId(Comunicacao.getRs().getInt("id"));
+                x.setCpf(Comunicacao.getRs().getString("cpf"));
+                x.setNome(Comunicacao.getRs().getString("nome"));
+                
+                return x;
             }
         } catch (Exception e) {
             System.out.println("Erro ao pesquisar cliente por nome: " + e);
@@ -154,11 +159,12 @@ public class ClienteDao {
             Comunicacao.executarQuery();
 
             while (Comunicacao.getRs().next()) {
-                Cliente cliente = new Cliente(
-                        Comunicacao.getRs().getString("nome"),
-                        Comunicacao.getRs().getString("id")
-                );
-                clientes.add(cliente);
+                Cliente x = new Cliente();
+                x.setId(Comunicacao.getRs().getInt("id"));
+                x.setCpf(Comunicacao.getRs().getString("cpf"));
+                x.setNome(Comunicacao.getRs().getString("nome"));
+                
+                clientes.add(x);
             }
         } catch (Exception e) {
             System.out.println("Erro ao pesquisar cliente por nome parcial: " + e);
