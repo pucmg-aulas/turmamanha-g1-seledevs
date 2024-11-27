@@ -5,7 +5,9 @@ import br.com.javaParking.model.Parque;
 import br.com.javaParking.model.Veiculo;
 import br.com.javaParking.util.Comunicacao;
 import br.com.javaParking.controller.ParqueController;
+import br.com.javaParking.model.Cliente;
 import br.com.javaParking.model.Configuracao;
+import br.com.javaParking.dao.ConexaoDAO;
 
 
 // IMPORT DE BIBLIOTECAS DO JAVA:
@@ -21,7 +23,7 @@ import java.util.Iterator;
 import java.util.List;
 
 public class ParqueDAO extends ConexaoDAO {
-
+    
 
     public static String criarTabela() {
         try {
@@ -43,6 +45,150 @@ public class ParqueDAO extends ConexaoDAO {
             return "Erro ao criar tabela tbparques: " + e;
         }
         return "Tabela tbparques criada com sucesso";
+    }
+    
+    public static Parque parque() {
+        try {
+
+            Comunicacao.setSql("SELECT * from interno.tbparques where interno.tbparques.id = 1;");
+            Comunicacao.prepararConexcao();
+            Comunicacao.executarQuery();
+
+            while (Comunicacao.getRs().next()) {
+                Parque x = new Parque(
+                        Comunicacao.getRs().getInt("id"),
+                        Comunicacao.getRs().getString("nomeParque"),
+                        Comunicacao.getRs().getInt("numeroDeVagas"),
+                        Comunicacao.getRs().getInt("vagasPorFileira")
+                );
+
+                return x;
+            }
+
+            } catch (Exception e) {
+        }
+
+        return null;
+
+    }
+
+    
+    public static boolean addParque(Parque parque) {
+        
+        try {
+            Comunicacao.setSql("""
+                                INSERT INTO 
+                               interno.tbparques(
+                                    id,
+                                    nomeParque, 
+                                    numeroVagas, 
+                                    vagasPorFileira)
+                                VALUES (?, ?, ?);
+                                """);
+            Comunicacao.prepararConexcao();
+            Comunicacao.getPst().setString(1, parque.getNomeParque());
+            Comunicacao.getPst().setInt(2, parque.getNumeroVagas());
+            Comunicacao.getPst().setInt(3, parque.getVagasPorFileira());
+            Comunicacao.executar();
+            return true;
+        } catch (Exception e) {
+            System.err.println("Erro ao adicionar parque: " + e);
+            return false;
+        }
+    }
+    
+    public static boolean alterarParque(Parque parque) {
+        try {
+            Comunicacao.setSql("""
+                UPDATE
+                    interno.tbparques
+                SET
+                    nomeParque = ?,
+                    numeroVagas = ?,
+                    vagasPorFileira = ?
+                WHERE
+                    id = ?;
+                """);
+            Comunicacao.prepararConexcao();
+            Comunicacao.getPst().setString(1, parque.getNomeParque());
+            Comunicacao.getPst().setInt(2, parque.getNumeroVagas());
+            Comunicacao.getPst().setInt(3, parque.getVagasPorFileira());
+            Comunicacao.getPst().setInt(4, parque.getId());
+            Comunicacao.executar();
+            return true;
+        } catch (Exception e) {
+            System.out.println("Erro ao alterar parque: " + e);
+            return false;
+        }
+    }    
+        
+    public static boolean excluirParque(int id) {
+        try {
+            Comunicacao.setSql("""
+                                    DELETE
+                                    FROM interno.tbparques
+                                    WHERE id = ?;
+                                """);
+            Comunicacao.prepararConexcao();
+            Comunicacao.getPst().setInt(1, id);
+            Comunicacao.executar();
+            return true;
+        } catch (Exception e) {
+            System.out.println("Erro ao excluir parque: " + e);
+            return false;
+        }
+    }
+    
+    public static Parque buscarPorNome(String nomeParque) {
+        
+        try {
+            Comunicacao.setSql("""
+                                    SELECT *
+                                    FROM interno.tbparques
+                                    WHERE nomeParque = ?;
+                                 );
+                                """);
+            Comunicacao.prepararConexcao();
+            Comunicacao.getPst().setString(1, nomeParque);
+            Comunicacao.executarQuery();
+
+            if (Comunicacao.getRs().next()) {
+                Parque parqueEncontrado = new Parque(
+                        Comunicacao.getRs().getInt("id"),
+                        Comunicacao.getRs().getString("nomeParque"),
+                        Comunicacao.getRs().getInt("numeroVagas"),
+                        Comunicacao.getRs().getInt("vagasPorFileira")
+                );
+                return parqueEncontrado;
+            }
+        } catch (Exception e) {
+            System.out.println("Erro ao pesquisar parque por nome: " + e);
+        }
+        return null;
+    }
+    
+    
+    public static List<Parque> listarParques() {
+        List<Parque> parques = new ArrayList<>();
+        try {
+            Comunicacao.setSql("SELECT nomeParque, numeroVagas FROM interno.tbparques;");
+            Comunicacao.prepararConexcao();
+            Comunicacao.executarQuery();
+
+            while (Comunicacao.getRs().next()) {
+                Parque parque = new Parque(
+                        Comunicacao.getRs().getInt("id"),
+                        Comunicacao.getRs().getString("nomeParque"),
+                        Comunicacao.getRs().getInt("numeroVagas"),
+                        Comunicacao.getRs().getInt("vagasPorFileira")
+
+                );
+                parques.add(parque);
+            }
+        } catch (Exception e) {
+            System.out.println("Erro ao listar clientes: " + e);
+        }
+        return parques;
     }
     
     /*
@@ -127,27 +273,7 @@ public class ParqueDAO extends ConexaoDAO {
     
     // INICIO DOS MÉTODOS ESPECIAIS DE CRUD DO PARQUE:
     
-    public boolean addParque(Parque parque) {
-        
-        try {
-            Comunicacao.setSql("""
-                                INSERT INTO 
-                               interno.tbparques(
-                                    nomeParque, 
-                                    numeroVagas, 
-                                    vagasPorFileira,)
-                                VALUES (?, ?, ?);
-                                """);
-            Comunicacao.prepararConexcao();
-            Comunicacao.getPst().setString(1, parque.getNomeParque());
-            Comunicacao.getPst().setInt(2, parque.getNumeroVagas());
-            Comunicacao.getPst().setInt(3, parque.getVagasPorFileira());
-            Comunicacao.executar();
-            return true;
-        } catch (Exception e) {
-            System.err.println("Erro ao adicionar parque: " + e);
-            return false;
-        }
+    
         
         /*
         try {
@@ -158,7 +284,6 @@ public class ParqueDAO extends ConexaoDAO {
             return false;
         }
     */
-    }
     
     /*
     public boolean alterarParque(Parque parqueSelecionado, int parqueIdentificador) {
