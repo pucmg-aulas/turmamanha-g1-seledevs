@@ -37,11 +37,11 @@ public class VeiculoDAO extends ConexaoDAO implements Serializable {
     }
 
     private void carregaVeiculos() {
-        this.veiculos = super.leitura(localArquivo);
+       this.veiculos = super.leitura(localArquivo);
     }
 
     private void grava() {
-        super.grava(localArquivo, veiculos);
+       super.grava(localArquivo, veiculos);
     }
 
     public List<Veiculo> getVeiculos() {

@@ -21,7 +21,9 @@ public class ArrecadacaoDAO {
                     interno.tbarrecadacao(
                                     id SERIAL,
                                     fk_id_cliente INT,
-                                    valor_arrecadado NUMERIC(1000,2)
+                                    valor_arrecadado NUMERIC(1000,2),
+                                    FOREIGN KEY (fk_id_cliente) REFERENCES interno.tbcliente(id),
+                                    PRIMARY KEY (id)
                     );
                 """);
             Comunicacao.prepararConexcao();
