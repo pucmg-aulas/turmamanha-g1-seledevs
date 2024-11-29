@@ -58,44 +58,6 @@ public class OcupacaoDAO {
         }
     }
 
-    // Lista todas as ocupações
-    public static List<Ocupacao> listarOcupacoes() {
-        List<Ocupacao> ocupacoes = new ArrayList<>();
-        try {
-            Comunicacao.setSql("SELECT * FROM interno.tbocupacoes;");
-            Comunicacao.prepararConexcao();
-            Comunicacao.executarQuery();
-
-            while (Comunicacao.getRs().next()) {
-                // Recupera dados básicos
-                int id = Comunicacao.getRs().getInt("id");
-                String clienteId = Comunicacao.getRs().getString("cliente_id");
-                String veiculoId = Comunicacao.getRs().getString("veiculo_id");
-                String vagaId = Comunicacao.getRs().getString("vaga_id");
-                LocalTime horaEntrada = Comunicacao.getRs().getTime("hora_entrada").toLocalTime();
-                LocalTime horaSaida = null;
-
-                if (Comunicacao.getRs().getTime("hora_saida") != null) {
-                    horaSaida = Comunicacao.getRs().getTime("hora_saida").toLocalTime();
-                }
-
-                // Instancia objetos
-                Cliente cliente = ClienteDao.buscarPorCpf(clienteId);
-                Veiculo veiculo = VeiculoDAO.buscarPorPlaca(veiculoId); // Método no VeiculoDAO
-                Vaga vaga = VagaDAO.buscarPorId(vagaId); // Método no VagaDAO
-
-                Ocupacao ocupacao = new Ocupacao(cliente, veiculo, vaga, horaEntrada);
-                if (horaSaida != null) {
-                    ocupacao.desocupar(vaga);
-                }
-                ocupacoes.add(ocupacao);
-            }
-        } catch (Exception e) {
-            System.out.println("Erro ao listar ocupações: " + e);
-        }
-        return ocupacoes;
-    }
-
     // Atualiza a saída de uma ocupação
     public static void registrarSaida(int ocupacaoId, LocalTime horaSaida) {
         try {

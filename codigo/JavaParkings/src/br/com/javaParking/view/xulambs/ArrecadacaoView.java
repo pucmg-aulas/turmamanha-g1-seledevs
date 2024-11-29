@@ -8,6 +8,11 @@ import br.com.javaParking.view.cliente.ClienteView;
 import br.com.javaParking.view.parque.ParqueView;
 import br.com.javaParking.view.xulambs.PdaView;
 import br.com.javaParking.model.Configuracao;
+import javax.swing.JComboBox;
+import javax.swing.JLabel;
+import javax.swing.JMenu;
+import javax.swing.JMenuItem;
+import javax.swing.JTable;
 
 /**
  *
@@ -22,6 +27,102 @@ public class ArrecadacaoView extends javax.swing.JFrame {
         initComponents();
     }
 
+    public JComboBox<String> getCbAno() {
+        return cbAno;
+    }
+
+    public void setCbAno(JComboBox<String> cbAno) {
+        this.cbAno = cbAno;
+    }
+
+    public JComboBox<String> getCbMes() {
+        return cbMes;
+    }
+
+    public void setCbMes(JComboBox<String> cbMes) {
+        this.cbMes = cbMes;
+    }
+
+    public JComboBox<String> getCbParque() {
+        return cbParque;
+    }
+
+    public void setCbParque(JComboBox<String> cbParque) {
+        this.cbParque = cbParque;
+    }
+
+    public JLabel getLblTotalArrecadado() {
+        return lblTotalArrecadado;
+    }
+
+    public void setLblTotalArrecadado(JLabel lblTotalArrecadado) {
+        this.lblTotalArrecadado = lblTotalArrecadado;
+    }
+
+    public JLabel getLblValorMedio() {
+        return lblValorMedio;
+    }
+
+    public void setLblValorMedio(JLabel lblValorMedio) {
+        this.lblValorMedio = lblValorMedio;
+    }
+
+    public JMenuItem getMenCadastroCliente() {
+        return menCadastroCliente;
+    }
+
+    public void setMenCadastroCliente(JMenuItem menCadastroCliente) {
+        this.menCadastroCliente = menCadastroCliente;
+    }
+
+    public JMenuItem getMenCadastroParque() {
+        return menCadastroParque;
+    }
+
+    public void setMenCadastroParque(JMenuItem menCadastroParque) {
+        this.menCadastroParque = menCadastroParque;
+    }
+
+    public JMenu getMenCadastros() {
+        return menCadastros;
+    }
+
+    public void setMenCadastros(JMenu menCadastros) {
+        this.menCadastros = menCadastros;
+    }
+
+    public JMenuItem getMenConfiguracao() {
+        return menConfiguracao;
+    }
+
+    public void setMenConfiguracao(JMenuItem menConfiguracao) {
+        this.menConfiguracao = menConfiguracao;
+    }
+
+    public JMenu getMenPDA() {
+        return menPDA;
+    }
+
+    public void setMenPDA(JMenu menPDA) {
+        this.menPDA = menPDA;
+    }
+
+    public JMenuItem getMenSair() {
+        return menSair;
+    }
+
+    public void setMenSair(JMenuItem menSair) {
+        this.menSair = menSair;
+    }
+
+    public JTable getTbArrecadacoes() {
+        return tbArrecadacoes;
+    }
+
+    public void setTbArrecadacoes(JTable tbArrecadacoes) {
+        this.tbArrecadacoes = tbArrecadacoes;
+    }    
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -50,13 +151,13 @@ public class ArrecadacaoView extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         cbParque = new javax.swing.JComboBox<>();
         Menu = new javax.swing.JMenuBar();
-        MenCad = new javax.swing.JMenu();
-        MenCadCli = new javax.swing.JMenuItem();
-        MenCadOs = new javax.swing.JMenuItem();
-        jMenu1 = new javax.swing.JMenu();
+        menCadastros = new javax.swing.JMenu();
+        menCadastroParque = new javax.swing.JMenuItem();
+        menCadastroCliente = new javax.swing.JMenuItem();
+        menPDA = new javax.swing.JMenu();
         MenOpc = new javax.swing.JMenu();
-        MenOpcSai = new javax.swing.JMenuItem();
-        MenOpcSai1 = new javax.swing.JMenuItem();
+        menConfiguracao = new javax.swing.JMenuItem();
+        menSair = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Xumlabs Parking");
@@ -228,7 +329,7 @@ public class ArrecadacaoView extends javax.swing.JFrame {
                     .addComponent(cbMes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(cbParque, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(16, 16, 16)
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 408, Short.MAX_VALUE)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 432, Short.MAX_VALUE)
                 .addGap(8, 8, 8))
         );
 
@@ -284,59 +385,59 @@ public class ArrecadacaoView extends javax.swing.JFrame {
         Menu.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 1, 1, 1, new java.awt.Color(153, 153, 153)));
         Menu.setFont(new java.awt.Font("Arial", 3, 12)); // NOI18N
 
-        MenCad.setText("Gerenciar");
-        MenCad.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
+        menCadastros.setText("Gerenciar");
+        menCadastros.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
 
-        MenCadCli.setText("Parques");
-        MenCadCli.addActionListener(new java.awt.event.ActionListener() {
+        menCadastroParque.setText("Parques");
+        menCadastroParque.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                MenCadCliActionPerformed(evt);
+                menCadastroParqueActionPerformed(evt);
             }
         });
-        MenCad.add(MenCadCli);
+        menCadastros.add(menCadastroParque);
 
-        MenCadOs.setText("Clientes");
-        MenCadOs.addActionListener(new java.awt.event.ActionListener() {
+        menCadastroCliente.setText("Clientes");
+        menCadastroCliente.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                MenCadOsActionPerformed(evt);
+                menCadastroClienteActionPerformed(evt);
             }
         });
-        MenCad.add(MenCadOs);
+        menCadastros.add(menCadastroCliente);
 
-        Menu.add(MenCad);
+        Menu.add(menCadastros);
 
-        jMenu1.setText("PDA");
-        jMenu1.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
-        jMenu1.addMouseListener(new java.awt.event.MouseAdapter() {
+        menPDA.setText("PDA");
+        menPDA.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
+        menPDA.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jMenu1MouseClicked(evt);
+                menPDAMouseClicked(evt);
             }
         });
-        jMenu1.addActionListener(new java.awt.event.ActionListener() {
+        menPDA.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenu1ActionPerformed(evt);
+                menPDAActionPerformed(evt);
             }
         });
-        Menu.add(jMenu1);
+        Menu.add(menPDA);
 
         MenOpc.setText("Opções");
         MenOpc.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
 
-        MenOpcSai.setText("Configurações");
-        MenOpcSai.addActionListener(new java.awt.event.ActionListener() {
+        menConfiguracao.setText("Configurações");
+        menConfiguracao.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                MenOpcSaiActionPerformed(evt);
+                menConfiguracaoActionPerformed(evt);
             }
         });
-        MenOpc.add(MenOpcSai);
+        MenOpc.add(menConfiguracao);
 
-        MenOpcSai1.setText("Sair");
-        MenOpcSai1.addActionListener(new java.awt.event.ActionListener() {
+        menSair.setText("Sair");
+        menSair.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                MenOpcSai1ActionPerformed(evt);
+                menSairActionPerformed(evt);
             }
         });
-        MenOpc.add(MenOpcSai1);
+        MenOpc.add(menSair);
 
         Menu.add(MenOpc);
 
@@ -377,87 +478,33 @@ public class ArrecadacaoView extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_cbParqueActionPerformed
 
-    private void MenCadCliActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MenCadCliActionPerformed
+    private void menSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menSairActionPerformed
         // TODO add your handling code here:
-        ParqueView tela = new ParqueView();
-        tela.setVisible(true);
-        this.dispose();
-    }//GEN-LAST:event_MenCadCliActionPerformed
+    }//GEN-LAST:event_menSairActionPerformed
 
-    private void MenOpcSai1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MenOpcSai1ActionPerformed
+    private void menConfiguracaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menConfiguracaoActionPerformed
+        // TODO add your handling code here:  
+    }//GEN-LAST:event_menConfiguracaoActionPerformed
+
+    private void menPDAActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menPDAActionPerformed
         // TODO add your handling code here:
-        this.dispose();
-    }//GEN-LAST:event_MenOpcSai1ActionPerformed
+    }//GEN-LAST:event_menPDAActionPerformed
 
-    private void MenCadOsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MenCadOsActionPerformed
+    private void menPDAMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_menPDAMouseClicked
+        // TODO add your handling code here:      
+    }//GEN-LAST:event_menPDAMouseClicked
+
+    private void menCadastroClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menCadastroClienteActionPerformed
         // TODO add your handling code here:
-        ClienteView tela = new ClienteView();
-        tela.setVisible(true);
-        this.dispose();
-    }//GEN-LAST:event_MenCadOsActionPerformed
+      
+    }//GEN-LAST:event_menCadastroClienteActionPerformed
 
-    private void jMenu1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenu1ActionPerformed
+    private void menCadastroParqueActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menCadastroParqueActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jMenu1ActionPerformed
-
-    private void MenOpcSaiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MenOpcSaiActionPerformed
-        // TODO add your handling code here:
-        ConfiguracaoView tela = new ConfiguracaoView();
-        tela.setVisible(true);
-    }//GEN-LAST:event_MenOpcSaiActionPerformed
-
-    private void jMenu1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenu1MouseClicked
-        // TODO add your handling code here:
-        PdaView tela = new PdaView();
-        tela.setVisible(true);
-        this.dispose();
-    }//GEN-LAST:event_jMenu1MouseClicked
-
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(ArrecadacaoView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(ArrecadacaoView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(ArrecadacaoView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(ArrecadacaoView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new ArrecadacaoView().setVisible(true);
-            }
-        });
-    }
+    }//GEN-LAST:event_menCadastroParqueActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JMenu MenCad;
-    private javax.swing.JMenuItem MenCadCli;
-    private javax.swing.JMenuItem MenCadOs;
     private javax.swing.JMenu MenOpc;
-    private javax.swing.JMenuItem MenOpcSai;
-    private javax.swing.JMenuItem MenOpcSai1;
     private javax.swing.JMenuBar Menu;
     private javax.swing.JComboBox<String> cbAno;
     private javax.swing.JComboBox<String> cbMes;
@@ -465,7 +512,6 @@ public class ArrecadacaoView extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JMenu jMenu1;
     private javax.swing.JPanel jPanel10;
     private javax.swing.JPanel jPanel11;
     private javax.swing.JPanel jPanel4;
@@ -477,6 +523,12 @@ public class ArrecadacaoView extends javax.swing.JFrame {
     private javax.swing.JLabel lblValorMedio;
     private javax.swing.JLabel lblVendas;
     private javax.swing.JLabel lblVendas1;
+    private javax.swing.JMenuItem menCadastroCliente;
+    private javax.swing.JMenuItem menCadastroParque;
+    private javax.swing.JMenu menCadastros;
+    private javax.swing.JMenuItem menConfiguracao;
+    private javax.swing.JMenu menPDA;
+    private javax.swing.JMenuItem menSair;
     private javax.swing.JTable tbArrecadacoes;
     // End of variables declaration//GEN-END:variables
 }

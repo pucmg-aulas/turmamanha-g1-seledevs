@@ -19,7 +19,7 @@
         </Property>
       </Properties>
       <SubComponents>
-        <Menu class="javax.swing.JMenu" name="MenCad">
+        <Menu class="javax.swing.JMenu" name="menCadastros">
           <Properties>
             <Property name="text" type="java.lang.String" value="Gerenciar"/>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
@@ -27,25 +27,25 @@
             </Property>
           </Properties>
           <SubComponents>
-            <MenuItem class="javax.swing.JMenuItem" name="MenCadCli">
+            <MenuItem class="javax.swing.JMenuItem" name="menCadastroParque">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Parques"/>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="MenCadCliActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="menCadastroParqueActionPerformed"/>
               </Events>
             </MenuItem>
-            <MenuItem class="javax.swing.JMenuItem" name="MenCadOs">
+            <MenuItem class="javax.swing.JMenuItem" name="menCadastroCliente">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Clientes"/>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="MenCadOsActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="menCadastroClienteActionPerformed"/>
               </Events>
             </MenuItem>
           </SubComponents>
         </Menu>
-        <Menu class="javax.swing.JMenu" name="jMenu1">
+        <Menu class="javax.swing.JMenu" name="menPDA">
           <Properties>
             <Property name="text" type="java.lang.String" value="PDA"/>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
@@ -53,8 +53,8 @@
             </Property>
           </Properties>
           <Events>
-            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jMenu1MouseClicked"/>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenu1ActionPerformed"/>
+            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="menPDAMouseClicked"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="menPDAActionPerformed"/>
           </Events>
         </Menu>
         <Menu class="javax.swing.JMenu" name="MenOpc">
@@ -65,20 +65,20 @@
             </Property>
           </Properties>
           <SubComponents>
-            <MenuItem class="javax.swing.JMenuItem" name="MenOpcSai">
+            <MenuItem class="javax.swing.JMenuItem" name="menConfiguracao">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Configura&#xe7;&#xf5;es"/>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="MenOpcSaiActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="menConfiguracaoActionPerformed"/>
               </Events>
             </MenuItem>
-            <MenuItem class="javax.swing.JMenuItem" name="MenOpcSai1">
+            <MenuItem class="javax.swing.JMenuItem" name="menSair">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Sair"/>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="MenOpcSai1ActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="menSairActionPerformed"/>
               </Events>
             </MenuItem>
           </SubComponents>
@@ -395,7 +395,7 @@
                                   <Component id="cbParque" alignment="3" min="-2" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace min="-2" pref="16" max="-2" attributes="0"/>
-                              <Component id="jScrollPane3" pref="408" max="32767" attributes="0"/>
+                              <Component id="jScrollPane3" pref="432" max="32767" attributes="0"/>
                               <EmptySpace min="-2" pref="8" max="-2" attributes="0"/>
                           </Group>
                       </Group>
