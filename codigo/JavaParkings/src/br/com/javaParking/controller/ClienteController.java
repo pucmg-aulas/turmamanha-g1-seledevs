@@ -82,6 +82,10 @@ public class ClienteController {
         this.view.setVisible(true);
     }
 
+    ClienteController(ClienteView clienteViewMock, ClienteDao clienteDaoMock) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
     // Método para pesquisar cliente por nome parcial
     public void pesquisarCliente() {
         String nome = view.getTxtPesquisar().getText().trim();
