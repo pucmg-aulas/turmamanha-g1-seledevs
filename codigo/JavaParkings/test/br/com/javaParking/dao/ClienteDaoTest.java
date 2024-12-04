@@ -24,15 +24,13 @@ public class ClienteDaoTest {
 
     @BeforeEach
     void setUp() {
-        // Configura o banco de dados em memória H2 para os testes
         dao = new ClienteDao();
-        dao.criarTabela(); // Cria a tabela de clientes no banco de dados
+        dao.criarTabela(); 
     }
 
     @AfterEach
     void tearDown() {
-        // Limpa os dados da tabela após cada teste (opcional)
-        dao.excluirCliente(1); // Exclui clientes com IDs específicos, se necessário
+        dao.excluirCliente(1);
     }
 
     @Test
