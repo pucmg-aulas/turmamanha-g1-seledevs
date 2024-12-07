@@ -1,6 +1,7 @@
 package br.com.javaParking.controller;
 
 import br.com.javaParking.dao.ParqueDAO;
+import br.com.javaParking.model.Cliente;
 import br.com.javaParking.model.Parque;
 import br.com.javaParking.view.parque.ParqueView;
 import javax.swing.JOptionPane;
@@ -10,7 +11,7 @@ import java.util.List;
 public class ParqueController {
 
     private ParqueView view;
-    private Parque parqueSelecionado; 
+    private Parque parqueSelecionado;
 
     public ParqueController() {
         this.view = new ParqueView();
@@ -26,7 +27,7 @@ public class ParqueController {
             int linha = this.view.getTbParques().getSelectedRow();
             if (linha != -1) {
                 String nomeParque = (String) this.view.getTbParques().getValueAt(linha, 0);
-                parqueSelecionado = ParqueDAO.buscarPorNome(nomeParque);
+                parqueSelecionado = (Parque) ParqueDAO.buscarPorNomeParcial(nomeParque);
 
                 if (parqueSelecionado != null) {
                     this.view.getTxtNomeParque().setText(parqueSelecionado.getNomeParque());
@@ -61,8 +62,9 @@ public class ParqueController {
 
             if (ParqueDAO.addParque(novoParque)) {
                 JOptionPane.showMessageDialog(view, "Parque adicionado com sucesso!");
+                carregarTabela();
                 limparCampos();
-                createMode();
+                habilitarModoEdicao();
                 
             } else {
                 JOptionPane.showMessageDialog(view, "Erro ao adicionar o parque.", "Erro", JOptionPane.ERROR_MESSAGE);
@@ -89,8 +91,10 @@ public class ParqueController {
 
             if (ParqueDAO.alterarParque(parqueSelecionado)) {
                 JOptionPane.showMessageDialog(view, "Parque alterado com sucesso!");
-                limparCampos();
                 carregarTabela();
+                habilitarModoEdicao();
+                limparCampos();
+     
             } else {
                 JOptionPane.showMessageDialog(view, "Erro ao alterar o parque.", "Erro", JOptionPane.ERROR_MESSAGE);
             }
@@ -111,6 +115,7 @@ public class ParqueController {
         if (confirmacao == JOptionPane.YES_OPTION) {
             if (ParqueDAO.excluirParque(parqueSelecionado.getId())) {
                 JOptionPane.showMessageDialog(view, "Parque excluído com sucesso!");
+                habilitarModoEdicao();
                 limparCampos();
                 carregarTabela();
             } else {
@@ -119,6 +124,28 @@ public class ParqueController {
         }
     }
 
+    public void pesquisarParque() {
+        carregarTabela();
+        habilitarModoEdicao();
+        String nomeParque = view.getTxtPesquisarParque().getText().trim();
+
+        // Se o campo estiver vazio, carrega todos os parques novamente
+        if (nomeParque.isEmpty()) {
+            carregarTabela();
+            return;
+        }
+
+        // Pesquisa o parque pelo nome ou caracteres inseridos
+        List<Parque> parquesEncontrados = ParqueDAO.buscarPorNomeParcial(nomeParque);
+
+        // Atualizar a tabela com os resultados encontrados
+        DefaultTableModel tm = new DefaultTableModel(new Object[]{"Nome", "NºVagas"}, 0);
+        for (Parque parque : parquesEncontrados) {
+            tm.addRow(new Object[]{parque.getNomeParque(), parque.getNumeroVagas()});
+        }
+        view.getTbParques().setModel(tm);
+    }
+    
     private void limparCampos() {
         this.view.getTxtNomeParque().setText("");
         this.view.getTxtNumeroVagas().setText("");
@@ -138,5 +165,6 @@ public class ParqueController {
         this.view.getBtnAtualizar().setEnabled(true);
         this.view.getBtnExcluir().setEnabled(false);
     }
+    
     
 }
