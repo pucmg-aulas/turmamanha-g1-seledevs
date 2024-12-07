@@ -1,104 +1,134 @@
 package br.com.javaParking.dao;
 
 import br.com.javaParking.model.Veiculo;
-import br.com.javaParking.util.Util;
-import java.io.Serializable;
+import br.com.javaParking.util.Comunicacao;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
-public class VeiculoDAO extends ConexaoDAO implements Serializable {
+public class VeiculoDao {
 
-    private List<Veiculo> veiculos;
-    // Atributo da própria classe, estático, para implementar o Singleton
-    private static VeiculoDAO instance;
-
-    //Endereço do arquivo serializado que contém a coleção de veiculos
-    private final String localArquivo = Util.CAMINHOPADRAO + "Veiculos.txt";
-
-    //Construtor privado, pois não podemos permitir mais de uma instância desta classe
-    //que controla a coleção de carros do sistema (Singleton)
-    private VeiculoDAO() {
-        this.veiculos = new ArrayList<>();
-        carregaVeiculos();
-    }
-
-    //Método para recuperar a única instância de veiculos
-    public static VeiculoDAO getInstance() {
-        if (instance == null) {
-            instance = new VeiculoDAO();
+    
+   //Temos que decidir se vai criar um veiculo solto ou com a FK de cliente
+    
+    // Cria a tabela de veículos no banco de dados
+    public static String criarTabela() {
+        try {
+            Comunicacao.setSql("""
+                CREATE TABLE IF NOT EXISTS
+                    interno.tbveiculo(
+                                    placa VARCHAR(15) NOT NULL UNIQUE,
+                                    cliente_cpf VARCHAR(255) NOT NULL,
+                                    FOREIGN KEY (cliente_cpf) REFERENCES interno.tbcliente(cpf)
+                    );
+                """);
+            Comunicacao.prepararConexcao();
+            Comunicacao.executar();
+        } catch (Exception e) {
+            return "Erro ao criar tabela de veículos: " + e;
         }
-        return instance;
+        return "Tabela de veículos criada com sucesso";
     }
 
-    public void addVeiculo(Veiculo veiculo) {
-        this.veiculos.add(veiculo);
-        grava();
+    // Adiciona um veículo ao banco de dados
+    public static void addVeiculo(Veiculo veiculo, String clienteCpf) {
+        try {
+            Comunicacao.setSql("""
+                INSERT INTO
+                    interno.tbveiculo (placa, cliente_cpf)
+                VALUES
+                    (?,?);
+                """);
+            Comunicacao.prepararConexcao();
+            Comunicacao.getPst().setString(1, veiculo.getPlaca());
+            Comunicacao.getPst().setString(2, clienteCpf);
+            Comunicacao.executar();
+        } catch (Exception e) {
+            System.out.println("Erro ao adicionar veículo: " + e);
+        }
     }
 
-    private void carregaVeiculos() {
-       this.veiculos = super.leitura(localArquivo);
-    }
+    // Busca um veículo pela placa
+    public static Veiculo buscarPorPlaca(String placa) {
+        try {
+            Comunicacao.setSql("SELECT * FROM interno.tbveiculo WHERE placa = ?;");
+            Comunicacao.prepararConexcao();
+            Comunicacao.getPst().setString(1, placa);
+            Comunicacao.executarQuery();
 
-    private void grava() {
-       super.grava(localArquivo, veiculos);
-    }
-
-    public List<Veiculo> getVeiculos() {
-        return veiculos;
-    }
-
-    public void excluirVeiculo(Veiculo veiculo) {
-        veiculos.remove(veiculo);
-        grava();
-    }
-
-    public Veiculo buscarCarroPorPlaca(String placa) {
-        for (Veiculo veiculo : veiculos) {
-            if (veiculo.getPlaca().equals(placa)) {
-                return veiculo;
+            if (Comunicacao.getRs().next()) {
+                return new Veiculo(Comunicacao.getRs().getString("placa"));
             }
+        } catch (Exception e) {
+            System.out.println("Erro ao buscar veículo por placa: " + e);
         }
         return null;
     }
-    
-    /* Nos parametros temos dois: 
-            veiculoExistente -> Em termos de codigo ele seria o novo Veiculo/Objeto que vc vai colocar no lugar de um antigo 
-                                (Observação: o novo objeto tem que ter um campo em comum com o antigo)
-            placaAnterior -> Seria o campo em comum ultilizado para localizar e substituir
-    */
-    public boolean altera(Veiculo veiculoExistente, String placaAnterior) {
 
+    // Lista todos os veículos de um cliente
+    public static List<Veiculo> listarVeiculosPorCliente(String clienteCpf) {
+        List<Veiculo> veiculos = new ArrayList<>();
         try {
-            if (veiculoExistente.getPlaca().equals(placaAnterior)) {
-                // Lista temporaria
-                ArrayList<Veiculo> listaTemp = new ArrayList<Veiculo>();
+            Comunicacao.setSql("SELECT * FROM interno.tbveiculo WHERE cliente_cpf = ?;");
+            Comunicacao.prepararConexcao();
+            Comunicacao.getPst().setString(1, clienteCpf);
+            Comunicacao.executarQuery();
 
-                // Loop para criar lista temporaria
-                for (Iterator<Veiculo> it = veiculos.iterator(); it.hasNext();) {
-                    Veiculo veiculo = it.next();
-                    if (!veiculo.getPlaca().equals(placaAnterior)) {
-                        listaTemp.add(veiculo);
-                    } else {
-                        listaTemp.add(veiculoExistente);
-                    }
-                }
-
-                // Zerar lista 
-                veiculos.removeAll(veiculos);
-                
-                // Preencher lista com novos dados
-                veiculos.addAll(listaTemp);
-                
-                // Sobreescrever dados antigos
-                grava();
-
-                return true;
-            }else{                
-                return false;
+            while (Comunicacao.getRs().next()) {
+                veiculos.add(new Veiculo(Comunicacao.getRs().getString("placa")));
             }
         } catch (Exception e) {
-            return false;
+            System.out.println("Erro ao listar veículos por cliente: " + e);
         }
+        return veiculos;
+    }
+
+    // Exclui um veículo pela placa
+    public static void excluirVeiculo(String placa) {
+        try {
+            Comunicacao.setSql("DELETE FROM interno.tbveiculo WHERE placa = ?;");
+            Comunicacao.prepararConexcao();
+            Comunicacao.getPst().setString(1, placa);
+            Comunicacao.executar();
+        } catch (Exception e) {
+            System.out.println("Erro ao excluir veículo: " + e);
+        }
+    }
+
+    // Atualiza a placa de um veículo
+    public static void alterarPlaca(String novaPlaca, String placaAntiga) {
+        try {
+            Comunicacao.setSql("""
+                UPDATE
+                    interno.tbveiculo
+                SET
+                    placa = ?
+                WHERE
+                    placa = ?;
+                """);
+            Comunicacao.prepararConexcao();
+            Comunicacao.getPst().setString(1, novaPlaca);
+            Comunicacao.getPst().setString(2, placaAntiga);
+            Comunicacao.executar();
+        } catch (Exception e) {
+            System.out.println("Erro ao alterar placa do veículo: " + e);
+        }
+    }
+
+   
+    // Lista todos os veículos no banco de dados
+    public static List<Veiculo> listarTodosVeiculos() {
+        List<Veiculo> veiculos = new ArrayList<>();
+        try {
+            Comunicacao.setSql("SELECT * FROM interno.tbveiculo;");
+            Comunicacao.prepararConexcao();
+            Comunicacao.executarQuery();
+
+            while (Comunicacao.getRs().next()) {
+                veiculos.add(new Veiculo(Comunicacao.getRs().getString("placa")));
+            }
+        } catch (Exception e) {
+            System.out.println("Erro ao listar todos os veículos: " + e);
+        }
+        return veiculos;
     }
 }

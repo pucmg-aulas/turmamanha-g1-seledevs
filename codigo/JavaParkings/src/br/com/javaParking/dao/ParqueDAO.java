@@ -32,7 +32,7 @@ public class ParqueDAO extends ConexaoDAO {
                                         interno.tbparques(
                                             id SERIAL,
                                             nomeParque VARCHAR(100),
-                                            numeroDeVagas INT NOT NULL,
+                                            numeroVagas INT NOT NULL,
                                             vagasPorFileira INT NOT NULL,
                                             PRIMARY KEY (id)
                                  );
@@ -58,7 +58,7 @@ public class ParqueDAO extends ConexaoDAO {
                 Parque x = new Parque(
                         Comunicacao.getRs().getInt("id"),
                         Comunicacao.getRs().getString("nomeParque"),
-                        Comunicacao.getRs().getInt("numeroDeVagas"),
+                        Comunicacao.getRs().getInt("numeroVagas"),
                         Comunicacao.getRs().getInt("vagasPorFileira")
                 );
 
@@ -71,15 +71,13 @@ public class ParqueDAO extends ConexaoDAO {
         return null;
 
     }
-
-    
+ 
     public static boolean addParque(Parque parque) {
         
         try {
             Comunicacao.setSql("""
                                 INSERT INTO 
                                interno.tbparques(
-                                    id,
                                     nomeParque, 
                                     numeroVagas, 
                                     vagasPorFileira)
@@ -139,17 +137,19 @@ public class ParqueDAO extends ConexaoDAO {
         }
     }
     
-    public static Parque buscarPorNome(String nomeParque) {
+    public static List<Parque> buscarPorNomeParcial(String nomeParque) {
+        
+        List<Parque> parques = new ArrayList<>();
         
         try {
+            
             Comunicacao.setSql("""
                                     SELECT *
                                     FROM interno.tbparques
-                                    WHERE nomeParque = ?;
-                                 );
+                                    WHERE nomeParque LIKE ?;
                                 """);
             Comunicacao.prepararConexcao();
-            Comunicacao.getPst().setString(1, nomeParque);
+            Comunicacao.getPst().setString(1, "%" + nomeParque + "%");
             Comunicacao.executarQuery();
 
             if (Comunicacao.getRs().next()) {
@@ -159,19 +159,19 @@ public class ParqueDAO extends ConexaoDAO {
                         Comunicacao.getRs().getInt("numeroVagas"),
                         Comunicacao.getRs().getInt("vagasPorFileira")
                 );
-                return parqueEncontrado;
+                parques.add(parqueEncontrado);
             }
         } catch (Exception e) {
             System.out.println("Erro ao pesquisar parque por nome: " + e);
         }
-        return null;
+        return parques;
     }
     
     
     public static List<Parque> listarParques() {
         List<Parque> parques = new ArrayList<>();
         try {
-            Comunicacao.setSql("SELECT nomeParque, numeroVagas FROM interno.tbparques;");
+            Comunicacao.setSql("SELECT * FROM interno.tbparques;");
             Comunicacao.prepararConexcao();
             Comunicacao.executarQuery();
 
@@ -310,4 +310,5 @@ public class ParqueDAO extends ConexaoDAO {
     
     // FIM DOS MÉTODOS ESPECIAIS DE CRUD DO PARQUE:
     */
+    
 }

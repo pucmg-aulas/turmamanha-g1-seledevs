@@ -6,106 +6,94 @@ import br.com.javaParking.model.tiposVaga.Comum;
 import br.com.javaParking.model.tiposVaga.Idoso;
 import br.com.javaParking.model.tiposVaga.PCD;
 import br.com.javaParking.model.tiposVaga.VIP;
-import br.com.javaParking.util.Util;
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileReader;
-import java.io.FileWriter;
+import br.com.javaParking.util.Comunicacao;
+
+import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 
-public class VagaDAO {
+public class VagaDao {
 
-    public final static String CAMINHOVAGA;
-
-    static {
-        CAMINHOVAGA = Util.CAMINHOPADRAO + "vagas.txt";
-    }
-
-    public static boolean gravar(Vaga vaga) {
-
-        File registro = new File(CAMINHOVAGA);
-
+   
+    public static String criarTabela() {
         try {
-
-            File dir = registro.getParentFile();
-            if (dir != null && !dir.exists()) {
-                dir.mkdirs();
-            }
-
-            if (!registro.exists()) {
-                registro.createNewFile();
-            }
-
-            try (BufferedWriter w = new BufferedWriter(new FileWriter(registro, true))) {
-                if (vaga instanceof Idoso) {
-                    w.write(vaga.getParque() + "&" + vaga.getIdentificador() + "&" + vaga.isOcupada() + "&" + "Idoso" + "&" + "\n");
-                } else if (vaga instanceof PCD) {
-                    w.write(vaga.getParque() + "&" + vaga.getIdentificador() + "&" + vaga.isOcupada() + "&" + "Pcd" + "&" + "\n");
-                } else if (vaga instanceof VIP) {
-                    w.write(vaga.getParque() + "&" + vaga.getIdentificador() + "&" + vaga.isOcupada() + "&" + "Vip" + "&" + "\n");
-                } else if (vaga instanceof Comum) {
-                    w.write(vaga.getParque() + "&" + vaga.getIdentificador() + "&" + vaga.isOcupada() + "&" + "Comum" + "&" + "\n");
-                }
-
-                w.write("§\n");
-            }
-
-            return true;
-
+            Comunicacao.setSql("""
+                CREATE TABLE IF NOT EXISTS 
+                    interno.tbvagas (
+                        identificador VARCHAR(50) PRIMARY KEY,
+                        tipo VARCHAR(20) NOT NULL,
+                        ocupada BOOLEAN NOT NULL,
+                        parque_id INT NOT NULL,
+                        FOREIGN KEY (parque_id) REFERENCES interno.tbparques(id)
+                    );
+                """);
+            Comunicacao.prepararConexcao();
+            Comunicacao.executar();
         } catch (Exception e) {
-            e.printStackTrace();
-            return false;
+            return "Erro ao criar tabela de vagas: " + e;
+        }
+        return "Tabela de vagas criada com sucesso";
+    }
+
+ 
+    public static void addVaga(Vaga vaga) {
+        try {
+            String tipo = vaga.getClass().getSimpleName().toUpperCase(); 
+            Comunicacao.setSql("""
+                INSERT INTO
+                    interno.tbvagas (identificador, tipo, ocupada, parque_id)
+                VALUES
+                    (?, ?, ?, ?);
+                """);
+            Comunicacao.prepararConexcao();
+            Comunicacao.getPst().setString(1, vaga.getIdentificador());
+            Comunicacao.getPst().setString(2, tipo);
+            Comunicacao.getPst().setBoolean(3, vaga.isOcupada());
+            Comunicacao.getPst().setInt(4, vaga.getParque().getId());
+            Comunicacao.executar();
+        } catch (Exception e) {
+            System.out.println("Erro ao adicionar vaga: " + e);
         }
     }
 
-    public static List<Vaga> listar(Parque parque) {
-        String identificador;
-        String ocupada;
-        String tipo;
 
-        File registro = new File(CAMINHOVAGA);
-        List<Vaga> vagas = new ArrayList<Vaga>();
+    public static List<Vaga> getVagas(Parque parque) {
+        List<Vaga> vagas = new ArrayList<>();
+        try {
+            Comunicacao.setSql("SELECT * FROM interno.tbvagas WHERE parque_id = ?;");
+            Comunicacao.prepararConexcao();
+            Comunicacao.getPst().setInt(1, parque.getId());
+            ResultSet rs = Comunicacao.getPst().executeQuery();
+            
+            while (rs.next()) {
+                String tipo = rs.getString("tipo");
+                String identificador = rs.getString("identificador");
+                boolean ocupada = rs.getBoolean("ocupada");
 
-        try (BufferedReader r = new BufferedReader(new FileReader(registro))) {
-            String linha;
-            StringBuilder vagaAtual = new StringBuilder();
-            Vaga vaga = null;
-
-            while ((linha = r.readLine()) != null) {
-                vagaAtual.append(linha).append("\n");
-
-                if (linha.equals("§")) {
-
-                    identificador = vagaAtual.toString().split("&")[1].replace("\n", "");
-                    ocupada = vagaAtual.toString().split("&")[2].replace("\n", "");
-                    tipo = vagaAtual.toString().split("&")[3].replace("\n", "");
-
-                    if (String.valueOf(parque.getId()).equals(vagaAtual.toString().split("&")[0].replace("\n", ""))) {
-
-                        if (tipo.equals("Idoso")) {
-                            vaga = new Idoso(parque, identificador,Boolean.parseBoolean(ocupada));
-                        } else if (tipo.equals("Pcd")) {
-                            vaga = new PCD(parque, identificador,Boolean.parseBoolean(ocupada));
-                        } else if (tipo.equals("Vip")) {
-                            vaga = new VIP(parque, identificador,Boolean.parseBoolean(ocupada));
-                        } else if (tipo.equals("Comum")) {
-                            vaga = new Comum(parque, identificador,Boolean.parseBoolean(ocupada));
-                        }
-                        
-                        vagas.add(vaga); 
-                        
-                    }
-
-                    vagaAtual.setLength(0);
-                }
+                Vaga vaga = switch (tipo) {
+                    case "COMUM" -> new Comum(parque, identificador, ocupada);
+                    case "IDOSO" -> new Idoso(parque, identificador, ocupada);
+                    case "PCD" -> new PCD(parque, identificador, ocupada);
+                    case "VIP" -> new VIP(parque, identificador, ocupada);
+                    default -> throw new IllegalArgumentException("Tipo de vaga desconhecido: " + tipo);
+                };
+                vagas.add(vaga);
             }
-
         } catch (Exception e) {
-            System.out.println("Erro durante a leitura do registro: " + e.getMessage());
+            System.out.println("Erro ao recuperar vagas: " + e);
         }
-
         return vagas;
+    }
+
+   
+    public static void excluirVaga(String identificador) {
+        try {
+            Comunicacao.setSql("DELETE FROM interno.tbvagas WHERE identificador = ?;");
+            Comunicacao.prepararConexcao();
+            Comunicacao.getPst().setString(1, identificador);
+            Comunicacao.executar();
+        } catch (Exception e) {
+            System.out.println("Erro ao excluir vaga: " + e);
+        }
     }
 }

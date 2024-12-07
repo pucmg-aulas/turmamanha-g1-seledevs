@@ -4,7 +4,7 @@
  */
 package br.com.javaParking.controller;
 
-import br.com.javaParking.dao.VeiculoDAO;
+import br.com.javaParking.dao.VeiculoDao;
 import br.com.javaParking.model.Veiculo;
 import br.com.javaParking.view.veiculo.VeiculoView;
 import javax.swing.JOptionPane;
@@ -15,20 +15,13 @@ import javax.swing.JOptionPane;
  */
 public class VeiculoController {
     private VeiculoView view;
-    private VeiculoDAO veiculos;
+    private VeiculoDao veiculos;
     
     public void addVeiculo(){
         String placa = view.getPlaca().getText();
         
         
         Veiculo v = new Veiculo(placa);
-        
-        // [CONCERTAR] - Mudei o id do cliente, criar de acordo com o CPF
-        veiculos.addVeiculo(v);
-        
-        JOptionPane.showMessageDialog(view, "Carro salvo com sucesso!");
-        
-        limpartela();
     }
     
     private void limpartela() {
