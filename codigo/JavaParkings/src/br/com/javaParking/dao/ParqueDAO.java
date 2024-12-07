@@ -139,32 +139,33 @@ public class ParqueDAO extends ConexaoDAO {
     
     public static List<Parque> buscarPorNomeParcial(String nomeParque) {
         
-        List<Parque> parques = new ArrayList<>();
+        List<Parque> parquesEncontrados = new ArrayList<>();
         
         try {
+ 
             
-            Comunicacao.setSql("""
+            Comunicacao.setSql(""" 
                                     SELECT *
                                     FROM interno.tbparques
                                     WHERE nomeParque LIKE ?;
-                                """);
+                             """);
             Comunicacao.prepararConexcao();
             Comunicacao.getPst().setString(1, "%" + nomeParque + "%");
             Comunicacao.executarQuery();
 
             if (Comunicacao.getRs().next()) {
-                Parque parqueEncontrado = new Parque(
+                Parque parque = new Parque(
                         Comunicacao.getRs().getInt("id"),
                         Comunicacao.getRs().getString("nomeParque"),
                         Comunicacao.getRs().getInt("numeroVagas"),
                         Comunicacao.getRs().getInt("vagasPorFileira")
                 );
-                parques.add(parqueEncontrado);
+                parquesEncontrados.add(parque);
             }
         } catch (Exception e) {
             System.out.println("Erro ao pesquisar parque por nome: " + e);
         }
-        return parques;
+        return parquesEncontrados;
     }
     
     
@@ -172,6 +173,8 @@ public class ParqueDAO extends ConexaoDAO {
         List<Parque> parques = new ArrayList<>();
         try {
             Comunicacao.setSql("SELECT * FROM interno.tbparques;");
+            
+            
             Comunicacao.prepararConexcao();
             Comunicacao.executarQuery();
 
