@@ -1,8 +1,10 @@
 package br.com.javaParking.controller;
 
 import br.com.javaParking.dao.ParqueDAO;
+import br.com.javaParking.dao.VagaDao;
 import br.com.javaParking.model.Cliente;
 import br.com.javaParking.model.Parque;
+import br.com.javaParking.model.Vaga;
 import br.com.javaParking.view.parque.ParqueView;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -22,18 +24,24 @@ public class ParqueController {
         this.view.getBtnAdicionar().addActionListener(e -> adicionarParque());
         this.view.getBtnAlterar().addActionListener(e -> alterarParque());
         this.view.getBtnExcluir().addActionListener(e -> excluirParque());
+        
+        this.view.getBtnVoltar().addActionListener((e) -> {
+            new ArrecadacaoController();
+            this.view.dispose();
+        });
 
         this.view.getTbParques().getSelectionModel().addListSelectionListener(e -> {
             int linha = this.view.getTbParques().getSelectedRow();
             if (linha != -1) {
                 String nomeParque = (String) this.view.getTbParques().getValueAt(linha, 0);
-                parqueSelecionado = (Parque) ParqueDAO.buscarPorNomeParcial(nomeParque);
+                parqueSelecionado = ParqueDAO.buscarPorNome(nomeParque);
 
                 if (parqueSelecionado != null) {
                     this.view.getTxtNomeParque().setText(parqueSelecionado.getNomeParque());
                     this.view.getTxtNumeroVagas().setText(String.valueOf(parqueSelecionado.getNumeroVagas()));
                     this.view.getTxtVagasPorFileira().setText(String.valueOf(parqueSelecionado.getVagasPorFileira()));
                     habilitarModoEdicao();
+                    carregarTabelaVaga(parqueSelecionado);
                 }
             }
         });
@@ -51,6 +59,17 @@ public class ParqueController {
 
         this.view.getTbParques().setModel(tm);
     }
+    
+    public void carregarTabelaVaga(Parque parque) {
+        List<Vaga> vagas = VagaDao.getVagas(parque);
+        DefaultTableModel tm = new DefaultTableModel(new Object[]{"identificador", "tipo"}, 0);
+
+        for (Vaga vaga : vagas) {
+            tm.addRow(new Object[]{vaga.getIdentificador(), vaga.getClass().getSimpleName().toUpperCase()});
+        }
+
+        this.view.getTbVagasDoParque().setModel(tm);
+    }
 
     public void adicionarParque() {
         try {
@@ -62,6 +81,7 @@ public class ParqueController {
 
             if (ParqueDAO.addParque(novoParque)) {
                 JOptionPane.showMessageDialog(view, "Parque adicionado com sucesso!");
+                novoParque.montarVagas();
                 carregarTabela();
                 limparCampos();
                 habilitarModoEdicao();
@@ -91,6 +111,8 @@ public class ParqueController {
 
             if (ParqueDAO.alterarParque(parqueSelecionado)) {
                 JOptionPane.showMessageDialog(view, "Parque alterado com sucesso!");
+                VagaDao.excluirVagas(parqueSelecionado);
+                parqueSelecionado.montarVagas();
                 carregarTabela();
                 habilitarModoEdicao();
                 limparCampos();
@@ -150,6 +172,8 @@ public class ParqueController {
         this.view.getTxtNomeParque().setText("");
         this.view.getTxtNumeroVagas().setText("");
         this.view.getTxtVagasPorFileira().setText("");
+        DefaultTableModel tm = new DefaultTableModel(new Object[]{"identificador", "tipo"}, 0);
+        this.view.getTbVagasDoParque().setModel(tm);
         parqueSelecionado = null;
     }
 

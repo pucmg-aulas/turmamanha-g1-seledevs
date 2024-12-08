@@ -22,7 +22,7 @@ public class Main {
         ConexaoDAO.Conexao();
         ConexaoDAO.Tabelas();
         
-         new ClienteController();
+         new ArrecadacaoController();
     }
 
 }

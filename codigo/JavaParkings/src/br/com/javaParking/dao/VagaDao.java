@@ -8,9 +8,9 @@ import br.com.javaParking.model.tiposVaga.PCD;
 import br.com.javaParking.model.tiposVaga.VIP;
 import br.com.javaParking.util.Comunicacao;
 
-import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.JOptionPane;
 
 public class VagaDao {
 
@@ -20,11 +20,12 @@ public class VagaDao {
             Comunicacao.setSql("""
                 CREATE TABLE IF NOT EXISTS 
                     interno.tbvagas (
-                        identificador VARCHAR(50) PRIMARY KEY,
+                        id SERIAL,
+                        identificador VARCHAR(50),
                         tipo VARCHAR(20) NOT NULL,
                         ocupada BOOLEAN NOT NULL,
                         parque_id INT NOT NULL,
-                        FOREIGN KEY (parque_id) REFERENCES interno.tbparques(id)
+                        PRIMARY KEY (id)
                     );
                 """);
             Comunicacao.prepararConexcao();
@@ -63,13 +64,14 @@ public class VagaDao {
             Comunicacao.setSql("SELECT * FROM interno.tbvagas WHERE parque_id = ?;");
             Comunicacao.prepararConexcao();
             Comunicacao.getPst().setInt(1, parque.getId());
-            ResultSet rs = Comunicacao.getPst().executeQuery();
+            Comunicacao.executarQuery();
             
-            while (rs.next()) {
-                String tipo = rs.getString("tipo");
-                String identificador = rs.getString("identificador");
-                boolean ocupada = rs.getBoolean("ocupada");
-
+            while (Comunicacao.getRs().next()) {
+                String tipo = Comunicacao.getRs().getString("tipo");
+                String identificador = Comunicacao.getRs().getString("identificador");
+                boolean ocupada = Comunicacao.getRs().getBoolean("ocupada");
+                
+                
                 Vaga vaga = switch (tipo) {
                     case "COMUM" -> new Comum(parque, identificador, ocupada);
                     case "IDOSO" -> new Idoso(parque, identificador, ocupada);
@@ -86,11 +88,11 @@ public class VagaDao {
     }
 
    
-    public static void excluirVaga(String identificador) {
+    public static void excluirVagas(Parque parque) {
         try {
-            Comunicacao.setSql("DELETE FROM interno.tbvagas WHERE identificador = ?;");
+            Comunicacao.setSql("DELETE FROM interno.tbvagas WHERE parque_id = ?;");
             Comunicacao.prepararConexcao();
-            Comunicacao.getPst().setString(1, identificador);
+            Comunicacao.getPst().setInt(1, parque.getId());
             Comunicacao.executar();
         } catch (Exception e) {
             System.out.println("Erro ao excluir vaga: " + e);

@@ -446,9 +446,7 @@ public class ClienteView extends javax.swing.JFrame {
 
     private void btnVoltarActionPerformed(java.awt.event.ActionEvent evt) {                                          
         // TODO add your handling code here:
-        ArrecadacaoView tela = new ArrecadacaoView();
-        tela.setVisible(true);
-        this.dispose();
+       
     }                                         
 
     

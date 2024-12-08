@@ -13,6 +13,7 @@ import br.com.javaParking.dao.ConexaoDAO;
 // IMPORT DE BIBLIOTECAS DO JAVA:
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.JOptionPane;
 
 public class ParqueDAO extends ConexaoDAO {
     
@@ -131,18 +132,22 @@ public class ParqueDAO extends ConexaoDAO {
     
     public static List<Parque> buscarPorNomeParcial(String nomeParque) {
         
-        List<Parque> parquesEncontrados = new ArrayList<>();
-        
+        List<Parque> parquesEncontrados = new ArrayList<>();        
         try {
  
             
             Comunicacao.setSql(""" 
-                                    SELECT *
-                                    FROM interno.tbparques
-                                    WHERE nomeParque LIKE ?;
+                                    SELECT 
+                                        *
+                                    FROM 
+                                        interno.tbparques
+                                    WHERE 
+                                        nomeParque 
+                                    LIKE 
+                                        ?;
                              """);
             Comunicacao.prepararConexcao();
-            Comunicacao.getPst().setString(1, "%" + nomeParque + "%");
+            Comunicacao.getPst().setString(1, nomeParque + "%");
             Comunicacao.executarQuery();
 
             if (Comunicacao.getRs().next()) {
@@ -158,6 +163,37 @@ public class ParqueDAO extends ConexaoDAO {
             System.out.println("Erro ao pesquisar parque por nome: " + e);
         }
         return parquesEncontrados;
+    }
+    
+    public static Parque buscarPorNome(String nomeParque) {
+             
+        try {            
+            Comunicacao.setSql(""" 
+                                    SELECT 
+                                        *
+                                    FROM 
+                                        interno.tbparques
+                                    WHERE 
+                                        nomeParque = ?;
+                             """);
+            Comunicacao.prepararConexcao();
+            Comunicacao.getPst().setString(1, nomeParque);
+            Comunicacao.executarQuery();
+
+            if (Comunicacao.getRs().next()) {
+                Parque parque = new Parque(
+                        Comunicacao.getRs().getInt("id"),
+                        Comunicacao.getRs().getString("nomeParque"),
+                        Comunicacao.getRs().getInt("numeroVagas"),
+                        Comunicacao.getRs().getInt("vagasPorFileira")
+                );
+                return parque;
+            }
+        } catch (Exception e) {
+            System.out.println("Erro ao pesquisar parque por nome: " + e);
+        }
+        JOptionPane.showMessageDialog(null, "parque nao encontrado");
+        throw new RuntimeException();
     }
     
     
@@ -176,7 +212,6 @@ public class ParqueDAO extends ConexaoDAO {
                         Comunicacao.getRs().getString("nomeParque"),
                         Comunicacao.getRs().getInt("numeroVagas"),
                         Comunicacao.getRs().getInt("vagasPorFileira")
-
                 );
                 parques.add(parque);
             }

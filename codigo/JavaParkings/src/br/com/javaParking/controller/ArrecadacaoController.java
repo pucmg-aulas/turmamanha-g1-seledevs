@@ -45,19 +45,23 @@ public class ArrecadacaoController {
             this.view.dispose();
         });
 
-        this.view.getMenPDA().addActionListener((e) -> {
+        this.view.getMenCadastroCliente().addActionListener((e) -> {
+            new ClienteController();
+            this.view.dispose();
         });
 
         this.view.getMenConfiguracao().addActionListener((e) -> {
             new ConfiguracaoController();
+            this.view.dispose();
         });
         
         this.view.getMenPDA().addActionListener((e) -> {
+            this.view.dispose();
+        });
+        
+        this.view.getMenCadastroParque().addActionListener((e) -> {
             new ParqueController();
-        });
-        
-        this.view.getMenPDA().addActionListener((e) -> {
-            new ClienteController();
+            this.view.dispose();
         });
 
         this.view.getTbArrecadacoes().getSelectionModel().addListSelectionListener(e -> {
@@ -67,7 +71,7 @@ public class ArrecadacaoController {
        
         this.view.setVisible(true);
     }
-
+    
     private void carregarTabela() {
 
     }

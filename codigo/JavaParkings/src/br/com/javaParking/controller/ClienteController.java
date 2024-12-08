@@ -33,6 +33,11 @@ public class ClienteController {
 
         carregarTabela();
 
+        this.view.getBtnVoltar().addActionListener((e) -> {
+            new ArrecadacaoController();
+            this.view.dispose();
+        });
+        
         this.view.getBtnAdicionar().addActionListener((e) -> {
             addCliente();
         });

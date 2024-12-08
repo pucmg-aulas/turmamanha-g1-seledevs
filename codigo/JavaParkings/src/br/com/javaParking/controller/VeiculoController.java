@@ -40,6 +40,8 @@ public class VeiculoController {
             VeiculoDao.addVeiculo(x, clienteEscolhido);
             limpartela();
         });
+        
+        
 
         this.view.getBtnAtualizar().addActionListener((e) -> {
             limpartela();

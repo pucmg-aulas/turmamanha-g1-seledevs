@@ -60,6 +60,14 @@ public class ParqueView extends javax.swing.JFrame {
     public JToggleButton getBtnAtualizar() {
         return btnAtualizar;
     }
+
+    public JButton getBtnVoltar() {
+        return btnVoltar;
+    }
+
+    public void setBtnVoltar(JButton btnVoltar) {
+        this.btnVoltar = btnVoltar;
+    }
     
     /**
      * This method is called from within the constructor to initialize the form.
@@ -459,9 +467,7 @@ public class ParqueView extends javax.swing.JFrame {
 
     private void btnVoltarActionPerformed(java.awt.event.ActionEvent evt) {                                          
         // TODO add your handling code here:
-        ArrecadacaoView tela = new ArrecadacaoView();
-        tela.setVisible(true);
-        this.dispose();
+       
     }                                         
 
     private void txtnumeroVagasActionPerformed(java.awt.event.ActionEvent evt) {                                               
