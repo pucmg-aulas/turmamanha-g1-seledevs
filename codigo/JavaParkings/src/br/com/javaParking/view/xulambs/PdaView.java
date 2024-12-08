@@ -4,10 +4,14 @@
  */
 package br.com.javaParking.view.xulambs;
 
+import br.com.javaParking.assets.swing.botaoArredondado;
 import br.com.javaParking.model.Arrecadacao;
 import br.com.javaParking.view.parque.ParqueView;
 import br.com.javaParking.view.xulambs.ArrecadacaoView;
 import br.com.javaParking.view.veiculo.VeiculosRegistradosView;
+import javax.swing.JButton;
+import javax.swing.JLabel;
+import javax.swing.JTable;
 
 /**
  *
@@ -22,6 +26,72 @@ public class PdaView extends javax.swing.JFrame {
         initComponents();
     }
 
+    public botaoArredondado getBtnConcluir() {
+        return btnConcluir;
+    }
+
+    public void setBtnConcluir(botaoArredondado btnConcluir) {
+        this.btnConcluir = btnConcluir;
+    }
+
+    public JButton getBtnVoltar() {
+        return btnVoltar1;
+    }
+
+    public void setBtnVoltar(JButton btnVoltar) {
+        this.btnVoltar1 = btnVoltar;
+    }
+
+    public JLabel getLblPesquisa() {
+        return lblPesquisa;
+    }
+
+    public void setLblPesquisa(JLabel lblPesquisa) {
+        this.lblPesquisa = lblPesquisa;
+    }
+
+    public JLabel getLblPesquisarCliente() {
+        return lblPesquisarCliente;
+    }
+
+    public void setLblPesquisarCliente(JLabel lblPesquisarCliente) {
+        this.lblPesquisarCliente = lblPesquisarCliente;
+    }
+
+    public JTable getTbVagasDesocupadas() {
+        return tbVagasDesocupadas;
+    }
+
+    public void setTbVagasDesocupadas(JTable tbVagasDesocupadas) {
+        this.tbVagasDesocupadas = tbVagasDesocupadas;
+    }
+
+    public JTable getTbVagasOcupadas() {
+        return tbVagasOcupadas;
+    }
+
+    public void setTbVagasOcupadas(JTable tbVagasOcupadas) {
+        this.tbVagasOcupadas = tbVagasOcupadas;
+    }
+
+    public static JLabel getLblValorTotal() {
+        return lblValorTotal;
+    }
+
+    public static void setLblValorTotal(JLabel lblValorTotal) {
+        PdaView.lblValorTotal = lblValorTotal;
+    }
+
+    public static JLabel getLblMinutosPassados() {
+        return lblMinutosPassados;
+    }
+
+    public static void setLblMinutosPassados(JLabel lblMinutosPassados) {
+        PdaView.lblMinutosPassados = lblMinutosPassados;
+    }
+    
+    
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -35,7 +105,7 @@ public class PdaView extends javax.swing.JFrame {
         pnTbPrincipal = new javax.swing.JPanel();
         jPanel9 = new javax.swing.JPanel();
         scPdv = new javax.swing.JScrollPane();
-        tbListaDeInformaçoes = new javax.swing.JTable();
+        tbVagasDesocupadas = new javax.swing.JTable();
         lblPesquisa = new javax.swing.JLabel();
         txtPesquisa = new javax.swing.JTextField();
         pnNota = new javax.swing.JPanel();
@@ -44,21 +114,15 @@ public class PdaView extends javax.swing.JFrame {
         txtPesquisarCliente = new javax.swing.JTextField();
         pnCliente = new javax.swing.JPanel();
         scCliente = new javax.swing.JScrollPane();
-        tbCliente = new javax.swing.JTable();
+        tbVagasOcupadas = new javax.swing.JTable();
         btnVoltar = new javax.swing.JButton();
         btnVoltar1 = new javax.swing.JButton();
         jPanel8 = new javax.swing.JPanel();
         lblTotal = new javax.swing.JLabel();
         lblValorTotal = new javax.swing.JLabel();
+        btnConcluir = new br.com.javaParking.assets.swing.botaoArredondado();
+        lblMinutosPassados = new javax.swing.JLabel();
         lblTotal1 = new javax.swing.JLabel();
-        lblTroco = new javax.swing.JLabel();
-        botaoArredondado1 = new br.com.javaParking.assets.swing.botaoArredondado();
-        jPanel5 = new javax.swing.JPanel();
-        rbDebito = new javax.swing.JRadioButton();
-        rbCredito = new javax.swing.JRadioButton();
-        jPanel7 = new javax.swing.JPanel();
-        rbDebito1 = new javax.swing.JRadioButton();
-        rbCredito1 = new javax.swing.JRadioButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Xumlabs Parking");
@@ -78,13 +142,13 @@ public class PdaView extends javax.swing.JFrame {
             }
         });
 
-        tbListaDeInformaçoes = new javax.swing.JTable(){
+        tbVagasDesocupadas = new javax.swing.JTable(){
             public boolean isCellEditable(int rowIndex, int colIndex){
                 return false;
             }
         };
-        tbListaDeInformaçoes.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
-        tbListaDeInformaçoes.setModel(new javax.swing.table.DefaultTableModel(
+        tbVagasDesocupadas.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
+        tbVagasDesocupadas.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {},
                 {},
@@ -95,12 +159,12 @@ public class PdaView extends javax.swing.JFrame {
 
             }
         ));
-        tbListaDeInformaçoes.addMouseListener(new java.awt.event.MouseAdapter() {
+        tbVagasDesocupadas.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                tbListaDeInformaçoesMouseClicked(evt);
+                tbVagasDesocupadasMouseClicked(evt);
             }
         });
-        scPdv.setViewportView(tbListaDeInformaçoes);
+        scPdv.setViewportView(tbVagasDesocupadas);
 
         lblPesquisa.setFont(new java.awt.Font("Dialog", 3, 14)); // NOI18N
         lblPesquisa.setText("Pesquisa:");
@@ -170,13 +234,13 @@ public class PdaView extends javax.swing.JFrame {
         pnCliente.setBackground(java.awt.SystemColor.control);
         pnCliente.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createMatteBorder(1, 0, 0, 0, new java.awt.Color(153, 153, 153)), "Ocupações", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.TOP, new java.awt.Font("Arial", 3, 12))); // NOI18N
 
-        tbCliente = new javax.swing.JTable(){
+        tbVagasOcupadas = new javax.swing.JTable(){
             public boolean isCellEditable(int rowIndex, int colIndex){
                 return false;
             }
         };
-        tbCliente.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
-        tbCliente.setModel(new javax.swing.table.DefaultTableModel(
+        tbVagasOcupadas.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
+        tbVagasOcupadas.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {},
                 {},
@@ -187,23 +251,22 @@ public class PdaView extends javax.swing.JFrame {
 
             }
         ));
-        tbCliente.setFocusable(false);
-        tbCliente.addMouseListener(new java.awt.event.MouseAdapter() {
+        tbVagasOcupadas.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                tbClienteMouseClicked(evt);
+                tbVagasOcupadasMouseClicked(evt);
             }
         });
-        scCliente.setViewportView(tbCliente);
+        scCliente.setViewportView(tbVagasOcupadas);
 
         javax.swing.GroupLayout pnClienteLayout = new javax.swing.GroupLayout(pnCliente);
         pnCliente.setLayout(pnClienteLayout);
         pnClienteLayout.setHorizontalGroup(
             pnClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(scCliente)
+            .addComponent(scCliente, javax.swing.GroupLayout.DEFAULT_SIZE, 455, Short.MAX_VALUE)
         );
         pnClienteLayout.setVerticalGroup(
             pnClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(scCliente, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+            .addComponent(scCliente, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 330, Short.MAX_VALUE)
         );
 
         btnVoltar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/javaParking/assets/img/iconeSetaEsquerda-00.png"))); // NOI18N
@@ -271,7 +334,7 @@ public class PdaView extends javax.swing.JFrame {
         );
 
         jPanel8.setBackground(java.awt.SystemColor.control);
-        jPanel8.setBorder(javax.swing.BorderFactory.createMatteBorder(1, 0, 0, 1, new java.awt.Color(153, 153, 153)));
+        jPanel8.setBorder(javax.swing.BorderFactory.createMatteBorder(1, 0, 0, 0, new java.awt.Color(153, 153, 153)));
 
         lblTotal.setFont(new java.awt.Font("Arial", 3, 36)); // NOI18N
         lblTotal.setText("Total: R$");
@@ -280,16 +343,17 @@ public class PdaView extends javax.swing.JFrame {
         lblValorTotal.setForeground(new java.awt.Color(0, 153, 0));
         lblValorTotal.setText("0.00");
 
+        btnConcluir.setBackground(new java.awt.Color(51, 153, 0));
+        btnConcluir.setForeground(new java.awt.Color(0, 0, 153));
+        btnConcluir.setText("Concluir");
+        btnConcluir.setFont(new java.awt.Font("Arial", 3, 14)); // NOI18N
+
+        lblMinutosPassados.setFont(new java.awt.Font("Arial", 3, 24)); // NOI18N
+        lblMinutosPassados.setForeground(new java.awt.Color(0, 51, 204));
+        lblMinutosPassados.setText("0.00");
+
         lblTotal1.setFont(new java.awt.Font("Arial", 3, 24)); // NOI18N
-        lblTotal1.setText("Ultimo Troco: R$");
-
-        lblTroco.setFont(new java.awt.Font("Arial", 3, 24)); // NOI18N
-        lblTroco.setText("0.00");
-
-        botaoArredondado1.setBackground(new java.awt.Color(51, 153, 0));
-        botaoArredondado1.setForeground(new java.awt.Color(0, 0, 153));
-        botaoArredondado1.setText("Concluir");
-        botaoArredondado1.setFont(new java.awt.Font("Arial", 3, 14)); // NOI18N
+        lblTotal1.setText("Minutos passados: ");
 
         javax.swing.GroupLayout jPanel8Layout = new javax.swing.GroupLayout(jPanel8);
         jPanel8.setLayout(jPanel8Layout);
@@ -297,20 +361,20 @@ public class PdaView extends javax.swing.JFrame {
             jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel8Layout.createSequentialGroup()
                 .addGap(8, 8, 8)
-                .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel8Layout.createSequentialGroup()
-                        .addComponent(lblTotal1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(lblTroco, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(jPanel8Layout.createSequentialGroup()
-                        .addComponent(lblTotal)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(lblValorTotal, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addComponent(lblTotal)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(lblValorTotal, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGap(16, 16, 16))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel8Layout.createSequentialGroup()
+            .addGroup(jPanel8Layout.createSequentialGroup()
+                .addContainerGap(73, Short.MAX_VALUE)
+                .addComponent(btnConcluir, javax.swing.GroupLayout.PREFERRED_SIZE, 317, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(73, Short.MAX_VALUE))
+            .addGroup(jPanel8Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(botaoArredondado1, javax.swing.GroupLayout.PREFERRED_SIZE, 317, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(lblTotal1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(lblMinutosPassados, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
         jPanel8Layout.setVerticalGroup(
             jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -319,104 +383,20 @@ public class PdaView extends javax.swing.JFrame {
                 .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblTotal)
                     .addComponent(lblValorTotal))
-                .addGap(16, 16, 16)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblTotal1)
-                    .addComponent(lblTroco, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addComponent(botaoArredondado1, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblMinutosPassados))
+                .addGap(16, 16, 16)
+                .addComponent(btnConcluir, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(16, 16, 16))
-        );
-
-        jPanel5.setBackground(java.awt.SystemColor.control);
-        jPanel5.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createMatteBorder(1, 0, 0, 0, new java.awt.Color(153, 153, 153)), "Maquininha", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.TOP, new java.awt.Font("Arial", 3, 12))); // NOI18N
-
-        rbDebito.setFont(new java.awt.Font("Arial", 3, 12)); // NOI18N
-        rbDebito.setText("Cartão Debito");
-        rbDebito.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                rbDebitoActionPerformed(evt);
-            }
-        });
-
-        rbCredito.setFont(new java.awt.Font("Arial", 3, 12)); // NOI18N
-        rbCredito.setText("Cartão Credito");
-        rbCredito.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                rbCreditoActionPerformed(evt);
-            }
-        });
-
-        javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
-        jPanel5.setLayout(jPanel5Layout);
-        jPanel5Layout.setHorizontalGroup(
-            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel5Layout.createSequentialGroup()
-                .addGap(0, 0, 0)
-                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(rbDebito)
-                    .addComponent(rbCredito))
-                .addGap(12, 12, 12))
-        );
-        jPanel5Layout.setVerticalGroup(
-            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel5Layout.createSequentialGroup()
-                .addGap(0, 0, 0)
-                .addComponent(rbDebito)
-                .addGap(9, 9, 9)
-                .addComponent(rbCredito, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-
-        jPanel7.setBackground(java.awt.SystemColor.control);
-        jPanel7.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createMatteBorder(1, 0, 0, 0, new java.awt.Color(153, 153, 153)), "A Vista", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.TOP, new java.awt.Font("Arial", 3, 12))); // NOI18N
-
-        rbDebito1.setFont(new java.awt.Font("Arial", 3, 12)); // NOI18N
-        rbDebito1.setText("Dinheiro");
-        rbDebito1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                rbDebito1ActionPerformed(evt);
-            }
-        });
-
-        rbCredito1.setFont(new java.awt.Font("Arial", 3, 12)); // NOI18N
-        rbCredito1.setText("PIX");
-        rbCredito1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                rbCredito1ActionPerformed(evt);
-            }
-        });
-
-        javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
-        jPanel7.setLayout(jPanel7Layout);
-        jPanel7Layout.setHorizontalGroup(
-            jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel7Layout.createSequentialGroup()
-                .addGap(0, 0, 0)
-                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(rbDebito1)
-                    .addComponent(rbCredito1))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-        jPanel7Layout.setVerticalGroup(
-            jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel7Layout.createSequentialGroup()
-                .addGap(0, 0, 0)
-                .addComponent(rbDebito1)
-                .addGap(9, 9, 9)
-                .addComponent(rbCredito1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGap(8, 8, 8))
         );
 
         javax.swing.GroupLayout pnNotaLayout = new javax.swing.GroupLayout(pnNota);
         pnNota.setLayout(pnNotaLayout);
         pnNotaLayout.setHorizontalGroup(
             pnNotaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnNotaLayout.createSequentialGroup()
-                .addComponent(jPanel8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(pnNotaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+            .addComponent(jPanel8, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(pnTbClientes, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         pnNotaLayout.setVerticalGroup(
@@ -424,12 +404,7 @@ public class PdaView extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnNotaLayout.createSequentialGroup()
                 .addComponent(pnTbClientes, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGap(0, 0, 0)
-                .addGroup(pnNotaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel8, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnNotaLayout.createSequentialGroup()
-                        .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addComponent(jPanel8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
 
@@ -493,21 +468,13 @@ public class PdaView extends javax.swing.JFrame {
         
     }//GEN-LAST:event_txtPesquisarClienteKeyReleased
 
-    private void tbClienteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbClienteMouseClicked
+    private void tbVagasOcupadasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbVagasOcupadasMouseClicked
         // TODO add your handling code here:
-    }//GEN-LAST:event_tbClienteMouseClicked
+    }//GEN-LAST:event_tbVagasOcupadasMouseClicked
 
     private void btnConcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConcluirActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_btnConcluirActionPerformed
-
-    private void rbCreditoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbCreditoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_rbCreditoActionPerformed
-
-    private void rbDebitoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbDebitoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_rbDebitoActionPerformed
 
     private void txtPesquisaKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPesquisaKeyReleased
         // TODO add your handling code here:
@@ -515,26 +482,16 @@ public class PdaView extends javax.swing.JFrame {
 
     private void txtPesquisaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtPesquisaActionPerformed
         // TODO add your handling code here:
-        VeiculosRegistradosView tela = new VeiculosRegistradosView();
-        tela.setVisible(true);
     }//GEN-LAST:event_txtPesquisaActionPerformed
 
     private void scPdvMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_scPdvMouseClicked
 
     }//GEN-LAST:event_scPdvMouseClicked
 
-    private void tbListaDeInformaçoesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbListaDeInformaçoesMouseClicked
+    private void tbVagasDesocupadasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbVagasDesocupadasMouseClicked
         // TODO add your handling code here:
         
-    }//GEN-LAST:event_tbListaDeInformaçoesMouseClicked
-
-    private void rbDebito1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbDebito1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_rbDebito1ActionPerformed
-
-    private void rbCredito1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbCredito1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_rbCredito1ActionPerformed
+    }//GEN-LAST:event_tbVagasDesocupadasMouseClicked
 
     private void btnVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVoltarActionPerformed
         // TODO add your handling code here:
@@ -542,9 +499,6 @@ public class PdaView extends javax.swing.JFrame {
 
     private void btnVoltar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVoltar1ActionPerformed
         // TODO add your handling code here:
-        ArrecadacaoView tela = new ArrecadacaoView();
-        tela.setVisible(true);
-        this.dispose();
     }//GEN-LAST:event_btnVoltar1ActionPerformed
 
     private void lblPesquisaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_lblPesquisaKeyPressed
@@ -552,32 +506,26 @@ public class PdaView extends javax.swing.JFrame {
     }//GEN-LAST:event_lblPesquisaKeyPressed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private br.com.javaParking.assets.swing.botaoArredondado botaoArredondado1;
+    private br.com.javaParking.assets.swing.botaoArredondado btnConcluir;
     private javax.swing.JButton btnVoltar;
     private javax.swing.JButton btnVoltar1;
     private javax.swing.JPanel jPanel4;
-    private javax.swing.JPanel jPanel5;
-    private javax.swing.JPanel jPanel7;
     private javax.swing.JPanel jPanel8;
     private javax.swing.JPanel jPanel9;
+    public static javax.swing.JLabel lblMinutosPassados;
     private javax.swing.JLabel lblPesquisa;
     private javax.swing.JLabel lblPesquisarCliente;
     private javax.swing.JLabel lblTotal;
     private javax.swing.JLabel lblTotal1;
-    public static javax.swing.JLabel lblTroco;
     public static javax.swing.JLabel lblValorTotal;
     private javax.swing.JPanel pnCliente;
     private javax.swing.JPanel pnNota;
     private javax.swing.JPanel pnTbClientes;
     private javax.swing.JPanel pnTbPrincipal;
-    private javax.swing.JRadioButton rbCredito;
-    private javax.swing.JRadioButton rbCredito1;
-    private javax.swing.JRadioButton rbDebito;
-    private javax.swing.JRadioButton rbDebito1;
     private javax.swing.JScrollPane scCliente;
     private javax.swing.JScrollPane scPdv;
-    private javax.swing.JTable tbCliente;
-    private javax.swing.JTable tbListaDeInformaçoes;
+    private javax.swing.JTable tbVagasDesocupadas;
+    private javax.swing.JTable tbVagasOcupadas;
     private javax.swing.JTextField txtPesquisa;
     private javax.swing.JTextField txtPesquisarCliente;
     // End of variables declaration//GEN-END:variables

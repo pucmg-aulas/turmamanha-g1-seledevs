@@ -13,45 +13,88 @@ public class Ocupacao implements Serializable{
     private Cliente cliente;
     private Veiculo veiculo;
     private Vaga vaga;
+    private Parque parque;
     private LocalTime horaEntrada;
     private LocalTime horaSaida;
 
     /**
      * Construtores
      */    
-    public Ocupacao(Cliente cliente, Veiculo veiculo, Vaga vaga, LocalTime horaEntrada) {
+    public Ocupacao(Cliente cliente, Veiculo veiculo, Vaga vaga, LocalTime horaEntrada, Parque parque) {
         this.cliente = cliente;
         this.veiculo = veiculo;
         this.vaga = vaga;
         this.vaga.ocuparVaga();
-        this.horaEntrada = horaEntrada;   
+        this.horaEntrada = horaEntrada; 
+        this.parque = parque;
     }
     
+    public Ocupacao(int id, LocalTime horaEntrada) {
+        this.id = id;
+        this.horaEntrada = horaEntrada;
+    }
+    
+    public int getId() {
+        return id;
+    }    
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public Cliente getCliente() {
+        return cliente;
+    }
+
+    public void setCliente(Cliente cliente) {
+        this.cliente = cliente;
+    }
+
+    public Veiculo getVeiculo() {
+        return veiculo;
+    }
+
+    public void setVeiculo(Veiculo veiculo) {
+        this.veiculo = veiculo;
+    }
+
+    public Vaga getVaga() {
+        return vaga;
+    }
+
+    public void setVaga(Vaga vaga) {
+        this.vaga = vaga;
+    }
+
+    public Parque getParque() {
+        return parque;
+    }
+
+    public void setParque(Parque parque) {
+        this.parque = parque;
+    }
+
+    public LocalTime getHoraEntrada() {
+        return horaEntrada;
+    }
+
+    public void setHoraEntrada(LocalTime horaEntrada) {
+        this.horaEntrada = horaEntrada;
+    }
+
+    public LocalTime getHoraSaida() {
+        return horaSaida;
+    }
+
     /**
      * Metodos de acesso 
      */
-    public int getId(){
-        return this.id;
+    public void setHoraSaida(LocalTime horaSaida) {
+        this.horaSaida = horaSaida;
     }
-    
-    public Cliente getCliente(){
-        return this.cliente;
-    }
-    
-    public Veiculo getVeiculo(){
-        return this.veiculo;
-    }
-    
-    public Vaga getVaga(){
-        return this.vaga;
-    }
-    
-    public LocalTime getEntrada(){
-        return this.horaEntrada;
-    }
-    
+
     /**
-     * Metodos de ação 
+     * Metodos de ação
      */ 
     public void desocupar(Vaga vaga) {
         vaga.desocuparVaga();

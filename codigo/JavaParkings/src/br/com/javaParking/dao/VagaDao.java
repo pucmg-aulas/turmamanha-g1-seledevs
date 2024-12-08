@@ -14,7 +14,6 @@ import javax.swing.JOptionPane;
 
 public class VagaDao {
 
-   
     public static String criarTabela() {
         try {
             Comunicacao.setSql("""
@@ -36,10 +35,9 @@ public class VagaDao {
         return "Tabela de vagas criada com sucesso";
     }
 
- 
     public static void addVaga(Vaga vaga) {
         try {
-            String tipo = vaga.getClass().getSimpleName().toUpperCase(); 
+            String tipo = vaga.getClass().getSimpleName().toUpperCase();
             Comunicacao.setSql("""
                 INSERT INTO
                     interno.tbvagas (identificador, tipo, ocupada, parque_id)
@@ -57,7 +55,6 @@ public class VagaDao {
         }
     }
 
-
     public static List<Vaga> getVagas(Parque parque) {
         List<Vaga> vagas = new ArrayList<>();
         try {
@@ -65,19 +62,23 @@ public class VagaDao {
             Comunicacao.prepararConexcao();
             Comunicacao.getPst().setInt(1, parque.getId());
             Comunicacao.executarQuery();
-            
+
             while (Comunicacao.getRs().next()) {
                 String tipo = Comunicacao.getRs().getString("tipo");
                 String identificador = Comunicacao.getRs().getString("identificador");
                 boolean ocupada = Comunicacao.getRs().getBoolean("ocupada");
-                
-                
+
                 Vaga vaga = switch (tipo) {
-                    case "COMUM" -> new Comum(parque, identificador, ocupada);
-                    case "IDOSO" -> new Idoso(parque, identificador, ocupada);
-                    case "PCD" -> new PCD(parque, identificador, ocupada);
-                    case "VIP" -> new VIP(parque, identificador, ocupada);
-                    default -> throw new IllegalArgumentException("Tipo de vaga desconhecido: " + tipo);
+                    case "COMUM" ->
+                        new Comum(parque, identificador, ocupada);
+                    case "IDOSO" ->
+                        new Idoso(parque, identificador, ocupada);
+                    case "PCD" ->
+                        new PCD(parque, identificador, ocupada);
+                    case "VIP" ->
+                        new VIP(parque, identificador, ocupada);
+                    default ->
+                        throw new IllegalArgumentException("Tipo de vaga desconhecido: " + tipo);
                 };
                 vagas.add(vaga);
             }
@@ -87,7 +88,119 @@ public class VagaDao {
         return vagas;
     }
 
-   
+    public static Vaga getVaga(Parque parque, String identificadorVaga) {
+        try {
+            Comunicacao.setSql("SELECT * FROM interno.tbvagas WHERE parque_id = ? and identificador = ?;");
+            Comunicacao.prepararConexcao();
+            Comunicacao.getPst().setInt(1, parque.getId());
+            Comunicacao.getPst().setString(2, identificadorVaga);
+            Comunicacao.executarQuery();
+
+            while (Comunicacao.getRs().next()) {
+                String tipo = Comunicacao.getRs().getString("tipo");
+                String identificador = Comunicacao.getRs().getString("identificador");
+                boolean ocupada = Comunicacao.getRs().getBoolean("ocupada");
+
+                Vaga vaga = switch (tipo) {
+                    case "COMUM" ->
+                        new Comum(parque, identificador, ocupada);
+                    case "IDOSO" ->
+                        new Idoso(parque, identificador, ocupada);
+                    case "PCD" ->
+                        new PCD(parque, identificador, ocupada);
+                    case "VIP" ->
+                        new VIP(parque, identificador, ocupada);
+                    default ->
+                        throw new IllegalArgumentException("Tipo de vaga desconhecido: " + tipo);
+                };
+
+                return vaga;
+            }
+        } catch (Exception e) {
+            System.out.println("Erro ao recuperar vagas: " + e);
+        }
+
+        throw new RuntimeException("Vaga não existe.");
+    }
+
+    public static void ocupar(Parque parque, String identificadorVaga) {
+        try {
+            Comunicacao.setSql("UPDATE interno.tbvagas SET ocupada = true WHERE parque_id = ? and identificador = ?;");
+            Comunicacao.prepararConexcao();
+            Comunicacao.getPst().setInt(1, parque.getId());
+            Comunicacao.getPst().setString(2, identificadorVaga);
+            Comunicacao.executarQuery();           
+        } catch (Exception e) {
+            System.out.println("Erro ao recuperar vagas: " + e);
+        }
+    }
+
+    public static List<Vaga> getVagasDesocupadas(Parque parque) {
+        List<Vaga> vagas = new ArrayList<>();
+        try {
+            Comunicacao.setSql("SELECT * FROM interno.tbvagas WHERE parque_id = ? and ocupada = false;");
+            Comunicacao.prepararConexcao();
+            Comunicacao.getPst().setInt(1, parque.getId());
+            Comunicacao.executarQuery();
+
+            while (Comunicacao.getRs().next()) {
+                String tipo = Comunicacao.getRs().getString("tipo");
+                String identificador = Comunicacao.getRs().getString("identificador");
+                boolean ocupada = Comunicacao.getRs().getBoolean("ocupada");
+
+                Vaga vaga = switch (tipo) {
+                    case "COMUM" ->
+                        new Comum(parque, identificador, ocupada);
+                    case "IDOSO" ->
+                        new Idoso(parque, identificador, ocupada);
+                    case "PCD" ->
+                        new PCD(parque, identificador, ocupada);
+                    case "VIP" ->
+                        new VIP(parque, identificador, ocupada);
+                    default ->
+                        throw new IllegalArgumentException("Tipo de vaga desconhecido: " + tipo);
+                };
+                vagas.add(vaga);
+            }
+        } catch (Exception e) {
+            System.out.println("Erro ao recuperar vagas: " + e);
+        }
+        return vagas;
+    }
+
+    public static List<Vaga> getVagasOcupadas(Parque parque) {
+        List<Vaga> vagas = new ArrayList<>();
+        try {
+            Comunicacao.setSql("SELECT * FROM interno.tbvagas WHERE parque_id = ? and ocupada = true;");
+            Comunicacao.prepararConexcao();
+            Comunicacao.getPst().setInt(1, parque.getId());
+            Comunicacao.executarQuery();
+
+            while (Comunicacao.getRs().next()) {
+                String tipo = Comunicacao.getRs().getString("tipo");
+                String identificador = Comunicacao.getRs().getString("identificador");
+                boolean ocupada = Comunicacao.getRs().getBoolean("ocupada");
+
+                Vaga vaga = switch (tipo) {
+                    case "COMUM" ->
+                        new Comum(parque, identificador, ocupada);
+                    case "IDOSO" ->
+                        new Idoso(parque, identificador, ocupada);
+                    case "PCD" ->
+                        new PCD(parque, identificador, ocupada);
+                    case "VIP" ->
+                        new VIP(parque, identificador, ocupada);
+                    default ->
+                        throw new IllegalArgumentException("Tipo de vaga desconhecido: " + tipo);
+                };
+                vagas.add(vaga);
+            }
+        } catch (Exception e) {
+            System.out.println("Erro ao recuperar vagas: " + e);
+        }
+        return vagas;
+    }
+
     public static void excluirVagas(Parque parque) {
         try {
             Comunicacao.setSql("DELETE FROM interno.tbvagas WHERE parque_id = ?;");

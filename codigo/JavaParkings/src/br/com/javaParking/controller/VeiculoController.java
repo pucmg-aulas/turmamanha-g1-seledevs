@@ -7,6 +7,7 @@ package br.com.javaParking.controller;
 import br.com.javaParking.dao.ConfiguracaoDAO;
 import br.com.javaParking.dao.ParqueDAO;
 import br.com.javaParking.dao.VeiculoDao;
+import br.com.javaParking.model.Cliente;
 import br.com.javaParking.model.Parque;
 import br.com.javaParking.model.Veiculo;
 import br.com.javaParking.view.veiculo.VeiculoView;
@@ -22,12 +23,12 @@ import javax.swing.table.DefaultTableModel;
 public class VeiculoController {
 
     private VeiculoView view;
-    private static String clienteEscolhido;
+    private static String clienteEscolhidoCPF;
     private static Veiculo veiculoEscolhido;
 
-    public VeiculoController(String cliente) {
+    public VeiculoController(Cliente cliente) {
 
-        clienteEscolhido = cliente;
+        clienteEscolhidoCPF = cliente.getCpf();
 
         this.view = new VeiculoView();
 
@@ -36,8 +37,8 @@ public class VeiculoController {
         this.view.getBtnRemover().setBorderPainted(false);
         
         this.view.getBtnAdicionar().addActionListener((e) -> {
-            Veiculo x = new Veiculo(view.getTxtPlaca().getText(), clienteEscolhido);
-            VeiculoDao.addVeiculo(x, clienteEscolhido);
+            Veiculo x = new Veiculo(view.getTxtPlaca().getText(), clienteEscolhidoCPF);
+            VeiculoDao.addVeiculo(x, clienteEscolhidoCPF);
             limpartela();
         });
         
@@ -55,7 +56,7 @@ public class VeiculoController {
         this.view.getTbVeiculo().getSelectionModel().addListSelectionListener((e) -> {
             int linha = this.view.getTbVeiculo().getSelectedRow();
             if (linha != -1) {
-                Veiculo x = new Veiculo(this.view.getTbVeiculo().getValueAt(linha, 0).toString(), clienteEscolhido);
+                Veiculo x = new Veiculo(this.view.getTbVeiculo().getValueAt(linha, 0).toString(), clienteEscolhidoCPF);
                 
                 veiculoEscolhido = x;
                 habilitarModoEdicao();

@@ -2,6 +2,7 @@ package br.com.javaParking.dao;
 
 import br.com.javaParking.model.Cliente;
 import br.com.javaParking.model.Ocupacao;
+import br.com.javaParking.model.Parque;
 import br.com.javaParking.model.Vaga;
 import br.com.javaParking.model.Veiculo;
 import br.com.javaParking.util.Comunicacao;
@@ -19,15 +20,14 @@ public class OcupacaoDao {
             Comunicacao.setSql("""
                 CREATE TABLE IF NOT EXISTS 
                     interno.tbocupacoes (
-                        id SERIAL PRIMARY KEY,
+                        id SERIAL,
                         cliente_id VARCHAR(50) NOT NULL,
                         veiculo_id VARCHAR(100) NOT NULL,
                         vaga_id VARCHAR(100) NOT NULL,
-                        hora_entrada TIME NOT NULL,
+                        parque_id INT,
+                        hora_entrada TIME,
                         hora_saida TIME,
-                        FOREIGN KEY (cliente_id) REFERENCES interno.tbcliente(id),
-                        FOREIGN KEY (veiculo_id) REFERENCES interno.tbveiculos(id),
-                        FOREIGN KEY (vaga_id) REFERENCES interno.tbvagas(id)
+                        PRIMARY KEY (id)
                     );
                 """);
             Comunicacao.prepararConexcao();
@@ -38,20 +38,45 @@ public class OcupacaoDao {
         return "Tabela de ocupações criada com sucesso";
     }
 
+    public static Ocupacao getOcupacaoHoraEntrada(Parque parque, String identificadorVaga) {
+        try {
+            Comunicacao.setSql("SELECT * FROM interno.tbocupacoes WHERE parque_id = ? and vaga_id = ?;");
+            Comunicacao.prepararConexcao();
+            Comunicacao.getPst().setInt(1, parque.getId());
+            Comunicacao.getPst().setString(2, identificadorVaga);
+            Comunicacao.executarQuery();
+
+            
+            while (Comunicacao.getRs().next()) {
+                Time z = Comunicacao.getRs().getTime("hora_entrada");
+                
+                Ocupacao x = new Ocupacao(Comunicacao.getRs().getInt("id"), z.toLocalTime());              
+                
+                return x;
+            }
+        } catch (Exception e) {
+            System.out.println("Erro ao recuperar ocupacao: " + e);
+        }
+
+        throw new RuntimeException("Ocupacao não existe.");
+    }
+    
     // Adiciona uma nova ocupação
     public static void addOcupacao(Ocupacao ocupacao) {
         try {
             Comunicacao.setSql("""
                 INSERT INTO
-                    interno.tbocupacoes (cliente_id, veiculo_id, vaga_id, hora_entrada)
+                    interno.tbocupacoes 
+                                (cliente_id, veiculo_id, vaga_id, parque_id, hora_entrada)
                 VALUES
-                    (?, ?, ?, ?);
+                    (?,?,?,?,?);
                 """);
             Comunicacao.prepararConexcao();
-            Comunicacao.getPst().setString(1, ocupacao.getCliente().getCpf()); // decidir id SERIAL ou CPF
+            Comunicacao.getPst().setString(1, ocupacao.getCliente().getCpf());
             Comunicacao.getPst().setString(2, ocupacao.getVeiculo().getPlaca());
             Comunicacao.getPst().setString(3, ocupacao.getVaga().getIdentificador());
-            Comunicacao.getPst().setTime(4, Time.valueOf(ocupacao.getEntrada()));
+            Comunicacao.getPst().setInt(4, ocupacao.getParque().getId());
+            Comunicacao.getPst().setTime(5, Time.valueOf(ocupacao.getHoraEntrada()));
             Comunicacao.executar();
         } catch (Exception e) {
             System.out.println("Erro ao adicionar ocupação: " + e);

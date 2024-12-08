@@ -2,8 +2,9 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-package br.com.javaParking.view.veiculo;
+package br.com.javaParking.view.cliente;
 
+import br.com.javaParking.view.veiculo.*;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 
@@ -11,21 +12,21 @@ import javax.swing.JTextField;
  *
  * @author Leandro Alencar
  */
-public class VeiculosRegistradosView extends javax.swing.JFrame {
+public class ClientesRegistradosView extends javax.swing.JFrame {
 
     /**
      * Creates new form ClienteHistoricoView
      */
-    public VeiculosRegistradosView() {
+    public ClientesRegistradosView() {
         initComponents();
     }
 
-    public JTable getTbListaVeiculos() {
-        return tbListaVeiculos;
+    public JTable getTbListaClientes() {
+        return tbListaClientes;
     }
 
-    public void setTbListaVeiculos(JTable tbListaVeiculos) {
-        this.tbListaVeiculos = tbListaVeiculos;
+    public void setTbListaClientes(JTable tbListaClientes) {
+        this.tbListaClientes = tbListaClientes;
     }
 
     public JTextField getTxtPesquisa() {
@@ -35,6 +36,8 @@ public class VeiculosRegistradosView extends javax.swing.JFrame {
     public void setTxtPesquisa(JTextField txtPesquisa) {
         this.txtPesquisa = txtPesquisa;
     }
+
+   
     
     
 
@@ -52,7 +55,7 @@ public class VeiculosRegistradosView extends javax.swing.JFrame {
         jPanel11 = new javax.swing.JPanel();
         jPanel9 = new javax.swing.JPanel();
         scPdv = new javax.swing.JScrollPane();
-        tbListaVeiculos = new javax.swing.JTable();
+        tbListaClientes = new javax.swing.JTable();
         lblPesquisa = new javax.swing.JLabel();
         txtPesquisa = new javax.swing.JTextField();
 
@@ -77,13 +80,13 @@ public class VeiculosRegistradosView extends javax.swing.JFrame {
             }
         });
 
-        tbListaVeiculos = new javax.swing.JTable(){
+        tbListaClientes = new javax.swing.JTable(){
             public boolean isCellEditable(int rowIndex, int colIndex){
                 return false;
             }
         };
-        tbListaVeiculos.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
-        tbListaVeiculos.setModel(new javax.swing.table.DefaultTableModel(
+        tbListaClientes.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
+        tbListaClientes.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {},
                 {},
@@ -94,13 +97,13 @@ public class VeiculosRegistradosView extends javax.swing.JFrame {
 
             }
         ));
-        tbListaVeiculos.setFocusable(false);
-        tbListaVeiculos.addMouseListener(new java.awt.event.MouseAdapter() {
+        tbListaClientes.setFocusable(false);
+        tbListaClientes.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                tbListaVeiculosMouseClicked(evt);
+                tbListaClientesMouseClicked(evt);
             }
         });
-        scPdv.setViewportView(tbListaVeiculos);
+        scPdv.setViewportView(tbListaClientes);
 
         lblPesquisa.setFont(new java.awt.Font("Dialog", 3, 14)); // NOI18N
         lblPesquisa.setText("Pesquisa:");
@@ -205,9 +208,9 @@ public class VeiculosRegistradosView extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void tbListaVeiculosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbListaVeiculosMouseClicked
+    private void tbListaClientesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbListaClientesMouseClicked
         // TODO add your handling code here:
-    }//GEN-LAST:event_tbListaVeiculosMouseClicked
+    }//GEN-LAST:event_tbListaClientesMouseClicked
 
     private void scPdvMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_scPdvMouseClicked
 
@@ -228,7 +231,7 @@ public class VeiculosRegistradosView extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel9;
     private javax.swing.JLabel lblPesquisa;
     private javax.swing.JScrollPane scPdv;
-    private javax.swing.JTable tbListaVeiculos;
+    private javax.swing.JTable tbListaClientes;
     private javax.swing.JTextField txtPesquisa;
     // End of variables declaration//GEN-END:variables
 }

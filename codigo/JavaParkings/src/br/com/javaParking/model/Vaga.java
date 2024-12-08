@@ -1,6 +1,8 @@
 package br.com.javaParking.model;
 
+import br.com.javaParking.dao.ConfiguracaoDAO;
 import java.io.Serializable;
+import javax.swing.JOptionPane;
 
 public abstract class Vaga implements Serializable{
     
@@ -54,7 +56,11 @@ public abstract class Vaga implements Serializable{
     public abstract double calcularPreco(long minutosTotais);
 
     protected double aplicarLimite(double precoTotal) {
-        return Math.min(precoTotal, this.getParque().getValorDeDiariaMaxima());
+              
+        if(precoTotal > ConfiguracaoDAO.configuracao().getValorMaximoDiaria()){
+           return ConfiguracaoDAO.configuracao().getValorMaximoDiaria();
+        } 
+        return precoTotal;
     }
     
 }

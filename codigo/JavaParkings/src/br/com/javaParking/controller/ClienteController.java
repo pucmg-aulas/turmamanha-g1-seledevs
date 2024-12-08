@@ -51,7 +51,7 @@ public class ClienteController {
         });
         
         this.view.getBtnVeiculo().addActionListener((e) -> {
-             new VeiculoController(clienteSelecionado.getCpf());
+             new VeiculoController(clienteSelecionado);
         });
 
         this.view.getTbClientes().getSelectionModel().addListSelectionListener(e -> {
