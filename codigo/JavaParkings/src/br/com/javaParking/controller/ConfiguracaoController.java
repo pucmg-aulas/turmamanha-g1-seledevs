@@ -19,10 +19,9 @@ public class ConfiguracaoController {
 
     public ConfiguracaoController() {
         this.view = new ConfiguracaoView();
+      
         
-        
-       
-            this.view.getTxtValorMaximoDiaria().setText(String.valueOf(ConfiguracaoDAO.configuracao().getValorMaximoDiaria()));
+        this.view.getTxtValorMaximoDiaria().setText(String.valueOf(ConfiguracaoDAO.configuracao().getValorMaximoDiaria()));
         this.view.getTxtPorcentagemVIP().setText(String.valueOf(ConfiguracaoDAO.configuracao().getPorcentagemMinimaVIP()));
         this.view.getTxtPorcentagemPCD().setText(String.valueOf(ConfiguracaoDAO.configuracao().getPorcentagemMinimaPCD()));
         this.view.getTxtPorcentagemIdoso().setText(String.valueOf(ConfiguracaoDAO.configuracao().getPorcentagemMinimaIdosos()));
@@ -37,6 +36,7 @@ public class ConfiguracaoController {
         this.view.setVisible(true);
     }
 
+    
     private Configuracao montarConfiguracao() {
         Configuracao x = new Configuracao(0, 0, 0, 0, 0, 0);
         try {
@@ -68,5 +68,11 @@ public class ConfiguracaoController {
         }
 
     }
+
+    public ConfiguracaoView getView() {
+        return view;
+    }
+
+    
 
 }

@@ -11,7 +11,7 @@ import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 
-public class OcupacaoDAO {
+public class OcupacaoDao {
 
     // Criação da tabela de ocupações
     public static String criarTabela() {

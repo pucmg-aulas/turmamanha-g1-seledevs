@@ -4,10 +4,7 @@ import java.io.Serializable;
 import br.com.javaParking.model.Parque;
 import javax.swing.JOptionPane;
 
-/**
- * Configuração do sistema de estacionamento. Contém as porcentagens mínimas e
- * valores de cobrança.
- */
+
 public class Configuracao implements Serializable {
 
     private double porcentagemMinimaIdosos;

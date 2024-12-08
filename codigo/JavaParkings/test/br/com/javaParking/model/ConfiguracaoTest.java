@@ -13,95 +13,77 @@ import org.junit.jupiter.api.function.Executable;
  * @author Islayder Jackson
  */
 
-public class ConfiguracaoTest {
+class ConfiguracaoTest {
 
     @Test
-    public void testConstrutorValido() {
-        System.out.println("testConstrutorValido");
-        // Testa se o construtor cria uma instância de Configuracao com valores válidos
-        Configuracao configuracao = new Configuracao(0.10, 0.10, 0.20, 30, 50.0);
-        
-        // Verifica se os valores foram definidos corretamente
-        assertEquals(0.10, configuracao.getPorcentagemMinimaIdosos());
-        assertEquals(0.10, configuracao.getPorcentagemMinimaPCD());
-        assertEquals(0.20, configuracao.getPorcentagemMinimaVIP());
-        assertEquals(30, configuracao.getIntervaloCobrancaMinutos());
-        assertEquals(50.0, configuracao.getValorMaximoDiaria());
+    void testConstrutorValido() {
+        Configuracao config = new Configuracao(10.0, 20.0, 30.0, 15, 50.0, 4.0);
+        assertEquals(10.0, config.getPorcentagemMinimaIdosos());
+        assertEquals(20.0, config.getPorcentagemMinimaPCD());
+        assertEquals(30.0, config.getPorcentagemMinimaVIP());
+        assertEquals(15, config.getIntervaloCobrancaMinutos());
+        assertEquals(50.0, config.getValorMaximoDiaria());
+        assertEquals(4.0, config.getValorPeriodoPorTempo());
     }
 
     @Test
-    public void testConstrutorInvalidoPorcentagemExcedida() {
-        System.out.println("testConstrutorInvalidoPorcentagemExcedida");
-        // Testa se uma IllegalArgumentException é lançada quando a soma das porcentagens excede 100%
-        Exception exception;
-        exception = assertThrows(IllegalArgumentException.class, new Executable() {
-            @Override
-            public void execute() throws Throwable {
-                new Configuracao(0.10, 0.10, 0.90, 30, 50.0);
-            }
-        });
-
-        // Mensagem esperada ao lançar a exceção
-        String expectedMessage = "A soma das porcentagens não pode ultrapassar 100%";
-        String actualMessage = exception.getMessage();
-
-        // Verifica se a mensagem da exceção é a esperada
-        assertTrue(actualMessage.contains(expectedMessage));
-    }
-
-    @Test
-    public void testSetPorcentagensValidas() {
-        System.out.println("testSetPorcentagensValidas");
-        // Testa se as porcentagens podem ser atualizadas para valores válidos
-        Configuracao configuracao = new Configuracao(0.10, 0.10, 0.20, 30, 50.0);
-        
-        configuracao.setPorcentagemMinimaIdosos(0.15);
-        configuracao.setPorcentagemMinimaPCD(0.15);
-        configuracao.setPorcentagemMinimaVIP(0.20);
-        
-        // Verifica se os novos valores foram definidos corretamente
-        assertEquals(0.15, configuracao.getPorcentagemMinimaIdosos());
-        assertEquals(0.15, configuracao.getPorcentagemMinimaPCD());
-        assertEquals(0.20, configuracao.getPorcentagemMinimaVIP());
-    }
-
-    @Test
-    public void testSetPorcentagensInvalida() {
-        System.out.println("testSetPorcentagensInvalida");
-        // Testa se uma IllegalArgumentException é lançada ao tentar definir porcentagens que excedem 100%
-        Configuracao configuracao = new Configuracao(0.10, 0.10, 0.20, 30, 50.0);
-
+    void testConstrutorInvalido() {
         Exception exception = assertThrows(IllegalArgumentException.class, () -> {
-            configuracao.setPorcentagemMinimaVIP(0.80); // Soma total vai para 1.0
+            new Configuracao(40.0, 40.0, 30.0, 15, 50.0, 4.0);
         });
-
-        // Mensagem esperada ao lançar a exceção
-        String expectedMessage = "A soma das porcentagens não pode ultrapassar 100%";
-        String actualMessage = exception.getMessage();
-
-        // Verifica se a mensagem da exceção é a esperada
-        assertTrue(actualMessage.contains(expectedMessage));
+        assertEquals("A soma das porcentagens não pode ultrapassar 100%", exception.getMessage());
     }
 
     @Test
-    public void testSetIntervaloCobrancaMinutos() {
-        System.out.println("testSetIntervaloCobrancaMinutos");
-        // Testa se o intervalo de cobrança pode ser atualizado corretamente
-        Configuracao configuracao = new Configuracao(0.10, 0.10, 0.20, 30, 50.0);
-        
-        configuracao.setIntervaloCobrancaMinutos(45);
-        // Verifica se o novo intervalo foi definido corretamente
-        assertEquals(45, configuracao.getIntervaloCobrancaMinutos());
+    void testSetPorcentagemMinimaIdosos() {
+        Configuracao config = new Configuracao(10.0, 20.0, 30.0, 15, 50.0, 4.0);
+        config.setPorcentagemMinimaIdosos(15.0);
+        assertEquals(15.0, config.getPorcentagemMinimaIdosos());
     }
 
     @Test
-    public void testSetValorMaximoDiaria() {
-        System.out.println("testSetValorMaximoDiaria");
-        // Testa se o valor máximo da diária pode ser atualizado corretamente
-        Configuracao configuracao = new Configuracao(0.10, 0.10, 0.20, 30, 50.0);
-        
-        configuracao.setValorMaximoDiaria(75.0);
-        // Verifica se o novo valor máximo foi definido corretamente
-        assertEquals(75.0, configuracao.getValorMaximoDiaria());
+    void testSetPorcentagemMinimaIdososInvalido() {
+        Configuracao config = new Configuracao(10.0, 20.0, 30.0, 15, 50.0, 4.0);
+        Exception exception = assertThrows(IllegalArgumentException.class, () -> {
+            config.setPorcentagemMinimaIdosos(50.0);
+        });
+        assertEquals("A soma das porcentagens não pode ultrapassar 100%", exception.getMessage());
+    }
+
+    @Test
+    void testSetPorcentagemMinimaPCD() {
+        Configuracao config = new Configuracao(10.0, 20.0, 30.0, 15, 50.0, 4.0);
+        config.setPorcentagemMinimaPCD(25.0);
+        assertEquals(25.0, config.getPorcentagemMinimaPCD());
+    }
+
+    @Test
+    void testSetPorcentagemMinimaPCDInvalido() {
+        Configuracao config = new Configuracao(10.0, 20.0, 30.0, 15, 50.0, 4.0);
+        Exception exception = assertThrows(IllegalArgumentException.class, () -> {
+            config.setPorcentagemMinimaPCD(60.0);
+        });
+        assertEquals("A soma das porcentagens não pode ultrapassar 100%", exception.getMessage());
+    }
+
+    @Test
+    void testSetIntervaloCobrancaMinutos() {
+        Configuracao config = new Configuracao(10.0, 20.0, 30.0, 15, 50.0, 4.0);
+        config.setIntervaloCobrancaMinutos(20);
+        assertEquals(20, config.getIntervaloCobrancaMinutos());
+    }
+
+    @Test
+    void testSetValorMaximoDiaria() {
+        Configuracao config = new Configuracao(10.0, 20.0, 30.0, 15, 50.0, 4.0);
+        config.setValorMaximoDiaria(60.0);
+        assertEquals(60.0, config.getValorMaximoDiaria());
+    }
+
+    @Test
+    void testSetValorPeriodoPorTempo() {
+        Configuracao config = new Configuracao(10.0, 20.0, 30.0, 15, 50.0, 4.0);
+        config.setValorPeriodoPorTempo(5.0);
+        assertEquals(5.0, config.getValorPeriodoPorTempo());
     }
 }
