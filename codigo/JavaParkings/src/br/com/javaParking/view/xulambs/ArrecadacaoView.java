@@ -122,6 +122,16 @@ public class ArrecadacaoView extends javax.swing.JFrame {
     public void setTbArrecadacoes(JTable tbArrecadacoes) {
         this.tbArrecadacoes = tbArrecadacoes;
     }    
+
+    public JMenuItem getMenPDAItem() {
+        return menPDAItem;
+    }
+
+    public void setMenPDAItem(JMenuItem menPDAItem) {
+        this.menPDAItem = menPDAItem;
+    }
+    
+    
     
     /**
      * This method is called from within the constructor to initialize the form.
@@ -155,6 +165,7 @@ public class ArrecadacaoView extends javax.swing.JFrame {
         menCadastroParque = new javax.swing.JMenuItem();
         menCadastroCliente = new javax.swing.JMenuItem();
         menPDA = new javax.swing.JMenu();
+        menPDAItem = new javax.swing.JMenuItem();
         MenOpc = new javax.swing.JMenu();
         menConfiguracao = new javax.swing.JMenuItem();
         menSair = new javax.swing.JMenuItem();
@@ -418,6 +429,15 @@ public class ArrecadacaoView extends javax.swing.JFrame {
                 menPDAActionPerformed(evt);
             }
         });
+
+        menPDAItem.setText("PDA");
+        menPDAItem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menPDAItemActionPerformed(evt);
+            }
+        });
+        menPDA.add(menPDAItem);
+
         Menu.add(menPDA);
 
         MenOpc.setText("Opções");
@@ -503,6 +523,10 @@ public class ArrecadacaoView extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_menCadastroParqueActionPerformed
 
+    private void menPDAItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menPDAItemActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_menPDAItemActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenu MenOpc;
     private javax.swing.JMenuBar Menu;
@@ -528,6 +552,7 @@ public class ArrecadacaoView extends javax.swing.JFrame {
     private javax.swing.JMenu menCadastros;
     private javax.swing.JMenuItem menConfiguracao;
     private javax.swing.JMenu menPDA;
+    private javax.swing.JMenuItem menPDAItem;
     private javax.swing.JMenuItem menSair;
     private javax.swing.JTable tbArrecadacoes;
     // End of variables declaration//GEN-END:variables

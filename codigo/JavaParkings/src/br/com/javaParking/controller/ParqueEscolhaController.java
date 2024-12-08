@@ -8,6 +8,7 @@ import br.com.javaParking.dao.ParqueDAO;
 import br.com.javaParking.model.Parque;
 import br.com.javaParking.view.parque.ParqueEscolhaView;
 import java.util.List;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -20,7 +21,6 @@ public class ParqueEscolhaController {
     private Parque parqueSelecionado;
 
     public ParqueEscolhaController() {
-        
         this.view = new ParqueEscolhaView();
         
         carregarTabela();

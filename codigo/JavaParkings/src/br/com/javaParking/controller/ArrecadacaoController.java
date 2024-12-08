@@ -8,6 +8,7 @@ import br.com.javaParking.dao.ArrecadacaoDAO;
 import br.com.javaParking.dao.ClienteDao;
 import br.com.javaParking.view.cliente.ClienteView;
 import br.com.javaParking.view.xulambs.ArrecadacaoView;
+import javax.swing.JOptionPane;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 
@@ -54,7 +55,7 @@ public class ArrecadacaoController {
             new ConfiguracaoController();
         });
         
-        this.view.getMenPDA().addActionListener((e) -> {
+        this.view.getMenPDAItem().addActionListener((e) -> {
             new ParqueEscolhaController();
             this.view.dispose();
         });
