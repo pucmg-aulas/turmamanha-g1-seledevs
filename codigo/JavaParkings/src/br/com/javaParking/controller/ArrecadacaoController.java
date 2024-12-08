@@ -52,10 +52,10 @@ public class ArrecadacaoController {
 
         this.view.getMenConfiguracao().addActionListener((e) -> {
             new ConfiguracaoController();
-            this.view.dispose();
         });
         
         this.view.getMenPDA().addActionListener((e) -> {
+            new ParqueEscolhaController();
             this.view.dispose();
         });
         
