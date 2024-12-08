@@ -422,14 +422,10 @@ public class ClienteView extends javax.swing.JFrame {
 
     private void btnAtualizarActionPerformed(java.awt.event.ActionEvent evt) {                                             
         // TODO add your handling code here:
-        VeiculoView tela = new VeiculoView();
-        tela.setVisible(true);
     }                                            
 
     private void btnHistoricoActionPerformed(java.awt.event.ActionEvent evt) {                                             
         // TODO add your handling code here:
-        ClienteHistoricoView tela = new ClienteHistoricoView();
-        tela.setVisible(true);
     }                                            
 
     private void txtCPFActionPerformed(java.awt.event.ActionEvent evt) {                                       

@@ -6,32 +6,29 @@ import java.util.List;
 
 public class Veiculo implements Serializable{
 
-    /**
-     * Atributos
-     */
     private String placa;
+    private String cpfCliente;
 
-    /**
-     * Construtores
-     */
-    public Veiculo(String placa) {
+    public Veiculo(String placa, String cpfCliente) {
+        this.placa = placa;
+        this.cpfCliente = cpfCliente;
+    }
+    
+    public String getPlaca() {
+        return placa;
+    }
+
+    public void setPlaca(String placa) {
         this.placa = placa;
     }
 
-    /**
-     * Metodos de acesso
-     */
-    public String getPlaca() {
-        return this.placa;
+    public String getCpfCliente() {
+        return cpfCliente;
     }
 
-    /**
-     * Metodos de validação
-     */
-    public boolean validarPlaca() {
-        /* [IMPLEMENTAÇÃO PENDENTE] -> Validar se a placa ja foi registrada antes usando os dados persistidos nos arquivos,
-         * caso ja exista retorne falso, caso contrario retorne verdadeiro.
-         */
-        return false;
+    public void setCpfCliente(String cpfCliente) {
+        this.cpfCliente = cpfCliente;
     }
+    
+    
 }

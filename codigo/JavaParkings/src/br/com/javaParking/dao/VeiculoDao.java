@@ -18,7 +18,7 @@ public class VeiculoDao {
                     interno.tbveiculo(
                                     placa VARCHAR(15) NOT NULL UNIQUE,
                                     cliente_cpf VARCHAR(255) NOT NULL,
-                                    FOREIGN KEY (cliente_cpf) REFERENCES interno.tbcliente(cpf)
+                                    PRIMARY KEY (placa)
                     );
                 """);
             Comunicacao.prepararConexcao();
@@ -56,7 +56,7 @@ public class VeiculoDao {
             Comunicacao.executarQuery();
 
             if (Comunicacao.getRs().next()) {
-                return new Veiculo(Comunicacao.getRs().getString("placa"));
+                return new Veiculo(Comunicacao.getRs().getString("placa"),Comunicacao.getRs().getString("cliente_cpf"));
             }
         } catch (Exception e) {
             System.out.println("Erro ao buscar veículo por placa: " + e);
@@ -74,7 +74,7 @@ public class VeiculoDao {
             Comunicacao.executarQuery();
 
             while (Comunicacao.getRs().next()) {
-                veiculos.add(new Veiculo(Comunicacao.getRs().getString("placa")));
+                veiculos.add(new Veiculo(Comunicacao.getRs().getString("placa"),Comunicacao.getRs().getString("cliente_cpf")));
             }
         } catch (Exception e) {
             System.out.println("Erro ao listar veículos por cliente: " + e);
@@ -124,7 +124,7 @@ public class VeiculoDao {
             Comunicacao.executarQuery();
 
             while (Comunicacao.getRs().next()) {
-                veiculos.add(new Veiculo(Comunicacao.getRs().getString("placa")));
+                veiculos.add(new Veiculo(Comunicacao.getRs().getString("placa"),Comunicacao.getRs().getString("cliente_cpf")));
             }
         } catch (Exception e) {
             System.out.println("Erro ao listar todos os veículos: " + e);

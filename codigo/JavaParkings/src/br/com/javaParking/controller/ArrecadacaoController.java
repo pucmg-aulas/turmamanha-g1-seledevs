@@ -64,25 +64,7 @@ public class ArrecadacaoController {
            
         });
 
-        // Adiciona o DocumentListener para a pesquisa em tempo real
-        this.view.getTxtPesquisar().getDocument().addDocumentListener(new DocumentListener() {
-            @Override
-            public void insertUpdate(DocumentEvent e) {
-                pesquisarCliente();
-            }
-
-            @Override
-            public void removeUpdate(DocumentEvent e) {
-                pesquisarCliente();
-            }
-
-            @Override
-            public void changedUpdate(DocumentEvent e) {
-                pesquisarCliente();
-            }
-        });
-
-        createMode();
+       
         this.view.setVisible(true);
     }
 

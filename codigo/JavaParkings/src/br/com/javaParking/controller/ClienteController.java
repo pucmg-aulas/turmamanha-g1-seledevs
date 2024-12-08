@@ -44,6 +44,10 @@ public class ClienteController {
         this.view.getBtnRemover().addActionListener((e) -> {
             deleteCliente();
         });
+        
+        this.view.getBtnVeiculo().addActionListener((e) -> {
+             new VeiculoController(clienteSelecionado.getCpf());
+        });
 
         this.view.getTbClientes().getSelectionModel().addListSelectionListener(e -> {
             int linha = this.view.getTbClientes().getSelectedRow();

@@ -4,9 +4,11 @@
  */
 package br.com.javaParking;
 
+import br.com.javaParking.controller.ArrecadacaoController;
 import br.com.javaParking.controller.ClienteController;
 import br.com.javaParking.controller.ConfiguracaoController;
 import br.com.javaParking.controller.ParqueController;
+import br.com.javaParking.controller.VeiculoController;
 import br.com.javaParking.dao.ConexaoDAO;
 
 /**
@@ -20,7 +22,7 @@ public class Main {
         ConexaoDAO.Conexao();
         ConexaoDAO.Tabelas();
         
-        new ClienteController();
+         new ClienteController();
     }
 
 }

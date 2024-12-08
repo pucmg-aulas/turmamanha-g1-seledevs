@@ -4,7 +4,10 @@
  */
 package br.com.javaParking.view.veiculo;
 
+import javax.swing.JButton;
+import javax.swing.JTable;
 import javax.swing.JTextField;
+import javax.swing.JToggleButton;
 
 /**
  *
@@ -19,13 +22,48 @@ public class VeiculoView extends javax.swing.JFrame {
         initComponents();
     }
 
-    //acessar texto
-    public JTextField getPlaca() {
-        return txtPlaca;
-    }    
+    public JButton getBtnAdicionar() {
+        return btnAdicionar;
+    }
+
+    public void setBtnAdicionar(JButton btnAdicionar) {
+        this.btnAdicionar = btnAdicionar;
+    }
+
+    public JToggleButton getBtnAtualizar() {
+        return btnAtualizar;
+    }
+
+    public void setBtnAtualizar(JToggleButton btnAtualizar) {
+        this.btnAtualizar = btnAtualizar;
+    }
+
+    public JButton getBtnRemover() {
+        return btnRemover;
+    }
+
+    public void setBtnRemover(JButton btnRemover) {
+        this.btnRemover = btnRemover;
+    }
+
+    public JTable getTbVeiculo() {
+        return tbVeiculo;
+    }
+
+    public void setTbVeiculo(JTable tbVeiculo) {
+        this.tbVeiculo = tbVeiculo;
+    }
     
+    public JTextField getTxtPlaca() {
+        return txtPlaca;
+    }
 
-
+    public void setTxtPlaca(JTextField txtPlaca) {
+        this.txtPlaca = txtPlaca;
+    }
+      
+    
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -42,14 +80,11 @@ public class VeiculoView extends javax.swing.JFrame {
         jPanel4 = new javax.swing.JPanel();
         txtPlaca = new javax.swing.JTextField();
         btnAdicionar = new javax.swing.JButton();
-        btnAlterar = new javax.swing.JButton();
         btnRemover = new javax.swing.JButton();
-        btnHistorico = new javax.swing.JToggleButton();
+        btnAtualizar = new javax.swing.JToggleButton();
         jPanel9 = new javax.swing.JPanel();
         jScrollPane4 = new javax.swing.JScrollPane();
         tbVeiculo = new javax.swing.JTable();
-        txtPesquisar = new javax.swing.JTextField();
-        lblPesquisar2 = new javax.swing.JLabel();
 
         jLabel2.setText("jLabel2");
 
@@ -87,6 +122,7 @@ public class VeiculoView extends javax.swing.JFrame {
 
         btnAdicionar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/javaParking/assets/img/iconeAdicionar-00.png"))); // NOI18N
         btnAdicionar.setToolTipText("");
+        btnAdicionar.setBorderPainted(false);
         btnAdicionar.setContentAreaFilled(false);
         btnAdicionar.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         btnAdicionar.setPreferredSize(new java.awt.Dimension(80, 80));
@@ -96,20 +132,9 @@ public class VeiculoView extends javax.swing.JFrame {
             }
         });
 
-        btnAlterar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/javaParking/assets/img/iconeEditar-00.png"))); // NOI18N
-        btnAlterar.setToolTipText("");
-        btnAlterar.setContentAreaFilled(false);
-        btnAlterar.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        btnAlterar.setEnabled(false);
-        btnAlterar.setPreferredSize(new java.awt.Dimension(80, 80));
-        btnAlterar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnAlterarActionPerformed(evt);
-            }
-        });
-
         btnRemover.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/javaParking/assets/img/iconeRemover-00.png"))); // NOI18N
         btnRemover.setToolTipText("");
+        btnRemover.setBorderPainted(false);
         btnRemover.setContentAreaFilled(false);
         btnRemover.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         btnRemover.setEnabled(false);
@@ -120,13 +145,13 @@ public class VeiculoView extends javax.swing.JFrame {
             }
         });
 
-        btnHistorico.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/javaParking/assets/img/iconeAtualizar-00.png"))); // NOI18N
-        btnHistorico.setToolTipText("");
-        btnHistorico.setBorderPainted(false);
-        btnHistorico.setContentAreaFilled(false);
-        btnHistorico.addActionListener(new java.awt.event.ActionListener() {
+        btnAtualizar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/javaParking/assets/img/iconeAtualizar-00.png"))); // NOI18N
+        btnAtualizar.setToolTipText("");
+        btnAtualizar.setBorderPainted(false);
+        btnAtualizar.setContentAreaFilled(false);
+        btnAtualizar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnHistoricoActionPerformed(evt);
+                btnAtualizarActionPerformed(evt);
             }
         });
 
@@ -139,14 +164,12 @@ public class VeiculoView extends javax.swing.JFrame {
                 .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel8Layout.createSequentialGroup()
-                .addContainerGap(25, Short.MAX_VALUE)
+                .addContainerGap(104, Short.MAX_VALUE)
                 .addComponent(btnAdicionar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnAlterar, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(8, 8, 8)
                 .addComponent(btnRemover, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnHistorico)
+                .addComponent(btnAtualizar)
                 .addGap(24, 24, 24))
         );
         jPanel8Layout.setVerticalGroup(
@@ -156,9 +179,8 @@ public class VeiculoView extends javax.swing.JFrame {
                 .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btnHistorico, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(btnAtualizar, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(btnRemover, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnAlterar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnAdicionar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
@@ -208,38 +230,20 @@ public class VeiculoView extends javax.swing.JFrame {
         });
         jScrollPane4.setViewportView(tbVeiculo);
 
-        txtPesquisar.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyReleased(java.awt.event.KeyEvent evt) {
-                txtPesquisarKeyReleased(evt);
-            }
-        });
-
-        lblPesquisar2.setFont(new java.awt.Font("Arial", 3, 14)); // NOI18N
-        lblPesquisar2.setText("Pesquisar:");
-
         javax.swing.GroupLayout jPanel9Layout = new javax.swing.GroupLayout(jPanel9);
         jPanel9.setLayout(jPanel9Layout);
         jPanel9Layout.setHorizontalGroup(
             jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel9Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                    .addGroup(jPanel9Layout.createSequentialGroup()
-                        .addComponent(lblPesquisar2)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtPesquisar, javax.swing.GroupLayout.DEFAULT_SIZE, 165, Short.MAX_VALUE)))
+                .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 243, Short.MAX_VALUE)
                 .addContainerGap())
         );
         jPanel9Layout.setVerticalGroup(
             jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel9Layout.createSequentialGroup()
                 .addGap(8, 8, 8)
-                .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblPesquisar2)
-                    .addComponent(txtPesquisar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 151, Short.MAX_VALUE)
                 .addGap(0, 0, 0))
         );
 
@@ -289,30 +293,21 @@ public class VeiculoView extends javax.swing.JFrame {
 
     }//GEN-LAST:event_btnAdicionarActionPerformed
 
-    private void btnAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAlterarActionPerformed
-
-    }//GEN-LAST:event_btnAlterarActionPerformed
-
     private void btnRemoverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRemoverActionPerformed
 
     }//GEN-LAST:event_btnRemoverActionPerformed
-
-    private void txtPesquisarKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPesquisarKeyReleased
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtPesquisarKeyReleased
 
     private void tbVeiculoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbVeiculoMouseClicked
         // TODO add your handling code here:
     }//GEN-LAST:event_tbVeiculoMouseClicked
 
-    private void btnHistoricoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHistoricoActionPerformed
+    private void btnAtualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAtualizarActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_btnHistoricoActionPerformed
+    }//GEN-LAST:event_btnAtualizarActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAdicionar;
-    private javax.swing.JButton btnAlterar;
-    private javax.swing.JToggleButton btnHistorico;
+    private javax.swing.JToggleButton btnAtualizar;
     private javax.swing.JButton btnRemover;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
@@ -321,9 +316,7 @@ public class VeiculoView extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel8;
     private javax.swing.JPanel jPanel9;
     private javax.swing.JScrollPane jScrollPane4;
-    private javax.swing.JLabel lblPesquisar2;
     private javax.swing.JTable tbVeiculo;
-    private javax.swing.JTextField txtPesquisar;
     private javax.swing.JTextField txtPlaca;
     // End of variables declaration//GEN-END:variables
 }
