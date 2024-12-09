@@ -132,7 +132,7 @@
                     </Property>
                     <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
                       <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
-                        <TitledBorder justification="2" position="2" title="Arrecada&#xe7;&#xf5;es">
+                        <TitledBorder justification="2" position="2" title="Historico Clientes">
                           <Border PropertyName="innerBorder" info="org.netbeans.modules.form.compat2.border.MatteColorBorderInfo">
                             <MatteColorBorder bottom="0" left="0" right="0" top="1">
                               <Color PropertyName="color" blue="99" green="99" red="99" type="rgb"/>
@@ -172,7 +172,7 @@
 
                       <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
                       <SubComponents>
-                        <Component class="javax.swing.JTable" name="tbArrecadacoes">
+                        <Component class="javax.swing.JTable" name="tbHistorico">
                           <Properties>
                             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                               <Font name="Dialog" size="12" style="1"/>
@@ -183,10 +183,10 @@
                             <Property name="focusable" type="boolean" value="false"/>
                           </Properties>
                           <Events>
-                            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="tbArrecadacoesMouseClicked"/>
+                            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="tbHistoricoMouseClicked"/>
                           </Events>
                           <AuxValues>
-                            <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="tbArrecadacoes = new javax.swing.JTable(){&#xa;    public boolean isCellEditable(int rowIndex, int colIndex){&#xa;        return false;&#xa;    }&#xa;};"/>
+                            <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="tbHistorico = new javax.swing.JTable(){&#xa;    public boolean isCellEditable(int rowIndex, int colIndex){&#xa;        return false;&#xa;    }&#xa;};"/>
                           </AuxValues>
                         </Component>
                       </SubComponents>

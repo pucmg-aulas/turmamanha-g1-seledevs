@@ -50,6 +50,10 @@ public class ClienteController {
             deleteCliente();
         });
         
+        this.view.getBtnHistorico().addActionListener((e) -> {
+             new ClienteHistoricoController(clienteSelecionado);
+        });
+        
         this.view.getBtnVeiculo().addActionListener((e) -> {
              new VeiculoController(clienteSelecionado);
         });

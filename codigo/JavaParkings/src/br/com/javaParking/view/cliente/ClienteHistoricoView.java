@@ -4,6 +4,8 @@
  */
 package br.com.javaParking.view.cliente;
 
+import javax.swing.JTable;
+
 /**
  *
  * @author Leandro Alencar
@@ -17,6 +19,16 @@ public class ClienteHistoricoView extends javax.swing.JFrame {
         initComponents();
     }
 
+    public JTable getTbHistorico() {
+        return tbHistorico;
+    }
+
+    public void setTbHistorico(JTable tbHistorico) {
+        this.tbHistorico = tbHistorico;
+    }
+
+    
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -31,7 +43,7 @@ public class ClienteHistoricoView extends javax.swing.JFrame {
         jPanel11 = new javax.swing.JPanel();
         jPanel8 = new javax.swing.JPanel();
         jScrollPane3 = new javax.swing.JScrollPane();
-        tbArrecadacoes = new javax.swing.JTable();
+        tbHistorico = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Xumlabs Parking");
@@ -46,15 +58,15 @@ public class ClienteHistoricoView extends javax.swing.JFrame {
         jPanel11.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 0, 0, new java.awt.Color(153, 153, 153)));
 
         jPanel8.setBackground(java.awt.SystemColor.control);
-        jPanel8.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createMatteBorder(1, 0, 0, 0, new java.awt.Color(153, 153, 153)), "Arrecadações", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.TOP, new java.awt.Font("Arial", 3, 12))); // NOI18N
+        jPanel8.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createMatteBorder(1, 0, 0, 0, new java.awt.Color(153, 153, 153)), "Historico Clientes", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.TOP, new java.awt.Font("Arial", 3, 12))); // NOI18N
 
-        tbArrecadacoes = new javax.swing.JTable(){
+        tbHistorico = new javax.swing.JTable(){
             public boolean isCellEditable(int rowIndex, int colIndex){
                 return false;
             }
         };
-        tbArrecadacoes.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
-        tbArrecadacoes.setModel(new javax.swing.table.DefaultTableModel(
+        tbHistorico.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
+        tbHistorico.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {},
                 {},
@@ -65,13 +77,13 @@ public class ClienteHistoricoView extends javax.swing.JFrame {
 
             }
         ));
-        tbArrecadacoes.setFocusable(false);
-        tbArrecadacoes.addMouseListener(new java.awt.event.MouseAdapter() {
+        tbHistorico.setFocusable(false);
+        tbHistorico.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                tbArrecadacoesMouseClicked(evt);
+                tbHistoricoMouseClicked(evt);
             }
         });
-        jScrollPane3.setViewportView(tbArrecadacoes);
+        jScrollPane3.setViewportView(tbHistorico);
 
         javax.swing.GroupLayout jPanel8Layout = new javax.swing.GroupLayout(jPanel8);
         jPanel8.setLayout(jPanel8Layout);
@@ -150,9 +162,9 @@ public class ClienteHistoricoView extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void tbArrecadacoesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbArrecadacoesMouseClicked
+    private void tbHistoricoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbHistoricoMouseClicked
         // TODO add your handling code here:
-    }//GEN-LAST:event_tbArrecadacoesMouseClicked
+    }//GEN-LAST:event_tbHistoricoMouseClicked
 
     
 
@@ -162,6 +174,6 @@ public class ClienteHistoricoView extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel7;
     private javax.swing.JPanel jPanel8;
     private javax.swing.JScrollPane jScrollPane3;
-    private javax.swing.JTable tbArrecadacoes;
+    private javax.swing.JTable tbHistorico;
     // End of variables declaration//GEN-END:variables
 }
