@@ -49,8 +49,10 @@ public class OcupacaoDao {
             
             while (Comunicacao.getRs().next()) {
                 Time z = Comunicacao.getRs().getTime("hora_entrada");
+                Cliente c = new Cliente();
                 
-                Ocupacao x = new Ocupacao(Comunicacao.getRs().getInt("id"), z.toLocalTime());              
+                
+                Ocupacao x = new Ocupacao(Comunicacao.getRs().getInt("id"), z.toLocalTime(), ClienteDao.buscarPorCpf(Comunicacao.getRs().getString("cliente_id")));              
                 
                 return x;
             }
@@ -110,6 +112,19 @@ public class OcupacaoDao {
             Comunicacao.prepararConexcao();
             Comunicacao.getPst().setInt(1, id);
             Comunicacao.executar();
+        } catch (Exception e) {
+            System.out.println("Erro ao excluir ocupação: " + e);
+        }
+    }
+    
+     // Exclui uma ocupação pelo ID
+    public static void excluirOcupacao(Parque parque, String identificadorVaga) {
+        try {
+            Comunicacao.setSql("DELETE FROM interno.tbocupacoes WHERE parque_id = ? and vaga_id = ?;");
+            Comunicacao.prepararConexcao();
+            Comunicacao.getPst().setInt(1, parque.getId());
+            Comunicacao.getPst().setString(2, identificadorVaga);
+            Comunicacao.executarQuery();
         } catch (Exception e) {
             System.out.println("Erro ao excluir ocupação: " + e);
         }

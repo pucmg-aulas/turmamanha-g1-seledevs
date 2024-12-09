@@ -135,6 +135,18 @@ public class VagaDao {
         }
     }
 
+    public static void desocupar(Parque parque, String identificadorVaga) {
+        try {
+            Comunicacao.setSql("UPDATE interno.tbvagas SET ocupada = false WHERE parque_id = ? and identificador = ?;");
+            Comunicacao.prepararConexcao();
+            Comunicacao.getPst().setInt(1, parque.getId());
+            Comunicacao.getPst().setString(2, identificadorVaga);
+            Comunicacao.executarQuery();           
+        } catch (Exception e) {
+            System.out.println("Erro ao recuperar vagas: " + e);
+        }
+    }
+    
     public static List<Vaga> getVagasDesocupadas(Parque parque) {
         List<Vaga> vagas = new ArrayList<>();
         try {

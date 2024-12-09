@@ -42,22 +42,7 @@ public class PdaView extends javax.swing.JFrame {
         this.btnVoltar1 = btnVoltar;
     }
 
-    public JLabel getLblPesquisa() {
-        return lblPesquisa;
-    }
-
-    public void setLblPesquisa(JLabel lblPesquisa) {
-        this.lblPesquisa = lblPesquisa;
-    }
-
-    public JLabel getLblPesquisarCliente() {
-        return lblPesquisarCliente;
-    }
-
-    public void setLblPesquisarCliente(JLabel lblPesquisarCliente) {
-        this.lblPesquisarCliente = lblPesquisarCliente;
-    }
-
+   
     public JTable getTbVagasDesocupadas() {
         return tbVagasDesocupadas;
     }
@@ -106,12 +91,8 @@ public class PdaView extends javax.swing.JFrame {
         jPanel9 = new javax.swing.JPanel();
         scPdv = new javax.swing.JScrollPane();
         tbVagasDesocupadas = new javax.swing.JTable();
-        lblPesquisa = new javax.swing.JLabel();
-        txtPesquisa = new javax.swing.JTextField();
         pnNota = new javax.swing.JPanel();
         pnTbClientes = new javax.swing.JPanel();
-        lblPesquisarCliente = new javax.swing.JLabel();
-        txtPesquisarCliente = new javax.swing.JTextField();
         pnCliente = new javax.swing.JPanel();
         scCliente = new javax.swing.JScrollPane();
         tbVagasOcupadas = new javax.swing.JTable();
@@ -166,48 +147,20 @@ public class PdaView extends javax.swing.JFrame {
         });
         scPdv.setViewportView(tbVagasDesocupadas);
 
-        lblPesquisa.setFont(new java.awt.Font("Dialog", 3, 14)); // NOI18N
-        lblPesquisa.setText("Pesquisa:");
-        lblPesquisa.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                lblPesquisaKeyPressed(evt);
-            }
-        });
-
-        txtPesquisa.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtPesquisaActionPerformed(evt);
-            }
-        });
-        txtPesquisa.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyReleased(java.awt.event.KeyEvent evt) {
-                txtPesquisaKeyReleased(evt);
-            }
-        });
-
         javax.swing.GroupLayout jPanel9Layout = new javax.swing.GroupLayout(jPanel9);
         jPanel9.setLayout(jPanel9Layout);
         jPanel9Layout.setHorizontalGroup(
             jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel9Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(scPdv, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                    .addGroup(jPanel9Layout.createSequentialGroup()
-                        .addComponent(lblPesquisa)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtPesquisa, javax.swing.GroupLayout.DEFAULT_SIZE, 224, Short.MAX_VALUE)))
+                .addComponent(scPdv, javax.swing.GroupLayout.DEFAULT_SIZE, 296, Short.MAX_VALUE)
                 .addContainerGap())
         );
         jPanel9Layout.setVerticalGroup(
             jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel9Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtPesquisa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblPesquisa))
-                .addGap(16, 16, 16)
-                .addComponent(scPdv, javax.swing.GroupLayout.DEFAULT_SIZE, 492, Short.MAX_VALUE)
+                .addGap(8, 8, 8)
+                .addComponent(scPdv, javax.swing.GroupLayout.DEFAULT_SIZE, 529, Short.MAX_VALUE)
                 .addGap(0, 0, 0))
         );
 
@@ -216,20 +169,6 @@ public class PdaView extends javax.swing.JFrame {
 
         pnTbClientes.setBackground(java.awt.SystemColor.control);
         pnTbClientes.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 0, 0, new java.awt.Color(153, 153, 153)));
-
-        lblPesquisarCliente.setFont(new java.awt.Font("Dialog", 3, 14)); // NOI18N
-        lblPesquisarCliente.setText("Pesquisar:");
-
-        txtPesquisarCliente.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtPesquisarClienteActionPerformed(evt);
-            }
-        });
-        txtPesquisarCliente.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyReleased(java.awt.event.KeyEvent evt) {
-                txtPesquisarClienteKeyReleased(evt);
-            }
-        });
 
         pnCliente.setBackground(java.awt.SystemColor.control);
         pnCliente.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createMatteBorder(1, 0, 0, 0, new java.awt.Color(153, 153, 153)), "Ocupações", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.TOP, new java.awt.Font("Arial", 3, 12))); // NOI18N
@@ -296,11 +235,7 @@ public class PdaView extends javax.swing.JFrame {
         pnTbClientesLayout.setHorizontalGroup(
             pnTbClientesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnTbClientesLayout.createSequentialGroup()
-                .addGap(16, 16, 16)
-                .addComponent(lblPesquisarCliente)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(txtPesquisarCliente)
-                .addGap(18, 18, 18)
+                .addGap(16, 428, Short.MAX_VALUE)
                 .addComponent(btnVoltar1, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
             .addComponent(pnCliente, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -313,17 +248,9 @@ public class PdaView extends javax.swing.JFrame {
         pnTbClientesLayout.setVerticalGroup(
             pnTbClientesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnTbClientesLayout.createSequentialGroup()
-                .addGroup(pnTbClientesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(pnTbClientesLayout.createSequentialGroup()
-                        .addGap(16, 16, 16)
-                        .addGroup(pnTbClientesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(txtPesquisarCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(lblPesquisarCliente))
-                        .addGap(16, 16, 16))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnTbClientesLayout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(btnVoltar1, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)))
+                .addGap(10, 10, 10)
+                .addComponent(btnVoltar1, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(pnCliente, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGap(0, 0, 0))
             .addGroup(pnTbClientesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -459,15 +386,6 @@ public class PdaView extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void txtPesquisarClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtPesquisarClienteActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtPesquisarClienteActionPerformed
-
-    private void txtPesquisarClienteKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPesquisarClienteKeyReleased
-        // TODO add your handling code here:
-        
-    }//GEN-LAST:event_txtPesquisarClienteKeyReleased
-
     private void tbVagasOcupadasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbVagasOcupadasMouseClicked
         // TODO add your handling code here:
     }//GEN-LAST:event_tbVagasOcupadasMouseClicked
@@ -475,14 +393,6 @@ public class PdaView extends javax.swing.JFrame {
     private void btnConcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConcluirActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_btnConcluirActionPerformed
-
-    private void txtPesquisaKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPesquisaKeyReleased
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtPesquisaKeyReleased
-
-    private void txtPesquisaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtPesquisaActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtPesquisaActionPerformed
 
     private void scPdvMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_scPdvMouseClicked
 
@@ -501,10 +411,6 @@ public class PdaView extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_btnVoltar1ActionPerformed
 
-    private void lblPesquisaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_lblPesquisaKeyPressed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_lblPesquisaKeyPressed
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private br.com.javaParking.assets.swing.botaoArredondado btnConcluir;
     private javax.swing.JButton btnVoltar;
@@ -513,8 +419,6 @@ public class PdaView extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel8;
     private javax.swing.JPanel jPanel9;
     public static javax.swing.JLabel lblMinutosPassados;
-    private javax.swing.JLabel lblPesquisa;
-    private javax.swing.JLabel lblPesquisarCliente;
     private javax.swing.JLabel lblTotal;
     private javax.swing.JLabel lblTotal1;
     public static javax.swing.JLabel lblValorTotal;
@@ -526,7 +430,5 @@ public class PdaView extends javax.swing.JFrame {
     private javax.swing.JScrollPane scPdv;
     private javax.swing.JTable tbVagasDesocupadas;
     private javax.swing.JTable tbVagasOcupadas;
-    private javax.swing.JTextField txtPesquisa;
-    private javax.swing.JTextField txtPesquisarCliente;
     // End of variables declaration//GEN-END:variables
 }

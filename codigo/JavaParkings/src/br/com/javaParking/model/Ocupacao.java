@@ -29,9 +29,10 @@ public class Ocupacao implements Serializable{
         this.parque = parque;
     }
     
-    public Ocupacao(int id, LocalTime horaEntrada) {
+    public Ocupacao(int id, LocalTime horaEntrada,Cliente cliente) {
         this.id = id;
         this.horaEntrada = horaEntrada;
+        this.cliente = cliente;
     }
     
     public int getId() {

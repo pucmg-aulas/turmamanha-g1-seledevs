@@ -59,6 +59,7 @@ public class ConexaoDAO {
             VeiculoDao.criarTabela();
             VagaDao.criarTabela();
             OcupacaoDao.criarTabela();
+            ArrecadacaoDAO.criarTabela();
         }
         return "";
     }

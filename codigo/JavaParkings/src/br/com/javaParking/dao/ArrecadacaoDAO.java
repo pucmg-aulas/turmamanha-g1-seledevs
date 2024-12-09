@@ -6,8 +6,11 @@ package br.com.javaParking.dao;
 
 import br.com.javaParking.model.Arrecadacao;
 import br.com.javaParking.util.Comunicacao;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
+
 /**
  *
  * @author Leandro Alencar
@@ -20,9 +23,9 @@ public class ArrecadacaoDAO {
                 CREATE TABLE IF NOT EXISTS
                     interno.tbarrecadacao(
                                     id SERIAL,
-                                    fk_id_cliente INT,
+                                    fk_cpf_cliente VARCHAR(255),
                                     valor_arrecadado NUMERIC(1000,2),
-                                    FOREIGN KEY (fk_id_cliente) REFERENCES interno.tbcliente(id),
+                                    data_arrecadacao DATE,
                                     PRIMARY KEY (id)
                     );
                 """);
@@ -46,8 +49,9 @@ public class ArrecadacaoDAO {
                 Arrecadacao x = new Arrecadacao();
 
                 x.setId(Comunicacao.getRs().getInt("id"));
-                x.setFk_id_cliente(Comunicacao.getRs().getInt("fk_id_cliente"));
+                x.setFk_cpf_cliente(Comunicacao.getRs().getString("fk_cpf_cliente"));
                 x.setValor_arrecadado(Comunicacao.getRs().getFloat("valor_arrecadado"));
+                x.setData_arrecadacao(Comunicacao.getRs().getDate("data_arrecadacao"));
 
                 Arrecadacoes.add(x);
             }
@@ -62,15 +66,22 @@ public class ArrecadacaoDAO {
 
     public static void addArrecadacao(Arrecadacao arrecadacao) {
         try {
+
+            DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+
+            java.sql.Date dSqo = new java.sql.Date(arrecadacao.getData_arrecadacao().getTime());
+            df.format(dSqo);
+
             Comunicacao.setSql("""
                 INSERT INTO
-                    interno.tbarrecadacao (fk_id_cliente, valor_arrecadado)
+                    interno.tbarrecadacao (fk_cpf_cliente, valor_arrecadado, data_arrecadacao)
                 VALUES
-                    (?,?);
+                    (?,?,?);
                 """);
             Comunicacao.prepararConexcao();
-            Comunicacao.getPst().setInt(1, arrecadacao.getId());
+            Comunicacao.getPst().setString(1, arrecadacao.getFk_cpf_cliente());
             Comunicacao.getPst().setFloat(2, arrecadacao.getValor_arrecadado());
+            Comunicacao.getPst().setDate(3, dSqo);
             Comunicacao.executar();
         } catch (Exception e) {
             System.out.println("Erro ao adicionar arrecadacao: " + e);
