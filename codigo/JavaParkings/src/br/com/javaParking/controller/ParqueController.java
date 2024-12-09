@@ -29,6 +29,10 @@ public class ParqueController {
             new ArrecadacaoController();
             this.view.dispose();
         });
+        
+        this.view.getBtnAtualizar().addActionListener((e) -> {
+            limparCampos();
+        });
 
         this.view.getTbParques().getSelectionModel().addListSelectionListener(e -> {
             int linha = this.view.getTbParques().getSelectedRow();

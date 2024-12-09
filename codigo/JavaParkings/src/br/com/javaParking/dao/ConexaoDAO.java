@@ -18,7 +18,6 @@ public class ConexaoDAO {
         URL = "jdbc:postgresql://localhost:5432/";
         USER = "xumlambs";
         PASSWORD = "123";
-        System.out.println("1");
         try {
             Class.forName("org.postgresql.Driver");
             CON = DriverManager.getConnection(URL, USER, PASSWORD);
@@ -33,9 +32,6 @@ public class ConexaoDAO {
         URL = "jdbc:postgresql://localhost:5432/dbxumlambs";
         USER = "xumlambs";
         PASSWORD = "123";
-
-        System.out.println("2");
-
         try {
             Class.forName("org.postgresql.Driver");
             CON = DriverManager.getConnection(URL, USER, PASSWORD);
@@ -60,6 +56,7 @@ public class ConexaoDAO {
             VagaDao.criarTabela();
             OcupacaoDao.criarTabela();
             ArrecadacaoDAO.criarTabela();
+            ParqueDAO.criarTabela();
         }
         return "";
     }

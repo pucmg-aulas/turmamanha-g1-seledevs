@@ -94,6 +94,34 @@ public class ArrecadacaoDAO {
         return Arrecadacoes;
 
     }
+    
+    public static List<Arrecadacao> tabelaRanking() {
+        List<Arrecadacao> Arrecadacoes = new ArrayList<Arrecadacao>();
+        try {
+
+            Comunicacao.setSql("SELECT * from interno.tbarrecadacao ORDER BY valor_arrecadado DESC;");
+            Comunicacao.prepararConexcao();
+            Comunicacao.executarQuery();
+
+            while (Comunicacao.getRs().next()) {
+                Arrecadacao x = new Arrecadacao();
+
+                x.setId(Comunicacao.getRs().getInt("id"));
+                x.setFk_cpf_cliente(Comunicacao.getRs().getString("fk_cpf_cliente"));
+                x.setValor_arrecadado(Comunicacao.getRs().getFloat("valor_arrecadado"));
+                x.setData_arrecadacao(Comunicacao.getRs().getDate("data_arrecadacao"));
+                x.setFk_nome_parque(Comunicacao.getRs().getString("fk_nome_parque"));
+
+                Arrecadacoes.add(x);
+            }
+
+        } catch (Exception e) {
+            throw new RuntimeException("Erro ao criar modelo tbArrecadacao");
+        }
+
+        return Arrecadacoes;
+
+    }
 
     public static void addArrecadacao(Arrecadacao arrecadacao) {
         try {

@@ -23,8 +23,8 @@ public class ArrecadacaoTest {
         assert arrecadacao.getId() == 1 : "Erro: o ID não foi setado corretamente.";
         System.out.println("Teste de setId e getId realizado com sucesso!");
 
-        arrecadacao.setFk_id_cliente(100);
-        assert arrecadacao.getFk_id_cliente() == 100 : "Erro: o fk_id_cliente não foi setado corretamente.";
+        arrecadacao.setFk_cpf_cliente("100");
+        assert arrecadacao.getFk_cpf_cliente().equals("100") : "Erro: o fk_id_cliente não foi setado corretamente.";
         System.out.println("Teste de setFk_id_cliente e getFk_id_cliente realizado com sucesso!");
 
         arrecadacao.setValor_arrecadado(250.75f);

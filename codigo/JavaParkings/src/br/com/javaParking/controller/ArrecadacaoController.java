@@ -165,7 +165,12 @@ public class ArrecadacaoController {
         }
 
         view.getLblTotalArrecadado().setText(new DecimalFormat("#,##0.00").format(valorTotal).replace(",", "."));
-        view.getLblValorMedio().setText(new DecimalFormat("#,##0.00").format(valorTotal / view.getTbArrecadacoes().getModel().getRowCount()).replace(",", "."));
+        if(valorTotal > 0){
+                    view.getLblValorMedio().setText(new DecimalFormat("#,##0.00").format(valorTotal / view.getTbArrecadacoes().getModel().getRowCount()).replace(",", "."));
+
+        }else{
+            view.getLblValorMedio().setText(new DecimalFormat("#,##0.00").format(0).replace(",", "."));
+        }
     }
 
     private void filtros() {
@@ -231,4 +236,14 @@ public class ArrecadacaoController {
         filtros();
     }
 
+    public ArrecadacaoView getView() {
+        return view;
+    }
+
+    public void setView(ArrecadacaoView view) {
+        this.view = view;
+    }
+
+    
+          
 }

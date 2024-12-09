@@ -279,7 +279,7 @@ public class ArrecadacaoView extends javax.swing.JFrame {
         jLabel1.setFont(new java.awt.Font("Arial", 3, 12)); // NOI18N
         jLabel1.setText("PARQUE");
 
-        cbMes.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "TODOS", "JANEIRO", "FEVEREIRO", "MARÇO", "ABRIL", "MAIO", "JUNHO", "JULHO", "AGOSTO", "SETEMBRO", "OUTUBRO", "NOVEMBRO ", "DEZEMBRO" }));
+        cbMes.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "TODOS" }));
         cbMes.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cbMesActionPerformed(evt);

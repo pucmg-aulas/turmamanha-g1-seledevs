@@ -1,6 +1,8 @@
 package br.com.javaParking.controller;
 
+import br.com.javaParking.dao.ArrecadacaoDAO;
 import br.com.javaParking.dao.ClienteDao;
+import br.com.javaParking.model.Arrecadacao;
 import br.com.javaParking.model.Cliente;
 import br.com.javaParking.util.validadores.CPFValidator;
 import br.com.javaParking.view.cliente.ClienteView;
@@ -32,6 +34,7 @@ public class ClienteController {
         this.view.getBtnVoltar().setBorderPainted(false);
 
         carregarTabela();
+        carregarTabelaRanking();
 
         this.view.getBtnVoltar().addActionListener((e) -> {
             new ArrecadacaoController();
@@ -229,4 +232,26 @@ public class ClienteController {
         }
         view.getTbClientes().setModel(tm);
     }
+    
+    private void carregarTabelaRanking() {
+        Object colunas[] = {"Nome", "CPF"};
+        DefaultTableModel tm = new DefaultTableModel(colunas, 0);
+        tm.setNumRows(0);
+
+        for (Arrecadacao arrecadacao : ArrecadacaoDAO.tabelaRanking()) {  // Alterado para listarClientes
+
+            if (ClienteDao.buscarPorCpf(arrecadacao.getFk_cpf_cliente()) == null) {
+                String linha[] = {"Anonimo", ""};
+                tm.addRow(linha);
+            } else {
+                String linha[] = {ClienteDao.buscarPorCpf(arrecadacao.getFk_cpf_cliente()).getNome(),ClienteDao.buscarPorCpf(arrecadacao.getFk_cpf_cliente()).getCpf()};
+                tm.addRow(linha);
+            }
+
+        }
+        
+        view.getTbRankingClientes().setModel(tm);
+    }
+    
+    
 }

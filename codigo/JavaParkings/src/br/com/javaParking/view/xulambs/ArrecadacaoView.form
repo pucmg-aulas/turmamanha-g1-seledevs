@@ -449,20 +449,8 @@
                     <Component class="javax.swing.JComboBox" name="cbMes">
                       <Properties>
                         <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-                          <StringArray count="13">
+                          <StringArray count="1">
                             <StringItem index="0" value="TODOS"/>
-                            <StringItem index="1" value="JANEIRO"/>
-                            <StringItem index="2" value="FEVEREIRO"/>
-                            <StringItem index="3" value="MAR&#xc7;O"/>
-                            <StringItem index="4" value="ABRIL"/>
-                            <StringItem index="5" value="MAIO"/>
-                            <StringItem index="6" value="JUNHO"/>
-                            <StringItem index="7" value="JULHO"/>
-                            <StringItem index="8" value="AGOSTO"/>
-                            <StringItem index="9" value="SETEMBRO"/>
-                            <StringItem index="10" value="OUTUBRO"/>
-                            <StringItem index="11" value="NOVEMBRO "/>
-                            <StringItem index="12" value="DEZEMBRO"/>
                           </StringArray>
                         </Property>
                       </Properties>
