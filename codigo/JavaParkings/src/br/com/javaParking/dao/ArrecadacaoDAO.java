@@ -24,6 +24,7 @@ public class ArrecadacaoDAO {
                     interno.tbarrecadacao(
                                     id SERIAL,
                                     fk_cpf_cliente VARCHAR(255),
+                                    fk_nome_parque VARCHAR(255),
                                     valor_arrecadado NUMERIC(1000,2),
                                     data_arrecadacao DATE,
                                     PRIMARY KEY (id)
@@ -52,6 +53,7 @@ public class ArrecadacaoDAO {
                 x.setFk_cpf_cliente(Comunicacao.getRs().getString("fk_cpf_cliente"));
                 x.setValor_arrecadado(Comunicacao.getRs().getFloat("valor_arrecadado"));
                 x.setData_arrecadacao(Comunicacao.getRs().getDate("data_arrecadacao"));
+                x.setFk_nome_parque(Comunicacao.getRs().getString("fk_nome_parque"));
 
                 Arrecadacoes.add(x);
             }
@@ -74,14 +76,15 @@ public class ArrecadacaoDAO {
 
             Comunicacao.setSql("""
                 INSERT INTO
-                    interno.tbarrecadacao (fk_cpf_cliente, valor_arrecadado, data_arrecadacao)
+                    interno.tbarrecadacao (fk_cpf_cliente, valor_arrecadado, data_arrecadacao,fk_nome_parque)
                 VALUES
-                    (?,?,?);
+                    (?,?,?,?);
                 """);
             Comunicacao.prepararConexcao();
             Comunicacao.getPst().setString(1, arrecadacao.getFk_cpf_cliente());
             Comunicacao.getPst().setFloat(2, arrecadacao.getValor_arrecadado());
             Comunicacao.getPst().setDate(3, dSqo);
+            Comunicacao.getPst().setString(4, arrecadacao.getFk_nome_parque());
             Comunicacao.executar();
         } catch (Exception e) {
             System.out.println("Erro ao adicionar arrecadacao: " + e);

@@ -103,11 +103,13 @@ public class PDAController {
                 Arrecadacao x = new Arrecadacao();
                 x.setData_arrecadacao(new Date());
                 if (ocupacaoEscolhida.getCliente() != null) {
-                    x.setFk_cpf_cliente(String.valueOf(ocupacaoEscolhida.getCliente().getId()));
+                    x.setFk_cpf_cliente(String.valueOf(ocupacaoEscolhida.getCliente().getCpf()));
                 } else {
                     x.setFk_cpf_cliente("");
                 }
+                
                 x.setValor_arrecadado(Float.parseFloat(this.view.getLblValorTotal().getText()));
+                x.setFk_nome_parque(parqueEscolhido.getNomeParque());
 
                 if (x.getValor_arrecadado() > 0) {
                     ArrecadacaoDAO.addArrecadacao(x);
