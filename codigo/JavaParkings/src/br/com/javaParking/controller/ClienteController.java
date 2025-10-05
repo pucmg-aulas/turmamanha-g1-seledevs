@@ -21,6 +21,7 @@ public class ClienteController {
     private ClienteView view;
     private ClienteDao clientes;  // Alterado para usar ClienteDao
     private Cliente clienteSelecionado;
+    // CR: Injete ClienteDao e ClienteView via construtor para permitir testes e desacoplar a UI da lógica.
 
     public ClienteController() {
         this.clientes = new ClienteDao();  // Alterado para instanciar ClienteDao
@@ -65,6 +66,7 @@ public class ClienteController {
             int linha = this.view.getTbClientes().getSelectedRow();
             if (linha != -1) {
                 String cpf = (String) view.getTbClientes().getValueAt(linha, 1);
+                // CR: Trate cpf nulo/vazio e falhas de busca com feedback ao usuário.
                 clienteSelecionado = clientes.buscarPorCpf(cpf);  // Alterado para usar buscarPorCpf
 
                 if (clienteSelecionado != null) {
@@ -80,6 +82,7 @@ public class ClienteController {
         this.view.getTxtPesquisar().getDocument().addDocumentListener(new DocumentListener() {
             @Override
             public void insertUpdate(DocumentEvent e) {
+                // CR: Debounce a pesquisa para evitar consultas excessivas a cada tecla.
                 pesquisarCliente();
             }
 
@@ -156,6 +159,7 @@ public class ClienteController {
                 Cliente c = new Cliente();
                 c.setNome(nome);
 
+                // CR: Normalize CPF removendo máscara antes da validação e armazenamento.
                 if (CPFValidator.isCPF(cpf)) {
                     c.setCpf(cpf);
                 } else {
@@ -163,6 +167,7 @@ public class ClienteController {
                     return;
                 }
 
+                // CR: Acesso ao DAO no Controller; prefira um ClienteService para regras (duplicidade, formatações).
                 clientes.addCliente(c);
 
                 JOptionPane.showMessageDialog(view, "Cliente salvo com sucesso!");
@@ -172,6 +177,7 @@ public class ClienteController {
                 JOptionPane.showMessageDialog(view, "Campos nome e CPF são obrigatórios!");
             }
         } catch (Exception e) {
+            // CR: Registre a exceção em um logger e mostre mensagem amigável.
             JOptionPane.showMessageDialog(null, e);
         }
     }
@@ -189,6 +195,7 @@ public class ClienteController {
             int op = JOptionPane.showConfirmDialog(view, "Deseja editar " + nome + "?");
             if (op == JOptionPane.YES_OPTION) {
                 Cliente cliente = clientes.buscarPorCpf(cpf);
+                // CR: Valide null antes de setar e salvar; aplique trim() e regras de negócio no Service.
                 cliente.setNome(nome);
                 clientes.alterarCliente(cliente);
                 JOptionPane.showMessageDialog(view, nome + " editado com sucesso!");
@@ -201,11 +208,13 @@ public class ClienteController {
 
     private void deleteCliente() {
         int linha = this.view.getTbClientes().getSelectedRow();
+        // CR: Trate caso nenhuma linha esteja selecionada com mensagem clara.
         String nome = (String) this.view.getTbClientes().getValueAt(linha, 0);
         String cpf = (String) this.view.getTbClientes().getValueAt(linha, 1);
 
         int op = JOptionPane.showConfirmDialog(view, "Deseja excluir " + nome + "?");
         if (op == JOptionPane.YES_OPTION) {
+            // CR: Use a instância do DAO já criada ao invés de chamadas estáticas.
             Cliente cliente = ClienteDao.buscarPorCpf(cpf);
             if (cliente == null) {
                 JOptionPane.showMessageDialog(view, "Cliente não encontrado.");

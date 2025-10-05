@@ -2,7 +2,6 @@ package br.com.javaParking.controller;
 
 import br.com.javaParking.dao.ParqueDAO;
 import br.com.javaParking.dao.VagaDao;
-import br.com.javaParking.model.Cliente;
 import br.com.javaParking.model.Parque;
 import br.com.javaParking.model.Vaga;
 import br.com.javaParking.view.parque.ParqueView;
@@ -14,6 +13,7 @@ public class ParqueController {
 
     private ParqueView view;
     private Parque parqueSelecionado;
+    // CR: Considere separar lógica de UI da lógica de negócio com um ParqueService; o Controller ficaria responsável apenas por orquestrar.
 
     public ParqueController() {
         this.view = new ParqueView();
@@ -37,6 +37,7 @@ public class ParqueController {
         this.view.getTbParques().getSelectionModel().addListSelectionListener(e -> {
             int linha = this.view.getTbParques().getSelectedRow();
             if (linha != -1) {
+                // CR: Valide valores nulos e trate exceções ao buscar por nome no DAO; apresente feedback ao usuário.
                 String nomeParque = (String) this.view.getTbParques().getValueAt(linha, 0);
                 parqueSelecionado = ParqueDAO.buscarPorNome(nomeParque);
 
@@ -46,6 +47,10 @@ public class ParqueController {
                     this.view.getTxtVagasPorFileira().setText(String.valueOf(parqueSelecionado.getVagasPorFileira()));
                     habilitarModoEdicao();
                     carregarTabelaVaga(parqueSelecionado);
+                } else {
+                    // CR: Informe quando o parque não for encontrado e limpe a seleção/estado.
+                    JOptionPane.showMessageDialog(view, "Parque não encontrado.");
+                    limparCampos();
                 }
             }
         });
@@ -54,6 +59,7 @@ public class ParqueController {
     }
 
     public void carregarTabela() {
+        // CR: Evite carregar dados no EDT; busque em thread separada e atualize a tabela no EDT.
         List<Parque> parques = ParqueDAO.listarParques();
         DefaultTableModel tm = new DefaultTableModel(new Object[]{"Nome", "Nº Vagas"}, 0);
 
@@ -65,6 +71,7 @@ public class ParqueController {
     }
     
     public void carregarTabelaVaga(Parque parque) {
+        // CR: Substitua DefaultTableModel por um TableModel específico (ex.: VagasTableModel) para tipagem forte e reutilização.
         List<Vaga> vagas = VagaDao.getVagas(parque);
         DefaultTableModel tm = new DefaultTableModel(new Object[]{"identificador", "tipo"}, 0);
 
@@ -89,6 +96,7 @@ public class ParqueController {
                 carregarTabela();
                 limparCampos();
                 habilitarModoEdicao();
+                // CR: `montarVagas()` após adicionar pode ser demorado; considere transação atômica no Service com rollback em caso de falha.
                 
             } else {
                 JOptionPane.showMessageDialog(view, "Erro ao adicionar o parque.", "Erro", JOptionPane.ERROR_MESSAGE);
@@ -96,6 +104,7 @@ public class ParqueController {
         } catch (NumberFormatException e) {
             JOptionPane.showMessageDialog(view, "Insira valores válidos para número de vagas e vagas por fileira.", "Erro", JOptionPane.ERROR_MESSAGE);
         } finally {
+            // CR: Recarregar sempre no finally pode desfazer filtros/estado atual; recarregue apenas quando necessário.
             carregarTabela();
         }
         
@@ -120,6 +129,7 @@ public class ParqueController {
                 carregarTabela();
                 habilitarModoEdicao();
                 limparCampos();
+                // CR: Alterar número de vagas pode impactar ocupações existentes; valide estado e bloqueie alterações perigosas.
      
             } else {
                 JOptionPane.showMessageDialog(view, "Erro ao alterar o parque.", "Erro", JOptionPane.ERROR_MESSAGE);
@@ -144,6 +154,7 @@ public class ParqueController {
                 habilitarModoEdicao();
                 limparCampos();
                 carregarTabela();
+                // CR: Garanta integridade referencial (ex.: vagas ocupadas/ocupaçoes/receitas) antes de excluir.
             } else {
                 JOptionPane.showMessageDialog(view, "Erro ao excluir o parque.", "Erro", JOptionPane.ERROR_MESSAGE);
             }
@@ -170,6 +181,7 @@ public class ParqueController {
             tm.addRow(new Object[]{parque.getNomeParque(), parque.getNumeroVagas()});
         }
         view.getTbParques().setModel(tm);
+        // CR: Considere highlight do termo pesquisado e paginação ao lidar com grandes volumes.
     }
     
     private void limparCampos() {
