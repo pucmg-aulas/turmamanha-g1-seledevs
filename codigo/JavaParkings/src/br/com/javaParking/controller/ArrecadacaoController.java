@@ -7,12 +7,8 @@ package br.com.javaParking.controller;
 import br.com.javaParking.dao.ArrecadacaoDAO;
 import br.com.javaParking.dao.ClienteDao;
 import br.com.javaParking.model.Arrecadacao;
-import br.com.javaParking.view.cliente.ClienteView;
 import br.com.javaParking.view.xulambs.ArrecadacaoView;
 import java.text.DecimalFormat;
-import javax.swing.JOptionPane;
-import javax.swing.event.DocumentEvent;
-import javax.swing.event.DocumentListener;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -25,6 +21,7 @@ public class ArrecadacaoController {
     private ArrecadacaoDAO arrecadacoes;
     private boolean aux;
     private String auxS;
+    // CR: Considere mover regras de negócio e acesso a dados para um ArrecadacaoService. O Controller deve apenas orquestrar a UI.
 
     public ArrecadacaoController() {
         this.arrecadacoes = new ArrecadacaoDAO();
@@ -147,6 +144,7 @@ public class ArrecadacaoController {
                 String linha[] = {"Anonimo", arrecadacao.getFk_nome_parque(), String.valueOf(arrecadacao.getValor_arrecadado()), String.valueOf(arrecadacao.getData_arrecadacao())};
                 tm.addRow(linha);
             } else {
+                // CR: Evite chamadas repetidas ao DAO dentro do loop; armazene o cliente em variável local para reduzir I/O.
                 String linha[] = {ClienteDao.buscarPorCpf(arrecadacao.getFk_cpf_cliente()).getNome(), arrecadacao.getFk_nome_parque(), String.valueOf(arrecadacao.getValor_arrecadado()), String.valueOf(arrecadacao.getData_arrecadacao())};
                 tm.addRow(linha);
             }
@@ -164,8 +162,10 @@ public class ArrecadacaoController {
             valorTotal += Double.parseDouble(view.getTbArrecadacoes().getModel().getValueAt(i, 2).toString());
         }
 
+        // CR: Evite replace manual; use Locale adequado no DecimalFormat para formato consistente independente do SO.
         view.getLblTotalArrecadado().setText(new DecimalFormat("#,##0.00").format(valorTotal).replace(",", "."));
         if(valorTotal > 0){
+                    // CR: Considere usar BigDecimal para cálculos monetários e arredondamento controlado (RoundingMode).
                     view.getLblValorMedio().setText(new DecimalFormat("#,##0.00").format(valorTotal / view.getTbArrecadacoes().getModel().getRowCount()).replace(",", "."));
 
         }else{
@@ -178,6 +178,7 @@ public class ArrecadacaoController {
         carregarTabela();
 
         if (this.view.getCbParque().getSelectedItem() != "TODOS") {
+            // CR: Comparação de Strings com != pode falhar; use equals.
             for (int i = 0; i < view.getTbArrecadacoes().getModel().getRowCount(); i++) {
 
                 if (!this.view.getCbParque().getSelectedItem().equals(view.getTbArrecadacoes().getModel().getValueAt(i, 1).toString())) {
@@ -194,6 +195,7 @@ public class ArrecadacaoController {
         }
 
         if (this.view.getCbAno().getSelectedItem() != "TODOS") {
+            // CR: Idem comparação de Strings; normalize datas com API java.time ao invés de split por "-".
             for (int i = 0; i < view.getTbArrecadacoes().getModel().getRowCount(); i++) {
 
                 auxS = view.getTbArrecadacoes().getModel().getValueAt(i, 3).toString().split("-")[0];
@@ -212,6 +214,7 @@ public class ArrecadacaoController {
         }
 
         if (this.view.getCbMes().getSelectedItem() != "TODOS") {
+            // CR: Idem; usar Month enum para evitar erros de parsing/locale.
             for (int i = 0; i < view.getTbArrecadacoes().getModel().getRowCount(); i++) {
 
                 auxS = view.getTbArrecadacoes().getModel().getValueAt(i, 3).toString().split("-")[1];
